@@ -1,7 +1,289 @@
-﻿
+﻿@model HealthyService.WebPanel.Areas.Account.Model.LoginViewModel 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<!-- Masthead -->
+<header class="masthead text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-8 mx-auto">
+                <h1 class="mb-5">Dołącz do nas aby zrealizować swoje cele!</h1>
+            </div>
+            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                <form>
+                    <div class="form-row">
+                        <div class="col-12 col-md-9 mb-2 mb-md-0">
+                            <input type="email" class="form-control form-control-lg" placeholder="Wpisz E-mail...">
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-block btn-lg btn-primary">Dołącz!</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</header>
+
+<!-- Icons Grid -->
+<section class="features-icons bg-light text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex">
+                        <i class="icon-calculator m-auto text-primary"></i>
+                    </div>
+                    <h3 style="text-default">Kalkulatory</h3>
+                    <p class="lead mb-0">Skorzystaj z proponowanych kalkulatorów!</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex">
+                        <i class="icon-book-open m-auto text-primary"></i>
+                    </div>
+                    <h3>Dziennik</h3>
+                    <p class="lead mb-0">Prowadź swój codzienny dziennik żywieniowy!</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                    <div class="features-icons-icon d-flex">
+                        <i class="icon-plus m-auto text-primary"></i>
+                    </div>
+                    <h3>Wiele korzyści</h3>
+                    <p class="lead mb-0">Przetrzymuj wszystkie informację w jednym miejscu!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Image Showcases -->
+<section class="showcase">
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+
+            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('img/Calculators.jpg');"></div>
+            <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                <h2>Dzięki naszym kalkulatorom</h2>
+                <p class="lead mb-0">w łatwy i szybki sposób policzysz zapotrzebowanie, sprawdź jaki maksymalny ciężar podniesiesz podczas treningu na jedno powtórzenie oraz oblicz swoje BMI. Zaloguj się aby dowiedzieć się więcej!</p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-6 text-white showcase-img" style="background-image: url('img/food3.jpg');"></div>
+            <div class="col-lg-6 my-auto showcase-text">
+                <h2>Prowadź dziennik żywienia</h2>
+                <p class="lead mb-0">aplikacja policzy twoje zapotrzebowanie, wprowadzaj codziennie produkty, które zjadasz w ciągu dnia, staraj się dostarczać określoną liczbę kalorii aby zrealizować swój cel!</p>
+            </div>
+        </div>
+        <div class="row no-gutters">
+            <div class="col-lg-6 order-lg-2 text-white showcase-img" style="background-image: url('img/Centimeter.jpg');"></div>
+            <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+                <h2>Łatwy sposób na sukces</h2>
+                <p class="lead mb-0">Nasza aplikacja jest bardzo prosta w obsłudzę, od dziś nie musisz stosować specjalnej diety wystarczy, że wykorzystasz naszą aplikacje!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials text-center bg-light">
+    <div class="container">
+        <h2 class="mb-5">Wasze opinie...</h2>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                    <img class="img-fluid rounded-circle mb-3" src="~/img/Kuba.jpg" alt="">
+                    <h5>Kuba M.</h5>
+                    <p class="font-weight-light mb-0">"Super strona! Polecam"</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                    <img class="img-fluid rounded-circle mb-3" src="~/img/Aniela.jpg" alt="">
+                    <h5>Aniela S.</h5>
+                    <p class="font-weight-light mb-0">"Dzięki tej stronie mogę jeść na co tylko mam ochotę."</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="testimonial-item mx-auto mb-5 mb-lg-0">
+                    <img class="img-fluid rounded-circle mb-3" src="~/img/Paweł.jpg" alt="">
+                    <h5>Paweł M.</h5>
+                    <p class="font-weight-light mb-0">"Świetna strona, korzystam każdego dnia!"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="call-to-action text-white text-center">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+                <h2 class="mb-4">Dołącz do nas aby zobaczyć zawartość!</h2>
+            </div>
+            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                <form>
+                    <div class="form-row">
+                        <div class="col-12 col-md-9 mb-2 mb-md-0">
+                            <input type="email" class="form-control form-control-lg" placeholder="Wpisz E-mail...">
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <button type="submit" class="btn btn-block btn-lg btn-primary">Dołącz!</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="container">
+
+            <div class="card o-hidden border-0 shadow-lg my-5">
+                <div class="card-body p-0">
+                    <!-- Nested Row within Card Body -->
+                    <div class="row">
+                        <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                        <div class="col-lg-7">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                </div>
+                                <form class="user">
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="text" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address">
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <input type="password" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
+                                        </div>
+                                    </div>
+                                    <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                        Register Account
+                                    </a>
+                                    <hr>
+                                    <a href="index.html" class="btn btn-google btn-user btn-block">
+                                        <i class="fab fa-google fa-fw"></i> Register with Google
+                                    </a>
+                                    <a href="index.html" class="btn btn-facebook btn-user btn-block">
+                                        <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
+                                    </a>
+                                </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                </div>
+                                <div class="text-center">
+                                    <a class="small" href="login.html">Already have an account? Login!</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" role="dialog" >
+    <div class="modal-dialog modal-xl">
+
+        <div class="bg-gradient-primary ">
+                <div class="container">
+
+                    <!-- Outer Row -->
+                    <div class="row justify-content-center">
+
+                        <div class="col-xl-10 col-lg-12 col-md-9">
+
+                            <div class="card o-hidden border-0 shadow-lg my-5">
+                                <div class="card-body p-0">
+                                    <!-- Nested Row within Card Body -->
+                                    <div class="row">
+                                        <div class="col-lg-6 d-none d-lg-block" style=" background-image: url('img/Register.jpg'); background-position: center; background-size: cover;"></div>
+                                        <div class="col-lg-6">
+                                            <div class="p-5">
+                                                <button type="button" class="close" data-dismiss="modal fade" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                                <div class="text-center">
+                                                    <h1 style="color:dimgrey">Zaloguj się</h1>
+                                                </div>
+
+                                                <form class="user" asp-area="Account" asp-action="Login" asp-controller="Home" method="post" role="form">
+                                                    <div class="form-group">
+                                                        <input asp-for="UserEmail" type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input asp-for="UserPassword" type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Hasło">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="custom-control custom-checkbox small">
+                                                            <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                            <label class="custom-control-label" style="color:dimgray" for="customCheck">Remember Me</label>
+                                                        </div>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                                        Login
+                                                    </button>
+                                                    <hr>
+                                                    <a href="index.html" class="btn btn-google btn-user btn-block" style="background-color:darkred; color:white">
+                                                        <i class="fab fa-google fa-fw"></i> Login with Google
+                                                    </a>
+                                                    <a href="index.html" class="btn btn-facebook btn-user btn-block " style="background-color:blue;color:white">
+                                                        <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                                    </a>
+
+                                                </form>
+                                                <hr>
+                                                <div class="text-center">
+                                                    <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                                </div>
+                                                <div class="text-center">
+                                                    <a class="small" href="register.html">Create an Account!</a>
+                                                </div>
+                                                <div class="text-center">
+                                                    <button class="btn btn-danger" data-dismiss="modal fade">Anuluj</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+    </div>
+</div>
 

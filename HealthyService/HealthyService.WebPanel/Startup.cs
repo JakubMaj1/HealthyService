@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +25,23 @@ namespace HealthyService.WebPanel
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.AccessDeniedPath = "/Account/Home/AccessDenied";
+                options.LoginPath = "/Account/Home/Login";
+            });
+
+
+            services.AddRazorPages();
+            //.AddFacebook(options =>
+            //{
+            //    options.ClientId = "593588681425639";
+            //    options.ClientSecret = "c0717dd3385f66bbd7bf6cf3322cbff8";
+            //    options.AccessDeniedPath = "/System/Account/AccessDenied";
+            //    options.SignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            //}); //TODO : Zainstalowac pakiet nugat, uzyskac client id i secret ze strony fb
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,6 +62,7 @@ namespace HealthyService.WebPanel
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
