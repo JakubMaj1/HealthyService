@@ -25,7 +25,7 @@
 
                                     <form class="user" asp-area="Account" asp-action="Login" asp-controller="Home" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="form-validate-jquery" autocomplete="on" role="form" ja>
                                         <div class="form-group">
-                                            <input asp-for="UserEmail" type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="E-mail">
+                                            <input asp-for="UserEmail" type="email" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="E-mail">
                                             <span asp-validation-for="UserEmail"></span>
                                         </div>
                                         <div class="form-group">
@@ -34,32 +34,30 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" style="color:dimgray" for="customCheck">Remember Me</label>
+                                                <input type="checkbox" class="custom-control-input">
+                                                <label class="custom-control-label" style="color:dimgray" for="customCheck">Zapamiętaj</label>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Zaloguj
                                         </button>
                                         <hr>
-                                        <a href="index.html" class="btn btn-google btn-user btn-block">
+                                        @*<a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
-                                        </a>
+                                        </a>*@
                                         <a href="index.html" class="btn btn-facebook btn-user btn-block ">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
+                                            <i class="fab fa-facebook-f fa-fw"></i> Zaloguj przez Facebook
                                         </a>
 
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="#">Zapomniałeś hasło?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small" asp-area="Account" asp-controller="Home" asp-action="Register">Stwórz konto!</a>
                                     </div>
-                                    <div class="text-center">
-                                        <button class="btn btn-danger" data-dismiss="modal fade">Anuluj</button>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

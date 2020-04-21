@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewData["Title"] = "BMI";
+    Layout = "_Layout2";
+
+}
+<br />
+    <h1 style="text-align:center">Kalkulator BMI</h1>
+
+
+<div class="container">
+    <div class="content">
+
+        <!-- Post grid -->
+        <div class="row">
+
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="card-body">
+                            <div class="card-img-actions mb-3">
+                                <img class="card-img img-fluid" src="../../img/centimeter.jpg" alt="">
+                                
+                            </div>
+
+                            <h5 class="font-weight-semibold mb-1">
+                               Kalkulator BMI
+                            </h5>
+
+                            <br />
+                            BMI jest jednym z ważnych wskaźniów określających nasz stan fizyczny, ale niestety nie wystarczającym. Bardzo ważnym uzupełnieniem BMI jest wskaźnik ilości tłuszczu brzusznego - zbyt duży może oznaczać niebezpieczną otyłość brzuszną i to nawet przy prawidłowym BMI! Ponadto, paradoksalnie, badania naukowe wskazują, że osoby z lekką nadwagą zwykle są zdrowsze i żyją dłużej od osób z tzw. "prawidłową wagą". Pojawiają się nawet głosy, że ustalony arbitralnie przez WHO próg nadwagi (25) jest zbyt niski.
+
+                            
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <div id="KalkulatorBMI" class="row">
+                                <div class="col-md-12" style="text-align:center; padding-bottom:1%; font-size:20px;">Zakresy wartości BMI:</div>
+                                <ul>
+                                    <li> mniej niż 16 - wygłodzenie</li>
+                                    <li> 16 - 16.99 - wychudzenie</li>
+                                    <li> 17 - 18.49 - niedowaga</li>
+                                    <li> 18.5 - 24.99 - wartość prawidłowa</li>
+                                    <li> 25 - 29.99 - nadwaga</li>
+                                    <li> 30 - 34.99 - I stopień otyłości</li>
+                                    <li> 35 - 39.99 - II stopień otyłości</li>
+                                    <li> powyżej 40 - otyłość skrajna</li>
+                                </ul>
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4  mb-4">Podaj dane</h1>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-md-6">
+                                            <label>Wzrost</label>
+                                            <input type="text" class="form-control" style=" border-radius: 45px;" id="HeightBMI"placeholder="cm">
+                                            <br />
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Waga</label>
+                                            <input type="text" class="form-control" style=" border-radius: 45px;" id="WeightBMI"placeholder="kg">
+                                        </div>
+                                        <div class="col-md-5">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button onclick="BMI()" style=" border-radius: 15px;" type="submit" class="btn btn-primary"> Oblicz </button>
+                                        </div>
+                                        <div class="col-md-5">
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12">
+
+                                                <div style="text-align:left; padding-bottom:2px; text-transform:capitalize;letter-spacing: 1px; font-size:15px; ">
+
+
+                                                    <div id="BMIInfo">
+
+                                                    </div>
+
+                                                    <div style="font-size:35px; padding-bottom:5px;" id="BMIValue">
+
+                                                    </div>
+
+                                                    <div id="BMIInfo2">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

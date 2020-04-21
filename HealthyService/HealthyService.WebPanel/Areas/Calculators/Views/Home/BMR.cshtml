@@ -1,0 +1,156 @@
+﻿@{
+    ViewData["Title"] = "BMR";
+    Layout = "_Layout2";
+}
+<br />
+<h1 style="text-align:center">Kalkulator Zapotrzebowania Kalorycznego</h1>
+
+<div class="container">
+    <div class="content">
+
+        <!-- Post grid -->
+        <div class="row">
+
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="card-body">
+                            <div class="card-img-actions mb-3">
+                                <img class="card-img img-fluid" src="../../img/food.jpg" alt="">
+                                
+                            </div>
+
+                            <h5 class="font-weight-semibold mb-1">
+                                Kalkulator Zapotrzebowania Kalorycznego
+                            </h5>
+
+                            <br />
+                            Kalkulator kalorii umożliwia szybkie i wygodne wyliczenie własnego dziennego zapotrzebowania na kalorie. Oblicz swoje zapotrzebowanie aby osiągnąć wyznaczony cel, wypełnij formularz aby otrzymać swoje zapotrzebowanie.
+                            Każdy organizm jest inny! Podane przez kalkulator kalorii wartości mają charakter orientacyjny i pomocniczy. Żadne narzędzie nie zastąpi konsultacji ze specjalistą! Zamieszczone informacje nie mogą być podstawą do przeprowadzenia samodiagnozy czy leczenia.
+
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <div id="KalkulatorZapotrzebowania" class="row">
+
+
+                                <div class="col-md-12" style="text-align:center; padding-left:3%; padding-top:5%; padding-bottom:1%; font-size:20px;">Stopien aktywności</div>
+
+
+                                1 - Bardzo niska aktywność (Brak treningu)<br />
+
+
+                                2 - Niska aktywność ( 1 trening w tygodniu)<br />
+
+
+                                3 - Umiarkowana aktywność (2-3 treningi w tygodniu)<br />
+
+
+                                4 - Wysoka aktywność ( 4-5 treningów w tygodniu)<br />
+
+
+
+
+
+
+
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4  mb-4">Podaj dane</h1>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-md-4  mb-2">
+                                            <label>Wzrost</label>
+                                            <input style="border-radius: 45px;" type="text" class="form-control" id="HeightBMR"placeholder="cm">
+                                        </div>
+                                        <div class=" col-md-4 mb-2">
+                                            <label>Waga</label>
+                                            <input style="border-radius: 45px;" type="text" class="form-control" id="WeightBMR"placeholder="kg">
+                                        </div>
+
+                                        <div class="col-md-4 mb-2">
+                                            <label>Wiek</label>
+                                            <input style="border-radius: 45px;" type="text" class="form-control" id="AgeBMR"placeholder="1-99">
+                                        </div>
+
+                                        <div class="col-md-6 mb-4">
+                                            <label>Stopień aktywności</label>
+                                            <select id="ActiveLevelBMR" class="form-control">
+                                                <option selected>1</option>
+                                                <option>2</option>
+                                                <option>3</option>
+                                                <option>4</option>
+                                            </select>
+
+                                        </div>
+
+                                        <div class="col-md-6 mb-4">
+                                            <label>Płeć</label>
+                                            <select id="GenderBMR" class="form-control">
+                                                <option selected>Mężczyzna</option>
+                                                <option>Kobieta</option>
+
+                                            </select>
+
+                                        </div>
+                                        <div class="col-md-5">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button onclick="BMR()" style=" border-radius: 15px;" type="submit" class="btn btn-primary"> Oblicz </button>
+                                        </div>
+                                        <div class="col-md-5">
+                                        </div>
+
+                                        <div class="row">
+
+                                            <br />
+                                            <br />
+                                            <div class="col-md-12">
+
+                                                <div style="text-align:left; padding-bottom:2px; text-transform:;letter-spacing: 1px; font-size:15px; ">
+
+                                                    <div id="BMRValueInfo">
+
+                                                    </div>
+
+                                                    <div style="font-size:35px; padding-bottom:5px;" id="BMRValue">
+
+                                                    </div>
+
+                                                    <div id="BMRValueInfo2">
+
+                                                    </div>
+
+                                                    <div style="font-size:20px; padding-bottom:5px;" id="BMRValueMinus">
+
+                                                    </div>
+
+                                                    <div id="BMRValueInfo3">
+
+                                                    </div>
+
+                                                    <div style="font-size:20px; padding-bottom:5px;" id="BMRValuePlus">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -19,6 +19,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Calculators\Model\" />
     <Folder Include="Areas\Dashboard\Model\" />
     <Folder Include="Areas\Diary\Controllers\" />
     <Folder Include="Areas\Diary\Model\" />
@@ -28,9 +29,7 @@
     <Folder Include="Areas\Products\Views\Home\" />
     <Folder Include="Areas\System\Controllers\" />
     <Folder Include="Areas\System\Views\" />
-    <Folder Include="Areas\Training\Controllers\" />
     <Folder Include="Areas\Training\Model\" />
-    <Folder Include="Areas\Training\Views\Home\" />
     <Folder Include="Areas\Users\Controllers\" />
     <Folder Include="Areas\Users\Model\" />
     <Folder Include="Areas\Users\Views\Home\" />

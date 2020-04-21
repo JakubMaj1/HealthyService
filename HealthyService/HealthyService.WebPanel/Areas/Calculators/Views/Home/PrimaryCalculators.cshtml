@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewData["Title"] = "Calculators";
+    Layout = "_Layout2";
+}
+<br />
+<h1 style="text-align:center">Kalkulatory</h1>
+
+<div class="content">
+
+    <!-- Post grid -->
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="card-img-actions mb-3">
+                        <img class="card-img img-fluid" src="../../img/Lift.jpg" alt="">
+                        <div class="card-img-actions-overlay card-img">
+                            <a asp-area="Calculators" asp-controller="Home" asp-action="Lift" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">
+                                <i class="icon-link"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <h5 class="font-weight-semibold mb-1">
+                        <a href="#">Kalkulator Wyciskania</a>
+                    </h5>
+
+                    <br />
+
+                    Dzięki temu kalkulatorwi możesz dowiedzieć się jaki maksymalny ciężar jesteś w stanie wycisnąć na jedno powtórzenie podczas treningu siłowego w wyciskaniu sztangi na ławce poziomej.
+                </div>
+
+                <div class="card-footer d-flex">
+                    <a asp-area="Calculators" asp-controller="Home" asp-action="Lift" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="card-img-actions mb-3">
+                        <img class="card-img img-fluid" src="../../img/food.jpg" alt="">
+                        <div class="card-img-actions-overlay card-img">
+                            <a asp-area="Calculators" asp-controller="Home" asp-action="BMR" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">
+                                <i class="icon-link"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <h5 class="font-weight-semibold mb-1">
+                        <a href="#">Kalkulator Zapotrzebowania Kalorycznego</a>
+                    </h5>
+
+                    <br />
+
+                    Dzięki temu kalkulatorowi możesz dowiedzieć się ile kalorii powienieś spożywać aby osiągnąć wyznaczony cel, po podaniu danych otrzymasz w zamian ilość kalorii.
+                </div>
+
+                <div class="card-footer d-flex">
+                    <a asp-area="Calculators" asp-controller="Home" asp-action="BMR" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+
+                <div class="card-body">
+                    <div class="card-img-actions mb-3">
+                        <img class="card-img img-fluid" src="../../img/centimeter.jpg" alt="">
+                        <div class="card-img-actions-overlay card-img">
+                            <a asp-area="Calculators" asp-controller="Home" asp-action="BMI" class="btn btn-outline bg-white text-white border-white border-2 btn-icon rounded-round">
+                                <i class="icon-link"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <h5 class="font-weight-semibold mb-1">
+                        <a href="#">Kalkulator BMI</a>
+                    </h5>
+
+                    <br />
+
+                    Dzięki temu kalkulatorwi możesz dowiedzieć się ile wynosi twój wskaźnik BMI, warto wiedzieć czy twoja waga jest idealna dla twojego wzrostu. Wypełnij danę a wynik otrzymasz w zamian.
+                </div>
+
+                <div class="card-footer d-flex">
+                    <a asp-area="Calculators" asp-controller="Home" asp-action="BMI" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

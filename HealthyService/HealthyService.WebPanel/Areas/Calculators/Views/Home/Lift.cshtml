@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewData["Title"] = "Lift";
+    Layout = "_Layout2";
+
+}
+<br />
+    <h1 style="text-align:center">Kalkulator Wyciskania</h1>
+
+<div class="container">
+    <div class="content">
+
+        <!-- Post grid -->
+        <div class="row">
+
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="card-body">
+                            <div class="card-img-actions mb-3">
+                                <img class="card-img img-fluid" src="../../img/Lift.jpg" alt="">
+
+                            </div>
+
+                            <h5 class="font-weight-semibold mb-1">
+                                Kalkulator Wyciskania
+                            </h5>
+
+                            <br />
+
+                            Kalkulator obciążenia to świetne narzędzie, dzięki któremu w prosty sposób można oszacować maksymalny ciężar na jedno powtórzenie w wyciskaniu sztangi leżąc. Kalkulator siły to także doskonała pomoc w ustaleniu i określeniu założonego poziomu postępu w wyciskaniu, czyli tzw. treningowej progresji. W kalkulatorze wystarczy, że wpiszesz wartość podniesionego ciężaru i ilość powtórzeń, a po chwili otrzymasz wynik, oznaczający Twój ciężar maksymalny.
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <div id="KalkulatorBMI" class="row">
+                               
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4  mb-4">Podaj dane</h1>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-md-6">
+                                            <label style="text-align:center">Ciężar</label>
+                                            <input type="text" class="form-control" style=" border-radius: 45px;" id="load" placeholder="Kg">
+                                            <br />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Ilość powtórzeń</label>
+                                            <input type="text" class="form-control" style=" border-radius: 45px;" id="repetition"placeholder="1-10">
+                                            <span id="userMessageRepetition" hidden>Dźwigasz za małe cięzary</span>
+                                            <br />
+
+
+                                        </div>
+                                        <div class="col-md-5">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button onclick="sprawdz2()" style=" border-radius: 15px;" type="submit" class="btn btn-primary"> Oblicz </button>
+                                        </div>
+                                        <div class="col-md-5">
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <div style="text-align:left; padding-bottom:2px; text-transform:capitalize; letter-spacing: 1px; font-size:15px; ">
+                                                    <br />
+
+                                                    <div id="MaxInfo">
+
+                                                    </div>
+                                                    <div style="font-size:35px; padding-bottom:5px;" id="maxLoad">
+
+                                                    </div>
+                                                    <div id="maxLoad50">
+
+                                                    </div>
+                                                    <div id="maxLoad60">
+
+                                                    </div>
+                                                    <div id="maxLoad70">
+
+                                                    </div>
+
+                                                    <div id="maxLoad80">
+
+                                                    </div>
+                                                    <div id="maxLoad90">
+
+                                                    </div>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

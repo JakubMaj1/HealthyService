@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,8 +16,8 @@
 <body>
     <div class="navbar navbar-light navbar-expand-md">
         <div class="navbar-brand">
-            <a class="d-inline-block">
-                <img src="../../../../global_assets/images/logo_light.png" alt="">
+            <a asp-area="Dashboard" asp-controller="Home" asp-action="UserDashboard" class="d-inline-block" style="color:white;">
+                <i class="icon-home"></i> Healthy Service
             </a>
         </div>
 
@@ -32,19 +32,35 @@
 
         <div class="collapse navbar-collapse" id="navbar-mobile">
             @*<ul class="navbar-nav">
-                <li class="nav-item">
-                    <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
-                        <i class="icon-paragraph-justify3"></i>
-                    </a>
-                </li>
-            </ul>*@
+                    <li class="nav-item">
+                        <a href="#" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
+                            <i class="icon-paragraph-justify3"></i>
+                        </a>
+                    </li>
+                </ul>*@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
                     <a href="#" class="navbar-nav-link">
-                        Text link
+                        <i class="icon-book2"></i> Dziennik
                     </a>
                 </li>
+                <li class="nav-item">
+
+                    <a asp-area="Training" asp-controller="Home" asp-action="PrimaryTraining" class="navbar-nav-link d-flex align-items-center">
+                        <i class="icon-folder-heart"></i>  Trening
+                    </a>
+
+                </li>
+
+                <li class="nav-item">
+
+                    <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="navbar-nav-link d-flex align-items-center">
+                        <i class="icon-calculator2"></i>  Kalkulatory
+                    </a>
+
+                </li>
+
 
                 <li class="nav-item dropdown">
                     <a href="#" class="navbar-nav-link">
@@ -54,19 +70,21 @@
                     </a>
                 </li>
 
+
                 <li class="nav-item dropdown dropdown-user">
                     <a href="#" class="navbar-nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown">
-                        <img src="../../../../global_assets/images/image.png" class="rounded-circle mr-2" height="34" alt="">
-                        <span>Victoria</span>
+                        <img src="../../../img/Kuba.jpg" class="rounded-circle mr-2" height="34" alt="">
+                        <span>Kuba</span>
                     </a>
 
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a href="#" class="dropdown-item"><i class="icon-user-plus"></i> My profile</a>
-                        <a href="#" class="dropdown-item"><i class="icon-coins"></i> My balance</a>
-                        <a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Messages <span class="badge badge-pill bg-blue ml-auto">58</span></a>
+                        <a href="#" class="dropdown-item"><i class="icon-user-plus"></i> Moje konto</a>
+                        <a href="#" class="dropdown-item"><i class="icon-book"></i> Dziennik</a>
+                        <a href="#" class="dropdown-item"><i class="icon-comment-discussion"></i> Wiadomości</a>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Account settings</a>
-                        <a href="#" class="dropdown-item"><i class="icon-switch2"></i> Logout</a>
+                        <a href="#" class="dropdown-item"><i class="icon-cog5"></i> Ustawienia</a>
+                        <a class="dropdown-item" asp-area="Account" asp-controller="Home" asp-action="Logout"><i class="icon-switch2"></i> Wyloguj się</a>
+
                     </div>
                 </li>
             </ul>
@@ -76,7 +94,11 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/app.js"></script>
+
+
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/healthy.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
 </body>
