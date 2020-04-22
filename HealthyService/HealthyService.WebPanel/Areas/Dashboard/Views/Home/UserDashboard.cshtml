@@ -4,5 +4,147 @@
     Layout = "_Layout2";
 }
 
-<h1>UserDashboard</h1>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 ">
 
+                <!-- Middle placement -->
+                <div class="card">
+                    <div class="card-header header-elements-inline">
+                        <h6 class="card-title">Początkowe Pomiary</h6>
+                        <div class="header-elements">
+                            <div class="list-icons">
+                                <a class="list-icons-item" data-action="collapse"></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="collapseOne" class="card-body collapse">
+
+                        <div class="card-img-actions mb-2">
+                            <img class="img-fluid" src="../../img/centimeter.jpg" alt="">
+                            <div class="card-img-actions-overlay">
+
+                                <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                    Dodaj
+                                </a>
+                            </div>
+
+                        </div>
+                        <h5 class="card-title">Wymiary</h5>
+                        <hr>
+
+                        Obwód łydki : 40cm <br />
+                        Obwód uda : 65cm <br />
+                        Obwód klatki : 140cm <br />
+                        Obwód pasa : 110cm <br />
+
+
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <span class="font-size-sm text-uppercase font-weight-semibold">01.04.2020</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4 ">
+
+                <!-- Middle placement -->
+                <div class="card">
+
+                    <div class="card-header header-elements-inline">
+                        <h6 class="card-title">Aktualne Pomiary</h6>
+                        <div class="header-elements">
+                            <div class="list-icons">
+                                <a class="list-icons-item" data-action="collapse"></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div id="collapseOne" class="card-body collapse">
+                        <div class="card-img-actions mb-2">
+                            <img class="img-fluid" src="../../img/centimeter.jpg" alt="">
+                            <div class="card-img-actions-overlay ">
+
+                                <a href="#" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                    Aktualizuj
+                                </a>
+                            </div>
+                        </div>
+                        <h5 class="card-title">Wymiary</h5>
+                        <hr />
+                        Waga
+                        Obwód łydki : 39cm <br />
+                        Obwód uda : 60cm <br />
+                        Obwód klatki : 120cm <br />
+                        Obwód pasa : 99cm <br />
+
+
+                    </div>
+                    <div class="card-footer d-flex justify-content-between">
+                        <span class="font-size-sm text-uppercase font-weight-semibold">22.04.2020</span>
+                        <span class="font-size-sm text-uppercase text-success font-weight-semibold">5 Dni temu </span>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-md-4">
+
+                <!-- Overlay buttons -->
+                <div class="card">
+                    <div class="card-img-actions">
+                        <img class="card-img-top img-fluid" src="../../img/DashTraining.png" alt="">
+                        <div class="card-img-actions-overlay card-img-top">
+                            <a href="../../img/DashTraining.png" class="btn btn-outline bg-white text-white border-white border-2" data-popup="lightbox">
+                                Powiększ
+                            </a>
+                            <a asp-area="Training" asp-controller="Home" asp-action="PrimaryTraining" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                Szczegóły
+                            </a>
+                        </div>
+                    </div>
+
+                    @*<div class="card-body">
+                    <h5 class="card-title">Trening</h5>
+                    <p class="card-text">Dowiedz się więcej na temat treningu, zapoznaj się z proponowanymi planami.</p>
+                </div>
+
+                <div class="card-footer d-flex">
+                    <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
+                </div>*@
+                </div>
+                <div class="card">
+                    <div class="card-img-actions">
+                        <img class="card-img-top img-fluid" src="../../img/DashCalculatores.png" alt="">
+                        <div class="card-img-actions-overlay card-img-top">
+                            <a href="../../img/DashCalculatores.png" class="btn btn-outline bg-white text-white border-white border-2" data-popup="lightbox">
+                                Powiększ
+                            </a>
+                            <a asp-area="Training" asp-controller="Home" asp-action="PrimaryTraining" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                Szczegóły
+                            </a>
+                        </div>
+                    </div>
+
+                    @*<div class="card-body">
+                    <h5 class="card-title">Kalkulatory</h5>
+                    <p class="card-text">Skorzystaj z kalkulatorów, oblicz swoje zapotrzebowanie, BMI oraz inne.</p>
+                </div>
+
+                <div class="card-footer d-flex">
+                    <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
+                </div>*@
+                </div>
+
+
+            </div>
+        </div>
+       
+    </div>

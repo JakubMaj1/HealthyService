@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewData["Title"] = "MeasurementAdd";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+<br />
+    <h1 style="text-align:center">
+        Uzupełnij formularz
+    </h1>
+
+<div class="container">
+    <div class="content">
+
+        <!-- Post grid -->
+        <div class="row">
+
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="card-body">
+                            <div class="card-img-actions mb-3">
+                                <img class="card-img img-fluid" src="../../img/Humen.jpg" alt="">
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-md-6  p-4">
+                        <h3 style="text-align:center"> Dane Podstawowe</h3>
+                        <hr>
+
+                        <form>
+                            <div class="form-group row">
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" placeholder="Wiek">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" placeholder="Wzrost">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" placeholder="Waga">
+                                </div>
+
+
+
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-6 mb-4">
+                                    <label>Stopień aktywności</label>
+                                    <select id="ActiveLevelBMR" class="form-control">
+                                        <option selected>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <label>Płeć</label>
+                                    <select id="GenderBMR" class="form-control">
+                                        <option selected>Mężczyzna</option>
+                                        <option>Kobieta</option>
+
+                                    </select>
+
+                                </div>
+                            </div>
+
+                            <hr>
+                            <h3 style="text-align:center">
+                                Obwody
+                            </h3>
+
+                            <hr>
+                            <div class="form-group row">
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" placeholder="Klatki piersiowej">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" placeholder="Pasa">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" placeholder="Bioder">
+                                </div>
+
+
+
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" placeholder="Ramienia">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" placeholder="Uda">
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" placeholder="Łydki">
+                                </div>
+
+                            </div>
+                            <hr>
+
+                            <a class="btn btn-primary btn-user btn-block text-white">
+                                Zapisz
+                            </a>
+
+                        </form>
+
+
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -30,9 +30,7 @@
     <Folder Include="Areas\System\Controllers\" />
     <Folder Include="Areas\System\Views\" />
     <Folder Include="Areas\Training\Model\" />
-    <Folder Include="Areas\Users\Controllers\" />
     <Folder Include="Areas\Users\Model\" />
-    <Folder Include="Areas\Users\Views\Home\" />
   </ItemGroup>
 
   <ItemGroup>
