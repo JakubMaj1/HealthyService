@@ -75,11 +75,18 @@ namespace HealthyService.WebPanel
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            
+            InitializeHealthyService();
+
         }
 
         private void InitializeHealthyService()
         {
             //TODO: Odpal baze danych, wgraj dane startowe ... 
+           
+            
+            // HealthyService.Core.Database.DatabaseBus.DeleteDatabase();
+            HealthyService.Core.Database.DatabaseBus.MigrateDatabase();
         }
     }
 }
