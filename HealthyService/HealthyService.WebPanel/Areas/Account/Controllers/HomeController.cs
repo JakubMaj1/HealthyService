@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
+using System.Text;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
-using HealthyService.WebPanel.Areas.Account.Model;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query.Internal;
+using Microsoft.EntityFrameworkCore.Storage;
+using HealthyService.WebPanel.Areas.Account.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthyService.WebPanel.Areas.Account.Controllers
 {
@@ -82,5 +87,75 @@ namespace HealthyService.WebPanel.Areas.Account.Controllers
             return View();
         }
 
+        [HttpGet]
+        public async Task<IActionResult> RegisterUser()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> RegisterUser(Model.RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var dbContext = new HealthyService.Core.Database.HealthyServiceContext())
+                {
+                    using (var transaction = await dbContext.Database.BeginTransactionAsync())
+                    {
+                        var md5Passwod = CreateMD5(model.Password);
+
+                        await dbContext.Users.AddAsync(new HealthyService.Core.Database.Tables.User
+                        {
+                            Name = model.Name,
+                            SureName = model.SureName,
+                            Email = model.Email,
+                            Password = md5Passwod,
+                            IsActive = true,
+                            IsDeleted = false,
+                            CreateDate = DateTime.Now,
+
+                        });
+                        await dbContext.SaveChangesAsync();
+                        await transaction.CommitAsync();
+                    }
+                }
+
+            }
+            else
+            {
+
+            }
+            return RedirectToAction("UserDashboard", "Home", new { Area = "Dashboard" });
+        }
+
+        public async Task<bool> IsEmailValid(string email)
+        {
+            using(var dbContext = new Core.Database.HealthyServiceContext())
+            {
+                var userRef = await dbContext.Users.Where(q => EF.Functions.Like(q.Email, email)).FirstOrDefaultAsync();
+
+                if (userRef == null)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        public string CreateMD5(string input)
+        {
+            // Use input string to calculate MD5 hash
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                // Convert the byte array to hexadecimal string
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    sb.Append(hashBytes[i].ToString("X2"));
+                }
+                return sb.ToString();
+            }
+        }
     }
 }

@@ -14,6 +14,19 @@ namespace HealthyService.Core.Database
             {
                 using (var transaction = await dbContext.Database.BeginTransactionAsync())
                 {
+                    #region User
+
+                    User userAdmin = new User();
+                    userAdmin.Name = "Administrator";
+                    userAdmin.SureName = "Administrator";
+                    userAdmin.Email = "admin@admin";
+                    userAdmin.Password = "admin";
+
+                    await dbContext.Users.AddAsync(userAdmin);
+
+                    #endregion
+
+                    #region Product
                     var product1 = new Product()
                     {
                         Name = "Pierś z kurczaka",
@@ -55,6 +68,7 @@ namespace HealthyService.Core.Database
                         Fat = 5
                     };
                     await dbContext.Products.AddRangeAsync(new Product[] { product1, product2, product3, product4, product5 });
+                    #endregion Product
 
                     await dbContext.SaveChangesAsync();
                     await transaction.CommitAsync();

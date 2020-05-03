@@ -4,14 +4,16 @@ using HealthyService.Core.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthyService.Core.Migrations
 {
     [DbContext(typeof(HealthyServiceContext))]
-    partial class HealthyServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20200503191840_initial2")]
+    partial class initial2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,7 +89,7 @@ namespace HealthyService.Core.Migrations
                     b.Property<float>("Protein")
                         .HasColumnType("real");
 
-                    b.Property<long?>("UserId")
+                    b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -234,7 +236,6 @@ namespace HealthyService.Core.Migrations
                     b.HasOne("HealthyService.Core.Database.Tables.User", "User")
                         .WithMany("Meals")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK_UMU")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
@@ -244,7 +245,8 @@ namespace HealthyService.Core.Migrations
                     b.HasOne("HealthyService.Core.Database.Tables.User", "User")
                         .WithMany("Products")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("HealthyService.Core.Database.Tables.ProductMeal", b =>

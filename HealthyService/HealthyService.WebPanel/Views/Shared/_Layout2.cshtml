@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="~/assets/css/components.css" />
     <link rel="stylesheet" href="~/assets/css/layout.css" />
     <link rel="stylesheet" href="~/global_assets/css/icons/icomoon/styles.min.css" />
-
 </head>
 <body class="mr-1">
     <div class="navbar navbar-light navbar-expand-md">
@@ -41,7 +40,7 @@
 
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="#" class="navbar-nav-link">
+                    <a asp-area="Diary" asp-controller="Home" asp-action="FoodDiary" class="navbar-nav-link">
                         <i class="icon-book2"></i> Dziennik
                     </a>
                 </li>
@@ -90,13 +89,58 @@
             </ul>
         </div>
     </div>
+    <div class="navbar navbar-expand-md navbar-dark">
+
+
+        <div class="navbar-collapse collapse" id="navbar-second">
+            <ul class="navbar-nav">
+                <li class="nav-item p-2 ">
+                    Kalorie   <br />
+                    <span class="badge badge-pill bg-teal-800 position-static ml-auto ml-md-1 font-size-lg">2500 kcal</span>
+
+                </li>
+                <li class="nav-item p-2">
+                    <i>Białko</i> <br />
+                    <span class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg">200 g</span>
+                </li>
+                <li class="nav-item p-2">
+                    <i>Węglowodany</i> <br />
+                    <span class="badge badge-pill bg-primary-800 position-static ml-auto ml-md-1 font-size-lg">200 g</span>
+
+                </li>
+                <li class="nav-item p-2">
+                    <i>Tłuszcze</i> <br />
+                    <span class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg">200 g</span>
+
+                </li>
+            </ul>
+
+            <ul class="navbar-nav ml-md-auto">
+                <li class="nav-item">
+                    <a asp-area="Users" asp-controller="Home" asp-action="MacroKcalAdd" class="navbar-nav-link">
+                        <i class="icon-pencil3 mr-2"></i>
+                        Edytuj
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
     @RenderBody()
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+    <script src="~/global_assets/js/demo_pages/form_select2.js"></script>
+
     <script src="~/assets/js/app.js"></script>
-
-
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/healthy.js" asp-append-version="true"></script>
 

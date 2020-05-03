@@ -11,5 +11,9 @@ namespace HealthyService.Core.Database.Tables
         public string SureName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+
+        public List<UserDetails> UsersDetails { get; set; } // Dodane EF Relacje
+        public List<Meal> Meals { get; set; }
+        public List<Product> Products { get; set; }
     }
 }

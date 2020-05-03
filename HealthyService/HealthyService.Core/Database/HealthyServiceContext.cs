@@ -7,12 +7,13 @@ using System.Text;
 
 namespace HealthyService.Core.Database
 {
-    class HealthyServiceContext : DbContext
+    public class HealthyServiceContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<UserDetails> UsersDetails { get; set; }
         public DbSet<Meal> Meals { get; set; }
+        public DbSet<ProductMeal> ProductMeals { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
@@ -40,6 +41,10 @@ namespace HealthyService.Core.Database
                 entity.Property(p => p.IsDeleted).IsRequired();
 
                 entity.Property(p => p.CreateDate).IsRequired();
+
+                entity.HasMany(p => p.Products).WithOne(p => p.User);
+                entity.HasMany(p => p.Meals).WithOne(p => p.User);
+                entity.HasMany(p => p.UsersDetails).WithOne(p => p.User);
             });
 
             modelBuilder.Entity<UserDetails>(entity =>
@@ -80,6 +85,8 @@ namespace HealthyService.Core.Database
 
                 entity.Property(p => p.ForearmCircumference); //Przedramie
 
+                entity.HasOne(p => p.User).WithMany(p => p.UsersDetails).HasForeignKey(p => p.UserId).OnDelete(DeleteBehavior.Restrict);
+
             });
 
             modelBuilder.Entity<Product>(entity =>
@@ -104,15 +111,37 @@ namespace HealthyService.Core.Database
 
                 entity.Property(p => p.CreateDate).IsRequired();
 
+                entity.HasMany(p => p.Meals).WithOne(p => p.Product);
+
+                entity.HasOne(p => p.User).WithMany(p => p.Products).HasForeignKey(p => p.UserId).OnDelete(DeleteBehavior.NoAction);
+
             });
 
             modelBuilder.Entity<Meal>(entity =>
             {
                 entity.ToTable("Meals");
                 entity.HasKey(p => p.Id);
+
                 entity.Property(p => p.Name).HasMaxLength(30).IsRequired();
 
+                entity.Property(p => p.MealDateTime).IsRequired();
+
+                entity.HasOne(p => p.User).WithMany(p => p.Meals).HasForeignKey(p => p.UserId).OnDelete(DeleteBehavior.Restrict).HasConstraintName("FK_UMU");
+                entity.HasMany(p => p.Products).WithOne(p => p.Meal);
+
             });
+
+            modelBuilder.Entity<ProductMeal>()
+                .HasKey(t => new { t.ProductId, t.MealId });
+            modelBuilder.Entity<ProductMeal>()
+                .HasOne(pm => pm.Product)
+                .WithMany(p => p.Meals)
+                .HasForeignKey(pm => pm.ProductId);
+
+            modelBuilder.Entity<ProductMeal>()
+                .HasOne(pm => pm.Meal)
+                .WithMany(p => p.Products)
+                .HasForeignKey(pm => pm.MealId);
         }
     }
 }

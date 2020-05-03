@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewData["Title"] = "MeasurementEdit";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<div class="container">
+    <div class="content">
+
+        <!-- Post grid -->
+        <div class="row">
+
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="card-body">
+                            <div class="card-img-actions mb-3">
+                                <img class="card-img img-fluid" src="../../img/Humen.jpg" alt="">
+
+                            </div>
+
+
+                            
+
+
+                        </div>
+
+                        
+                    </div>
+
+                    <div class="col-md-6  p-4">
+                        <h3 style="text-align:center"> Dane Podstawowe</h3>
+                        <hr>
+
+                        <form>
+                            <div class="form-group row">
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user" placeholder="Wzrost">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control form-control-user" placeholder="Waga">
+                                </div>
+
+
+
+                            </div>
+                            <div class="form-group row">
+
+                                <div class="col-md-12">
+                                    <label>Stopień aktywności </label>
+                                    <select id="ActiveLevelBMR" class="form-control">
+                                        <option selected>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                    </select>
+
+                                </div>
+                            </div>
+
+
+                                <div class="row pl-3">
+                                    1 - Bardzo niska aktywność (Brak treningu)<br />
+
+
+                                    2 - Niska aktywność ( 1 trening w tygodniu)<br />
+
+
+                                    3 - Umiarkowana aktywność (2-3 treningi w tygodniu)<br />
+
+
+                                    4 - Wysoka aktywność ( 4-5 treningów w tygodniu)<br />
+                                </div>
+
+
+                                <hr>
+                                <h3 style="text-align:center">
+                                    Obwody
+                                </h3>
+
+                                <hr>
+                                <div class="form-group row">
+                                    <div class="col-sm-4 mb-3 mb-sm-0">
+                                        <input type="text" class="form-control form-control-user" placeholder="Klatki piersiowej">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control form-control-user" placeholder="Pasa">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control form-control-user" placeholder="Bioder">
+                                    </div>
+
+
+
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control form-control-user" placeholder="Ramienia">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control form-control-user" placeholder="Uda">
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control form-control-user" placeholder="Łydki">
+                                    </div>
+
+                                </div>
+                                <hr>
+
+                                <a class="btn btn-primary btn-user btn-block text-white">
+                                    Zapisz
+                                </a>
+
+                        </form>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

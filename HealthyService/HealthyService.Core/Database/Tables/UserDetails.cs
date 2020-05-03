@@ -1,4 +1,5 @@
 ﻿using HealthyService.Core.Database.Types;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -37,5 +38,8 @@ namespace HealthyService.Core.Database.Tables
         public long? ArmCircumference { get; set; }
 
         public long? ForearmCircumference { get; set; }
+
+        public User User { get; set; } // Dodane EF Relacje
+        public long UserId { get; set; } // Dodane EF Relacje
     }
 }

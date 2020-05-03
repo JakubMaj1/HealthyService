@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthyService.Core.Migrations
 {
     [DbContext(typeof(HealthyServiceContext))]
-    [Migration("20200422221655_FirtMigrationCreateDatabase")]
-    partial class FirtMigrationCreateDatabase
+    [Migration("20200503191925_initial3name")]
+    partial class initial3name
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,12 +37,20 @@ namespace HealthyService.Core.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("MealDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(30)")
                         .HasMaxLength(30);
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Meals");
                 });
@@ -81,9 +89,29 @@ namespace HealthyService.Core.Migrations
                     b.Property<float>("Protein")
                         .HasColumnType("real");
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("HealthyService.Core.Database.Tables.ProductMeal", b =>
+                {
+                    b.Property<long>("ProductId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("MealId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("ProductId", "MealId");
+
+                    b.HasIndex("MealId");
+
+                    b.ToTable("ProductMeals");
                 });
 
             modelBuilder.Entity("HealthyService.Core.Database.Tables.User", b =>
@@ -184,6 +212,9 @@ namespace HealthyService.Core.Migrations
                     b.Property<long?>("UserFatLevel")
                         .HasColumnType("bigint");
 
+                    b.Property<long>("UserId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("UserProteinLevel")
                         .HasColumnType("bigint");
 
@@ -195,7 +226,52 @@ namespace HealthyService.Core.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("UsersDetails");
+                });
+
+            modelBuilder.Entity("HealthyService.Core.Database.Tables.Meal", b =>
+                {
+                    b.HasOne("HealthyService.Core.Database.Tables.User", "User")
+                        .WithMany("Meals")
+                        .HasForeignKey("UserId")
+                        .HasConstraintName("FK_UMU")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthyService.Core.Database.Tables.Product", b =>
+                {
+                    b.HasOne("HealthyService.Core.Database.Tables.User", "User")
+                        .WithMany("Products")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthyService.Core.Database.Tables.ProductMeal", b =>
+                {
+                    b.HasOne("HealthyService.Core.Database.Tables.Meal", "Meal")
+                        .WithMany("Products")
+                        .HasForeignKey("MealId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HealthyService.Core.Database.Tables.Product", "Product")
+                        .WithMany("Meals")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("HealthyService.Core.Database.Tables.UserDetails", b =>
+                {
+                    b.HasOne("HealthyService.Core.Database.Tables.User", "User")
+                        .WithMany("UsersDetails")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

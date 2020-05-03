@@ -16,5 +16,10 @@ namespace HealthyService.Core.Database.Tables
         public float Fat { get; set; }
 
         public ProductMeasureType ProductMeasure { get; set; }
+
+        public List<ProductMeal> Meals { get; set; }
+
+        public User User { get; set; } // Dodane EF Relacje
+        public long? UserId { get; set; } // Dodane EF Relacje
     }
 }

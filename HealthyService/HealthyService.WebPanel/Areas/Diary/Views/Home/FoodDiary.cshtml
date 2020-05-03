@@ -1,0 +1,389 @@
+﻿
+@{
+    ViewData["Title"] = "FoodDiary";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+    <div class="container">
+        <div class="row pt-2">
+            <div class="col-lg-3">
+                <input type="text" class="form-control form-control-lg" placeholder="Nazwa posiłku">
+            </div>
+            <div class="col-lg-3">
+                <input type="datetime-local" class="form-control form-control-lg" placeholder="Nazwa posiłku">
+            </div>
+            <div class="col-lg-3">
+                <select data-placeholder="Enter 'as'" class="form-control select-minimum" style="background-color:aqua" data-fouc>
+                    <option></option>
+                    <optgroup label="Mountain Time Zone">
+                        <option value="AZ">Arizona</option>
+                        <option value="CO">Colorado</option>
+                        <option value="ID">Idaho</option>
+                        <option value="WY">Wyoming</option>
+                    </optgroup>
+                    <optgroup label="Central Time Zone">
+                        <option value="AL">Alabama</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="col-lg-3 p-3">
+                <a>Własny produkt</a>
+            </div>
+        </div>
+    </div>
+
+    @*<div class="page-content">
+
+        <div class="content-wrapper">
+
+            <div class="content">
+                <div class="row">
+
+                    <div class="col-md-5">
+                        <div class="card">
+
+                            <div class="card mb-0 rounded-bottom-0 ">
+                                <div class="card-header bg-green-400">
+                                    <h6 class="card-title">
+                                        <a data-toggle="collapse" class="text-black" href="#collapsible-item-group1"><h5>Posiłek 1</h5>  </a>
+                                    </h6>
+                                </div>
+
+                                <div id="collapsible-item-group1" class="collapse">
+                                    <div class="row pt-3 pl-4">
+                                        <div class="col-md-7 ">
+
+                                            <button type="button" class="btn bg-success" data-toggle="modal" data-target="#modal_AddProduct" style="font-size:15px;">Szukaj produktu <i class="icon-search4 "></i></button>
+
+                                        </div>
+                                        <div class=" col-md-5 ">
+                                            <button type="button" class="btn btn-link left mr-auto text-black" data-toggle="modal" data-target="#modal_AddProductDatabase" style="font-size:10px;">Dodaj własny produkt <i class="icon-plus-circle2 ml-1"></i></button>
+
+
+                                        </div>
+                                    </div>
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Produkt</th>
+                                                <th>Białko</th>
+                                                <th>Węglowodany</th>
+                                                <th>Tłuszcze</th>
+                                                <th>Kalorie</th>
+                                                <th>Akcja</th>
+
+                                            </tr>
+                                        </thead>
+                                        <hr />
+                                        <tbody>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Name</td>
+                                                <td>Name</td>
+                                                <td>Protein</td>
+                                                <td>Carbo</td>
+                                                <td><a class="icon-trash pl-2"></a></td>
+
+                                            </tr>
+                                        </tbody>
+
+                                        <tbody>
+
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Name</td>
+                                                <td>Name</td>
+                                                <td>Protein</td>
+                                                <td>Carbo</td>
+                                                <td><a class="icon-trash pl-2"></a></td>
+
+                                            </tr>
+                                        </tbody>
+                                        <tbody class="bg-grey">
+
+                                            <tr>
+                                                <td>Suma</td>
+                                                <td>50g</td>
+                                                <td>100g</td>
+                                                <td>10g</td>
+                                                <td>1200kcal</td>
+                                                <td><a class="icon-trash pl-2"></a></td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="card mb-0 rounded-bottom-0 ">
+                                <div class="card-header bg-green-300">
+                                    <h6 class="card-title">
+                                        <a data-toggle="collapse" class="text-black" href="#collapsible-item-group2"><h5>Posiłek 2</h5></a>
+                                    </h6>
+                                </div>
+
+                                <div id="collapsible-item-group2" class="collapse">
+                                    <div class="card-body col-md-8 ">
+
+                                        <input style="border-radius: 45px;" type="search" class="form-control" placeholder="Dodaj produkt">
+                                    </div>
+
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Produkt</th>
+                                                <th>Białko</th>
+                                                <th>Węglowodany</th>
+                                                <th>Tłuszcze</th>
+                                                <th>Kalorie</th>
+                                                <th>Akcja</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Pierś z kurczaka</td>
+                                                <td>Name</td>
+                                                <td>Name</td>
+                                                <td>Protein</td>
+                                                <td>Carbo</td>
+                                                <td><a class="icon-trash pl-2"></a></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Name</td>
+                                                <td>Name</td>
+                                                <td>Protein</td>
+                                                <td>Carbo</td>
+                                                <td><a class="icon-trash pl-2"></a></td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <hr />
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="card">
+
+                                <div class="card-header">
+                                    <h5 class="card-title">Podsumowanie dnia</h5>
+
+                                </div>
+
+                                <div class="card-body" >
+                                <div>
+
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Białko</th>
+                                                <th>Węglowodany</th>
+                                                <th>Tłuszcze</th>
+                                                <th>Kalorie</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Dostarczono</td>
+                                                <td>100g</td>
+                                                <td>220g</td>
+                                                <td>30g</td>
+                                                <td>2200kcal</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Pozostało</td>
+                                                <td>100g</td>
+                                                <td>220g</td>
+                                                <td>30g</td>
+                                                <td>2200kcal</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Zapotrzebowanie</td>
+                                                <td>200g</td>
+                                                <td>440g</td>
+                                                <td>60g</td>
+                                                <td>4400kcal</td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div id="modal_AddProductDatabase" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-grey-600">
+                    <h6 class="modal-title">Dodaj swój produkt do bazy danych</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <h6 class="font-weight-semibold">Uzupełnij informacje o produkcie</h6>
+
+                    <hr>
+                    <div>
+                        <form  method="post" class="form-validate-jquery user" role="form">
+
+
+
+
+
+
+                            <div class="form-group row">
+                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <i>Nazwa Produktu</i>
+                                    <input type="text" class="form-control form-control-user"  placeholder="Ryż biały">
+                                </div>
+                                <div class="col-sm-4">
+                                    <i>Białko</i>
+                                    <input type="text" class="form-control form-control-user"  placeholder="5">
+                                </div>
+                                <div class="col-sm-4">
+                                    <i>Węglowodany</i>
+                                    <input type="text" class="form-control form-control-user"  placeholder="10">
+                                </div>
+                                <div class="col-sm-4">
+                                    <i>Tłuszcze</i>
+                                    <input type="text" class="form-control form-control-user"  placeholder="5">
+                                </div>
+
+
+
+                            </div>
+
+                            <hr>
+
+                            
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Anuluj</button>
+                    <button type="button" class="btn bg-grey-600">Zapisz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal_AddProduct" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h6 class="modal-title">Dodaj produkt do posiłku</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <h6 class="font-weight-semibold">Szukaj produktu</h6>
+
+                    <hr>
+                    <div>
+                        <form  method="post" class="form-validate-jquery user" role="form">
+
+
+
+
+
+
+                            <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <i>Nazwa Produktu</i>
+                                    <input type="text" class="form-control form-control-user"  placeholder="Ryż biały">
+                                </div>
+                                <div class="col-sm-6">
+                                    <i>Waga produktu</i>
+                                    <input type="text" class="form-control form-control-user"  placeholder="100g">
+                                </div>
+                                
+
+
+
+                            </div>
+
+                            <hr>
+
+                            
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-link left mr-auto text-black" data-toggle="modal" data-target="#modal_AddProductDatabase" style="font-size:10px;" data-dismiss="modal">Dodaj własny produkt <br /> <i class="icon-plus2 ml-1"></i></button>
+
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Anuluj</button>
+                    <button type="button" class="btn bg-success">Dodaj produkt</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="modal_AddMeal" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-success">
+                    <h6 class="modal-title">Dodaj posiłek</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <h6 class="font-weight-semibold">Podaj nazwę posiłku</h6>
+
+                    <hr>
+                    <div>
+                        <form  method="post" class="form-validate-jquery user" role="form">
+
+
+
+
+
+
+                            <div class="form-group row">
+                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <i>Nazwa Posiłku</i>
+                                    <input type="text" class="form-control form-control-user"  placeholder="Śniadanie">
+                                </div>
+                                
+                                
+
+
+
+                            </div>
+
+                            <hr>
+
+                            
+
+                        </form>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+
+
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Anuluj</button>
+                    <button type="button" class="btn bg-success">Dodaj Nazwę</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
