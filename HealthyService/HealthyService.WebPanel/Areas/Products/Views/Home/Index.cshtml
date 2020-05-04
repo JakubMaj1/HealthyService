@@ -1,0 +1,74 @@
+﻿@model List<HealthyService.Core.Database.Tables.Product>
+@{
+    ViewData["Title"] = "AdminAddProduct";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<div class="container pt-3">
+    <div class="card">
+        <div class="card-header header-elements-inline">
+            <h5 class="card-title">Lista Produktów</h5>
+            <div class="header-elements">
+                <div class="list-icons">
+                    @*<a class="list-icons-item" data-action="remove"></a>*@
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <a  asp-area="Products" asp-controller="Home" asp-action="AdminAddProduct" class=" left mr-auto text-primary" style="font-size:18px;">Dodaj produkt <i class="icon-plus-circle2 "></i></a>
+
+        </div>
+
+        <table class="table datatable-basic">
+            <thead>
+                <tr>
+                    <th>Nazwa Produktu</th>
+                    <th>Białko</th>
+                    <th>Węglowodany</th>
+                    <th>Tłuszcze</th>
+                    <th>Status</th>
+                    <th class="text-center">Edytuj</th>
+                    <th class="text-center">Ukryj</th>
+                </tr>
+            </thead>
+            
+            @{
+
+                foreach (var products in Model)
+                {
+                    <tbody>
+                    <td>@products.Name</td>
+                    <td>@products.Protein</td>
+                    <td>@products.Carbo</td>
+                    <td>@products.Fat</td>
+                    <td>
+                        @{
+                            if (products.IsActive != true)
+                            {
+                                <span class="badge badge-danger">Ukryty</span>
+
+                            }
+                            else
+                            {
+                                <span class="badge badge-success">Widoczny</span>
+                            }
+                        }
+                    </td>
+                    <td class="text-center">
+                        <a href=""><span class="icon-pen6"></span></a>
+                    </td>
+                    <td class="text-center">
+                        <a href=""><span class="icon-blocked"></span></a>
+                    </td>
+                    </tbody>
+                }
+            }
+
+        </table>
+    </div>
+</div>
+<div id="modal_AddProductDatabase" class="modal fade" tabindex="-1">
+    
+</div>

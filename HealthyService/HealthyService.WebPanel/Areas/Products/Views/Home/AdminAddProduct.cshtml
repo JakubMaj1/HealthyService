@@ -1,0 +1,55 @@
+﻿@model HealthyService.WebPanel.Areas.Products.Model.AdminAddProductModel
+@{
+    ViewData["Title"] = "AdminAddProduct";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+}
+
+
+<div class="container w-50 pt-3">
+    <div class="card">
+        <div class="modal-header bg-primary">
+            <h6 class="modal-title">Dodaj nowy produkt do bazy danych</h6>
+
+        </div>
+        <div class="modal-body">
+            <h6 class="font-weight-semibold">Uzupełnij informacje o produkcie</h6>
+            <hr>
+            <div>
+                <form asp-area="Products" asp-controller="Home" asp-action="AdminAddProduct" method="post" class="form-validate-jquery user" role="form">
+                    <div class="form-group row">
+                        <div class="col-sm-12 mb-3 mb-sm-0">
+                            <i>Nazwa Produktu</i>
+                            <input type="text" class="form-control form-control-user" asp-for="Name" placeholder="Ryż biały">
+                            <span asp-validation-for="Name"></span>
+                        </div>
+                        <div class="col-sm-4">
+                            <i>Białko</i>
+                            <input type="text" class="form-control form-control-user" asp-for="Protein" placeholder="5">
+                            <span asp-validation-for="Protein"></span>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <i>Węglowodany</i>
+                            <input type="text" class="form-control form-control-user" asp-for="Carbo" placeholder="10">
+                            <span asp-validation-for="Carbo"></span>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <i>Tłuszcze</i>
+                            <input type="text" class="form-control form-control-user" asp-for="Fat" placeholder="5">
+                            <span asp-validation-for="Fat"></span>
+
+                        </div>
+                    </div>
+                    <hr>
+                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                       Zapisz
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="p-2" asp-area="Products" asp-controller="Home" asp-action="Index">Powrót</a>
+        </div>
+    </div>
+</div>

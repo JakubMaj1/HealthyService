@@ -11,7 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,9 +21,6 @@
   <ItemGroup>
     <Folder Include="Areas\Calculators\Model\" />
     <Folder Include="Areas\Dashboard\Model\" />
-    <Folder Include="Areas\Products\Controllers\" />
-    <Folder Include="Areas\Products\Model\" />
-    <Folder Include="Areas\Products\Views\Home\" />
     <Folder Include="Areas\System\Controllers\" />
     <Folder Include="Areas\System\Views\" />
     <Folder Include="Areas\Training\Model\" />

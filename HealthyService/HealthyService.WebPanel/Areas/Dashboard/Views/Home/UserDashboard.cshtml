@@ -7,24 +7,7 @@
 @*@Model.UserTest.Name*@
 
     <div class="container mt-4">
-        <div class="card">
-            <div class="card-header header-elements-inline">
-                <h5 class="card-title">Line multiples</h5>
-                <div class="header-elements">
-                    <div class="list-icons">
-                        <a class="list-icons-item" data-action="collapse"></a>
-                        <a class="list-icons-item" data-action="reload"></a>
-                        <a class="list-icons-item" data-action="remove"></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-body">
-                <div class="chart-container">
-                    <div class="chart has-fixed-height" id="line_multiple" style="height: 440px;"></div>
-                </div>
-            </div>
-        </div>
+       
         <div class="row">
             <div class="col-md-4 ">
 
@@ -32,23 +15,33 @@
                 <div class="card">
                     <div class="card-header header-elements-inline">
                         <h6 class="card-title">Początkowe Pomiary</h6>
-                        <div class="header-elements">
-                            <div class="list-icons">
-                                <a class="list-icons-item" data-action="collapse"></a>
-                            </div>
-                        </div>
+                        
                     </div>
 
 
-                    <div id="collapseOne" class="card-body collapse">
+                    <div id="collapseOne" class="card-body">
 
                         <div class="card-img-actions mb-2">
                             <img class="img-fluid" src="../../img/centimeter.jpg" alt="">
                             <div class="card-img-actions-overlay">
+                                @{
+                                    if (Model.UserDetailsFirst != null)
+                                    {
+                                        <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                            Edytuj
+                                        </a>
+                                        
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                                Dodaj
+                                            </a>
+                                        </div>
+                                    }
+                                }
 
-                                <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
-                                    Dodaj
-                                </a>
                             </div>
 
                         </div>
@@ -67,7 +60,9 @@
                             else
                             {
                                 <div>
-                                    DUPA O
+                                    <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-secondary w-100 ">
+                                        Uzupełnij dane
+                                    </a>
                                 </div>
                             }
                         }
@@ -77,6 +72,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-between">
                         <span class="font-size-sm text-uppercase font-weight-semibold">
+
                             @{
                                 if (@Model.UserDetailsFirst != null)
                                 {
@@ -84,6 +80,9 @@
                                 }
                                 else
                                 {
+                                        <div>
+                                            Dodaj wpis z początkowymi pomiarami.
+                                        </div>
                                 }
                             }
                         </span>
@@ -134,7 +133,9 @@
                             else
                             {  
                                 <div>
-                                     ss
+                                    <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-secondary w-100 ">
+                                        Uzupełnij dane
+                                    </a>
                                 </div>
                                 
                             }
@@ -144,7 +145,9 @@
 
                     </div>
                     <div class="card-footer d-flex justify-content-between">
-                        <span class="font-size-sm text-uppercase font-weight-semibold">@(Model.UserDetailsLast != null ? Model.UserDetailsLast.CreateDate : DateTime.Now )</span>
+                        <span class="font-size-sm text-uppercase font-weight-semibold">
+                        @(Model.UserDetailsLast != null ? Model.UserDetailsLast.CreateDate : DateTime.Now )
+                        </span>
                         <span class="font-size-sm text-uppercase text-success font-weight-semibold">5 Dni temu </span>
                     </div>
                 </div>
@@ -160,9 +163,7 @@
                     <div class="card-img-actions">
                         <img class="card-img-top img-fluid" src="../../img/DashTraining.png" alt="">
                         <div class="card-img-actions-overlay card-img-top">
-                            <a href="../../img/DashTraining.png" class="btn btn-outline bg-white text-white border-white border-2" data-popup="lightbox">
-                                Powiększ
-                            </a>
+                           
                             <a asp-area="Training" asp-controller="Home" asp-action="PrimaryTraining" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
                                 Szczegóły
                             </a>
@@ -182,9 +183,7 @@
                     <div class="card-img-actions">
                         <img class="card-img-top img-fluid" src="../../img/DashCalculatores.png" alt="">
                         <div class="card-img-actions-overlay card-img-top">
-                            <a href="../../img/DashCalculatores.png" class="btn btn-outline bg-white text-white border-white border-2" data-popup="lightbox">
-                                Powiększ
-                            </a>
+                           
                             <a asp-area="Training" asp-controller="Home" asp-action="PrimaryTraining" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
                                 Szczegóły
                             </a>

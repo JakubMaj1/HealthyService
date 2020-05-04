@@ -33,77 +33,130 @@
                             <div class="row">
                                 <div class=" card col-md-12 p-1" style="text-align:center; font-size:20px;">
 
-                                    <h1 class="h4  mb-4">Aktualnie</h1>
+                                    @{ if (Model.UserProteinLevel != null)
+                                        {
+                                            <h1 class="h4  mb-4">Aktualnie</h1>
 
 
-                                    <div class="row mt-1 mb-3">
+                                            <div class="row mt-1 mb-3">
 
-                                        <div class="col-md-3">
-                                            <i>Kalorie</i>    <br />
-                                            <span class="badge badge-pill bg-teal-800 position-static ml-auto ml-md-1 font-size-lg">@(4 * Model.UserCarboLevel + 4*Model.UserProteinLevel + 9*Model.UserFatLevel) kcal</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i>Białko</i> <br />
-                                            <span class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg">@Model.UserProteinLevel g</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i>Węglowodany</i> <br />
-                                            <span class="badge badge-pill bg-primary-800 position-static ml-auto ml-md-1 font-size-lg">@Model.UserCarboLevel g</span>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <i>Tłuszcze</i> <br />
-                                            <span class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg">@Model.UserFatLevel g</span>
-                                        </div>
-                                    </div>
-                                    
-                                    <hr />
-
-                                    <div class="p-2">
-                                        <div class="text-center">
-                                            <h1 class="h4  mb-4">Aktualizuj</h1>
-                                        </div>
-                                        
-                                        <form asp-area="Users" asp-controller="Home" asp-action="MacroKcalAdd" method="post" class="form-validate-jquery user" role="form">
-                                           
-                                            
-                                           
-
-                                            
-
-                                            <div class="form-group row">
-                                                <div class="col-sm-3 mb-3 mb-sm-0">
-                                                    <i>Kalorie</i>
-                                                    <input type="text" class="form-control form-control-user" asp-for="UserDemendLevel" placeholder="2500">
-                                                    <span asp-validation-for="UserDemendLevel"></span>
+                                                <div class="col-md-3">
+                                                    <i>Kalorie</i>    <br />
+                                                    <span class="badge badge-pill bg-teal-800 position-static ml-auto ml-md-1 font-size-lg">@(4 * Model.UserCarboLevel + 4*Model.UserProteinLevel + 9*Model.UserFatLevel) kcal</span>
                                                 </div>
-                                                <div class="col-sm-3">
-                                                    <i>Białko</i>
-                                                    <input type="text" class="form-control form-control-user" asp-for="UserProteinLevel" placeholder="120">
-                                                    <span asp-validation-for="UserProteinLevel"></span>
+                                                <div class="col-md-3">
+                                                    <i>Białko</i> <br />
+                                                    <span class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg">@Model.UserProteinLevel g</span>
                                                 </div>
-                                                <div class="col-sm-3">
-                                                    <i>Węglowodany</i>
-                                                    <input type="text" class="form-control form-control-user" asp-for="UserCarboLevel" placeholder="300">
-                                                    <span asp-validation-for="UserCarboLevel"></span>
+                                                <div class="col-md-3">
+                                                    <i>Węglowodany</i> <br />
+                                                    <span class="badge badge-pill bg-primary-800 position-static ml-auto ml-md-1 font-size-lg">@Model.UserCarboLevel g</span>
                                                 </div>
-                                                <div class="col-sm-3">
-                                                    <i>Tłuszcze</i>
-                                                    <input type="text" class="form-control form-control-user" asp-for="UserFatLevel" placeholder="60">
-                                                    <span asp-validation-for="UserFatLevel"></span>
+                                                <div class="col-md-3">
+                                                    <i>Tłuszcze</i> <br />
+                                                    <span class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg">@Model.UserFatLevel g</span>
                                                 </div>
-
-
-
                                             </div>
-                                           
-                                            <hr>
 
-                                            <button class="btn btn-primary btn-user btn-block text-white">
-                                                Zapisz
-                                            </button>
+                                            <hr />
 
-                                        </form>
-                                    </div>
+                                            <div class="p-2">
+                                                <div class="text-center">
+                                                    <h1 class="h4  mb-4">Aktualizuj</h1>
+                                                </div>
+
+                                                <form asp-area="Users" asp-controller="Home" asp-action="MacroKcalAdd" method="post" class="form-validate-jquery user" role="form">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                                            <i>Kalorie</i>
+                                                            <input type="text" class="form-control form-control-user" asp-for="UserDemendLevel" placeholder="2500">
+                                                            <span asp-validation-for="UserDemendLevel"></span>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <i>Białko</i>
+                                                            <input type="text" class="form-control form-control-user" asp-for="UserProteinLevel" placeholder="120">
+                                                            <span asp-validation-for="UserProteinLevel"></span>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <i>Węglowodany</i>
+                                                            <input type="text" class="form-control form-control-user" asp-for="UserCarboLevel" placeholder="300">
+                                                            <span asp-validation-for="UserCarboLevel"></span>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <i>Tłuszcze</i>
+                                                            <input type="text" class="form-control form-control-user" asp-for="UserFatLevel" placeholder="60">
+                                                            <span asp-validation-for="UserFatLevel"></span>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <hr>
+
+                                                    <button class="btn btn-primary btn-user btn-block text-white">
+                                                        Zapisz
+                                                    </button>
+
+                                                </form>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <h1 class="h4 p-4">Kalorie i Makroskładniki</h1>
+
+
+                                            <span  >
+
+                                               Dodaj jaką ilość kalorii oraz makroskładników chcesz spożywać, w każdej chwili będziesz mógł zaktualizować te informacje.
+                                               
+                                            </span>
+
+
+                                            <div class="p-2">
+                                                <div class="text-center">
+                                                    <h1 class="h4  mt-4 mb-4">Uzupełnij</h1>
+                                                </div>
+
+                                                <form asp-area="Users" asp-controller="Home" asp-action="MacroKcalAdd" method="post" class="form-validate-jquery user" role="form">
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-3 mb-3 mb-sm-0">
+                                                            <i>Kalorie</i>
+                                                            <input type="text" class="form-control form-control-user" asp-for="UserDemendLevel" placeholder="2500">
+                                                            <span style="font-size:13px;" asp-validation-for="UserDemendLevel"></span>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <i>Białko</i>
+                                                            <input type="text" class="form-control form-control-user" asp-for="UserProteinLevel" placeholder="120">
+                                                            <span style="font-size:13px;" asp-validation-for="UserProteinLevel"></span>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <i>Węglowodany</i>
+                                                            <input type="text" class="form-control form-control-user" asp-for="UserCarboLevel" placeholder="300">
+                                                            <span style="font-size:13px;" asp-validation-for="UserCarboLevel"></span>
+                                                        </div>
+                                                        <div class="col-sm-3">
+                                                            <i>Tłuszcze</i>
+                                                            <input type="text" class="form-control form-control-user" asp-for="UserFatLevel" placeholder="60">
+                                                            <span style="font-size:13px;" asp-validation-for="UserFatLevel"></span>
+                                                        </div>
+
+
+
+                                                    </div>
+
+                                                    <hr>
+
+                                                    <button class="btn btn-primary btn-user btn-block text-white mb-4">
+                                                        Zapisz
+                                                    </button>
+
+                                                </form>
+                                            </div>
+                                        }
+                                    }
+
+
                                 </div>
 
 

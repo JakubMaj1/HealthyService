@@ -39,7 +39,7 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                 }
 
                 return View(model);
-            }
+            } 
         }
         [HttpPost]
         public async Task <IActionResult> MacroKcalAdd (MacroKcalAddModel model)

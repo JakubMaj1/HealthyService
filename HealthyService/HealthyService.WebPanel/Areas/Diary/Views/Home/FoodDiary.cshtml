@@ -5,35 +5,75 @@
 }
 
     <div class="container">
-        <div class="row pt-2">
+        <div class="row pt-4">
             <div class="col-lg-3">
                 <input type="text" class="form-control form-control-lg" placeholder="Nazwa posiłku">
             </div>
             <div class="col-lg-3">
                 <input type="datetime-local" class="form-control form-control-lg" placeholder="Nazwa posiłku">
             </div>
-            <div class="col-lg-3">
-                <select data-placeholder="Enter 'as'" class="form-control select-minimum" style="background-color:aqua" data-fouc>
+            <div class="col-lg-3 ">
+                <select data-placeholder="Wyszukaj Produkt" class="form-control  select-minimum " data-fouc>
                     <option></option>
                     <optgroup label="Mountain Time Zone">
                         <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>
-                        <option value="ID">Idaho</option>
-                        <option value="WY">Wyoming</option>
+                        <option value="CO">Colorado</option>                       
                     </optgroup>
                     <optgroup label="Central Time Zone">
                         <option value="AL">Alabama</option>
                         <option value="IA">Iowa</option>
-                        <option value="KS">Kansas</option>
-                        <option value="KY">Kentucky</option>
                     </optgroup>
                 </select>
             </div>
-            <div class="col-lg-3 p-3">
-                <a>Własny produkt</a>
+            <div class="col-lg-3 pl-5 pt-1">
+                <button type="button" class="btn btn-link left mr-auto text-black" data-toggle="modal" data-target="#modal_AddProductDatabase" style="font-size:15px;">Dodaj własny produkt <i class="icon-plus-circle2 ml-1"></i></button>
             </div>
         </div>
     </div>
+
+    <div id="modal_AddProductDatabase" class="modal fade" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-grey-600">
+                    <h6 class="modal-title">Dodaj swój produkt do bazy danych</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h6 class="font-weight-semibold">Uzupełnij informacje o produkcie</h6>
+                    <hr>
+                    <div>
+                        <form method="post" class="form-validate-jquery user" role="form">
+                            <div class="form-group row">
+                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                    <i>Nazwa Produktu</i>
+                                    <input type="text" class="form-control form-control-user" placeholder="Ryż biały">
+                                </div>
+                                <div class="col-sm-4">
+                                    <i>Białko</i>
+                                    <input type="text" class="form-control form-control-user" placeholder="5">
+                                </div>
+                                <div class="col-sm-4">
+                                    <i>Węglowodany</i>
+                                    <input type="text" class="form-control form-control-user" placeholder="10">
+                                </div>
+                                <div class="col-sm-4">
+                                    <i>Tłuszcze</i>
+                                    <input type="text" class="form-control form-control-user" placeholder="5">
+                                </div>
+                            </div>
+                            <hr>
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link" data-dismiss="modal">Anuluj</button>
+                    <button type="button" class="btn bg-grey-600">Zapisz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     @*<div class="page-content">
 
@@ -227,63 +267,7 @@
 
         </div>
     </div>
-    <div id="modal_AddProductDatabase" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-grey-600">
-                    <h6 class="modal-title">Dodaj swój produkt do bazy danych</h6>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-
-                <div class="modal-body">
-                    <h6 class="font-weight-semibold">Uzupełnij informacje o produkcie</h6>
-
-                    <hr>
-                    <div>
-                        <form  method="post" class="form-validate-jquery user" role="form">
-
-
-
-
-
-
-                            <div class="form-group row">
-                                <div class="col-sm-12 mb-3 mb-sm-0">
-                                    <i>Nazwa Produktu</i>
-                                    <input type="text" class="form-control form-control-user"  placeholder="Ryż biały">
-                                </div>
-                                <div class="col-sm-4">
-                                    <i>Białko</i>
-                                    <input type="text" class="form-control form-control-user"  placeholder="5">
-                                </div>
-                                <div class="col-sm-4">
-                                    <i>Węglowodany</i>
-                                    <input type="text" class="form-control form-control-user"  placeholder="10">
-                                </div>
-                                <div class="col-sm-4">
-                                    <i>Tłuszcze</i>
-                                    <input type="text" class="form-control form-control-user"  placeholder="5">
-                                </div>
-
-
-
-                            </div>
-
-                            <hr>
-
-                            
-
-                        </form>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link" data-dismiss="modal">Anuluj</button>
-                    <button type="button" class="btn bg-grey-600">Zapisz</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <div id="modal_AddProduct" class="modal fade" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -385,5 +369,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>*@
 
+    

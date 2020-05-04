@@ -1,0 +1,177 @@
+{
+  "Products": [
+    {
+      "Name": "Banan",
+      "Protein": 23.5,
+      "Carbo": 1,
+      "Fat": 0.3,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Awokado",
+      "Protein": 2,
+      "Carbo": 7.4,
+      "Fat": 15.3,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Baton Snickers",
+      "Protein": 9.7,
+      "Carbo": 52.6,
+      "Fat": 28.9,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Bób",
+      "Protein": 7.1,
+      "Carbo": 14,
+      "Fat": 0.4,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Bu³ki pszenne zwyk³e",
+      "Protein": 7.3,
+      "Carbo": 58.5,
+      "Fat": 1.4,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Cebula",
+      "Protein": 1.4,
+      "Carbo": 6.9,
+      "Fat": 0.4,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Chipsy",
+      "Protein": 6,
+      "Carbo": 51,
+      "Fat": 40,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Dorsz œwie¿y",
+      "Protein": 18,
+      "Carbo": 0,
+      "Fat": 1,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Czekolada",
+      "Protein": 7.7
+      "Carbo": 51,
+      "Fat": 38,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Fasola szparagowa",
+      "Protein":7.6,
+      "Carbo": 2.4,
+      "Fat": 0.2,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Jab³ko",
+      "Protein": 0.4,
+      "Carbo": 12.1,
+      "Fat": 0.2,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "£osoœ œwie¿y",
+      "Protein": 20.4,
+      "Carbo": 0,
+      "Fat": 13.6,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Kasza gryczana",
+      "Protein": 12.4,
+      "Carbo": 69.1,
+      "Fat": 3,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Kasza gryczana",
+      "Protein": 12.4,
+      "Carbo": 69.1,
+      "Fat": 3,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Kurczak, skrzyd³o",
+      "Protein": 19.4,
+      "Carbo": 0.1,
+      "Fat": 12.2,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Mas³o ekstra",
+      "Protein": 0.7,
+      "Carbo": 0.7,
+      "Fat": 82.5,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Orzechy arachidowe",
+      "Protein": 25.7,
+      "Carbo": 19.2,
+      "Fat": 46.5,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Pierœ z kurczaka",
+      "Protein": 21.7,
+      "Carbo": 0,
+      "Fat": 1.3,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+    {
+      "Name": "Ziemniaki",
+      "Protein": 2,
+      "Carbo": 20.5,
+      "Fat": 0.1,
+      "ProductMeasure": "gram",
+      "IsActive": true,
+      "IsDelete": false
+    },
+
+
+  ]
+}
