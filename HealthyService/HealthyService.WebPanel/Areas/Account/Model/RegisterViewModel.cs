@@ -20,6 +20,8 @@ namespace HealthyService.WebPanel.Areas.Account.Model
         [DataType(DataType.EmailAddress)]
         [Remote("IsEmailValid", "Home", "Account", ErrorMessage = "Ten adres email jest użyty.", HttpMethod = "GET")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "Login jest wymagany")]
+        public string Login { get; set; }
 
         [Required(ErrorMessage = "Hasło jest wymagane")]
         [DataType(DataType.Password)]

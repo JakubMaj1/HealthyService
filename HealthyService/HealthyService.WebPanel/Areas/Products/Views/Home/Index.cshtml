@@ -18,34 +18,45 @@
 
         <div class="card-body">
             <a  asp-area="Products" asp-controller="Home" asp-action="AdminAddProduct" class=" left mr-auto text-primary" style="font-size:18px;">Dodaj produkt <i class="icon-plus-circle2 "></i></a>
-
         </div>
 
         <table class="table datatable-basic">
             <thead>
                 <tr>
                     <th>Nazwa Produktu</th>
+                    <th>Jednostka</th>
                     <th>Białko</th>
                     <th>Węglowodany</th>
                     <th>Tłuszcze</th>
                     <th>Status</th>
-                    <th class="text-center">Edytuj</th>
-                    <th class="text-center">Ukryj</th>
+                    <th class="text-center">Edytuj/Ukryj</th>
                 </tr>
             </thead>
             
             @{
 
-                foreach (var products in Model)
+                foreach (var product in Model)
                 {
                     <tbody>
-                    <td>@products.Name</td>
-                    <td>@products.Protein</td>
-                    <td>@products.Carbo</td>
-                    <td>@products.Fat</td>
+                    <td>@product.Name</td>
+                    <td>
+                        @{ 
+                            if (@product.ProductMeasure !=HealthyService.Core.Database.Types.ProductMeasureType.Piece)
+                            {
+                                    <div>100g</div>
+                            }
+                            else
+                            {
+                                    <div>1 szt</div>
+                            }
+                        }
+                    </td>
+                    <td>@product.Protein</td>
+                    <td>@product.Carbo</td>
+                    <td>@product.Fat</td>
                     <td>
                         @{
-                            if (products.IsActive != true)
+                            if (product.IsActive != true)
                             {
                                 <span class="badge badge-danger">Ukryty</span>
 
@@ -57,11 +68,11 @@
                         }
                     </td>
                     <td class="text-center">
-                        <a href=""><span class="icon-pen6"></span></a>
+                        <a asp-area="Products" asp-controller="Home" asp-action="EditProduct" asp-route-productId="@product.Id"><span class="icon-pen6 text-black"></span></a>
+                        <a href=""><span class="icon-blocked text-black"></span></a>
+
                     </td>
-                    <td class="text-center">
-                        <a href=""><span class="icon-blocked"></span></a>
-                    </td>
+                    
                     </tbody>
                 }
             }

@@ -1,4 +1,4 @@
-﻿@model HealthyService.WebPanel.Areas.Products.Model.AdminAddProductModel
+﻿@model HealthyService.WebPanel.Areas.Products.Model.AdminAddEditProductModel
 @{
     ViewData["Title"] = "AdminAddProduct";
     Layout = "~/Views/Shared/_Layout2.cshtml";
@@ -17,14 +17,21 @@
             <div>
                 <form asp-area="Products" asp-controller="Home" asp-action="AdminAddProduct" method="post" class="form-validate-jquery user" role="form">
                     <div class="form-group row">
-                        <div class="col-sm-12 mb-3 mb-sm-0">
+                        <div class="col-sm-8 mb-3 mb-sm-0">
                             <i>Nazwa Produktu</i>
                             <input type="text" class="form-control form-control-user" asp-for="Name" placeholder="Ryż biały">
                             <span asp-validation-for="Name"></span>
                         </div>
+                        <div class="col-sm-4 mb-3 mb-sm-0">
+                            <i>Jednostka</i>
+                            <select asp-for="ProductMeasure" asp-items="Model.ProductMeasures" class="form-control">
+                            </select>
+                            <span asp-validation-for="ProductMeasure"></span>
+
+                        </div>
                         <div class="col-sm-4">
                             <i>Białko</i>
-                            <input type="text" class="form-control form-control-user" asp-for="Protein" placeholder="5">
+                            <input type="text" class="form-control " asp-for="Protein" placeholder="5">
                             <span asp-validation-for="Protein"></span>
 
                         </div>

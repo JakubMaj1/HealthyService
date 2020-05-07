@@ -1,4 +1,5 @@
 ﻿using HealthyService.Core.Database.Tables;
+using HealthyService.Core.Logic.Users;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,7 +21,8 @@ namespace HealthyService.Core.Database
                     userAdmin.Name = "Administrator";
                     userAdmin.SureName = "Administrator";
                     userAdmin.Email = "admin@admin";
-                    userAdmin.Password = "admin";
+                    userAdmin.Password = new UserManager().EncodePassword("admin@admin","admin");
+                    userAdmin.Login = "admin";
 
                     await dbContext.Users.AddAsync(userAdmin);
 

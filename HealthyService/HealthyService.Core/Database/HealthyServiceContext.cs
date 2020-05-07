@@ -33,6 +33,8 @@ namespace HealthyService.Core.Database
                 entity.Property(p => p.Password).HasMaxLength(50).IsRequired();
 
                 entity.Property(p => p.Name).HasMaxLength(20).IsRequired();
+                
+                entity.Property(p => p.Login).HasMaxLength(20).IsRequired();
 
                 entity.Property(p => p.SureName).HasMaxLength(25).IsRequired();
 

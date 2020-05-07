@@ -13,6 +13,10 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.EntityFrameworkCore.Storage;
 using HealthyService.WebPanel.Areas.Account.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using HealthyService.Core.Logic.Users;
+using Microsoft.AspNetCore.Http;
+using HealthyService.Core.Database.Tables;
 
 namespace HealthyService.WebPanel.Areas.Account.Controllers
 {
@@ -23,23 +27,34 @@ namespace HealthyService.WebPanel.Areas.Account.Controllers
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
         {
             //TODO: Sprawdzic w bazie czy uzytkownik istnieje.
+            ViewData["ReturnUrl"] = returnUrl;
 
-            var claims = new List<Claim>
+            var User = await new UserManager().GetUserAsync(model.UserEmailOrLogin);
+           
+            if(User !=null)
             {
-                new Claim("user", model.UserEmail),
-                new Claim("role", "Member")
-            };
+                if(new UserManager().CheckPassword(User.Email, User.Password, model.UserPassword))
+                {
+                    await SingInAsync(this.HttpContext, User);
 
-            await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme,"user","role")));
+                    if (Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("UserDashboard", "Home", new { Area = "Dashboard" });
+                    }
+                }
 
-            if(Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
+                ModelState.AddModelError(String.Empty, "Invalid login attempt.");
+                return View(model);
             }
             else
-            {
-                return RedirectToAction("UserDashboard", "Home", new { Area = "Dashboard" });
-            }
+                {
+                    return RedirectToAction("RegisterViewModel", "Home", new { Area = "Account" });
+
+                }
         }
 
         public async Task<IActionResult> Logout()
@@ -101,7 +116,7 @@ namespace HealthyService.WebPanel.Areas.Account.Controllers
                 {
                     using (var transaction = await dbContext.Database.BeginTransactionAsync())
                     {
-                        var md5Passwod = CreateMD5(model.Password);
+                        var md5Passwod = new UserManager().EncodePassword(model.Email, model.Password);
 
                         await dbContext.Users.AddAsync(new HealthyService.Core.Database.Tables.User
                         {
@@ -112,6 +127,7 @@ namespace HealthyService.WebPanel.Areas.Account.Controllers
                             IsActive = true,
                             IsDeleted = false,
                             CreateDate = DateTime.Now,
+                            Login = model.Login,
 
                         });
                         await dbContext.SaveChangesAsync();
@@ -140,22 +156,36 @@ namespace HealthyService.WebPanel.Areas.Account.Controllers
             }
         }
 
-        public string CreateMD5(string input)
+        public async Task SingInAsync(HttpContext httpContext, User user, bool isPersistent = false)
         {
-            // Use input string to calculate MD5 hash
-            using (MD5 md5 = MD5.Create())
+            var claims = new List<Claim>
             {
-                byte[] inputBytes = Encoding.ASCII.GetBytes(input);
-                byte[] hashBytes = md5.ComputeHash(inputBytes);
+                new Claim(ClaimTypes.NameIdentifier, user.Login),
+                new Claim(ClaimTypes.Name, user.Login),
+            };
 
-                // Convert the byte array to hexadecimal string
-                StringBuilder sb = new StringBuilder();
-                for (int i = 0; i < hashBytes.Length; i++)
-                {
-                    sb.Append(hashBytes[i].ToString("X2"));
-                }
-                return sb.ToString();
+            if (!string.IsNullOrEmpty(user.Email))
+            {
+                claims.Add(new Claim(ClaimTypes.Email, user.Email));
             }
+
+            var claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = isPersistent,
+            };
+
+            await httpContext.SignInAsync(
+                  CookieAuthenticationDefaults.AuthenticationScheme,
+                  new ClaimsPrincipal(claimsIdentity),
+                  authProperties);
+        }
+
+        public async Task SignOutAsync(HttpContext httpContext)
+        {
+            await httpContext.SignOutAsync();
         }
     }
 }

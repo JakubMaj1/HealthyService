@@ -8,9 +8,8 @@ namespace HealthyService.WebPanel.Areas.Account.Model
 {
     public class LoginViewModel
     {
-        [EmailAddress]
         [Required(ErrorMessage ="Wymagany email")]
-        public string UserEmail { get; set; }
+        public string UserEmailOrLogin { get; set; }
 
         [DataType(DataType.Password), Required(ErrorMessage ="Wymagane hasło")]
         public string UserPassword { get; set; }

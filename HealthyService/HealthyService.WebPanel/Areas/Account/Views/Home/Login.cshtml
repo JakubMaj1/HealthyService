@@ -25,8 +25,8 @@
 
                                     <form class="user" asp-area="Account" asp-action="Login" asp-controller="Home" asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" class="form-validate-jquery" autocomplete="on" role="form" ja>
                                         <div class="form-group">
-                                            <input asp-for="UserEmail" type="email" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="E-mail">
-                                            <span asp-validation-for="UserEmail"></span>
+                                            <input asp-for="UserEmailOrLogin" class="form-control form-control-user" aria-describedby="emailHelp" placeholder="E-mail">
+                                            <span asp-validation-for="UserEmailOrLogin"></span>
                                         </div>
                                         <div class="form-group">
                                             <input asp-for="UserPassword" type="password" class="form-control form-control-user" placeholder="Hasło">

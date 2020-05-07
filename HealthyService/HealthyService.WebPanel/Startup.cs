@@ -35,6 +35,11 @@ namespace HealthyService.WebPanel
 
 
             services.AddRazorPages();
+            services
+               .AddMvc(config =>
+               {
+                   config.ModelBinderProviders.Insert(0, new DecimalModelBinder());
+               });
             //.AddFacebook(options =>
             //{
             //    options.ClientId = "593588681425639";
@@ -89,7 +94,6 @@ namespace HealthyService.WebPanel
             HealthyService.Core.Database.DatabaseBus.MigrateDatabase();
 
             //await new HealthyService.Core.Database.StartData().AddDataFromCodeAsync();
-
         }
     }
 }
