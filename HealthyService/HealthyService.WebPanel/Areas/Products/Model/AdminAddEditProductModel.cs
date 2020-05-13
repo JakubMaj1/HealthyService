@@ -10,7 +10,8 @@ namespace HealthyService.WebPanel.Areas.Products.Model
 {
     public class AdminAddEditProductModel
     {
-        [MaxLength(15)]
+        public long ProductId { get; set; }
+        [MaxLength(25)]
         [Required(ErrorMessage = "Podaj nazwę produktu")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Podaj ilość białka")]
@@ -19,6 +20,9 @@ namespace HealthyService.WebPanel.Areas.Products.Model
         public decimal Carbo { get; set; }
         [Required(ErrorMessage = "Podaj ilość tłuszczy")]
         public decimal Fat { get; set; }
+        [Required(ErrorMessage = "Wybierz")]
+        public bool IsActive { get; set; }
+
         [Required(ErrorMessage = "Wybierz")]
 
         public Core.Database.Types.ProductMeasureType ProductMeasure { get; set; }

@@ -14,12 +14,68 @@ namespace HealthyService.WebPanel.Areas.Products.Controllers
     [Area("Products")]
     public class HomeController : Controller
     {
+        [HttpPost]
+        public IActionResult Status()
+        {
 
+            ///Pytanie jak to zrobić skoro widok model z produktów liste, a nie używamy modelu tutaj ? :) tak jak na głownym ? 
+            ///
+
+            return RedirectToAction("Index", "Home", new { Area = "Products" });
+        }
+
+
+
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditProduct(Model.AdminAddEditProductModel model)
+        {
+            using (var dbContext = new HealthyService.Core.Database.HealthyServiceContext())
+            {
+                using (var transaction = await dbContext.Database.BeginTransactionAsync())
+                {
+                    var product = await dbContext.Products.FindAsync(model.ProductId);
+
+                    if (product == null)
+                        return View(model);
+                    else
+                    {
+                        product.Carbo = (float)model.Carbo;
+                        product.Fat = (float)model.Fat;
+                        product.Protein = (float)model.Protein;
+                        product.Name = model.Name;
+                        product.ProductMeasure = model.ProductMeasure;
+                        product.IsActive = model.IsActive;
+                        await dbContext.SaveChangesAsync();
+                        await transaction.CommitAsync();
+                    }
+                }
+            }
+
+            return RedirectToAction("Index", "Home", new { Area = "Products" });
+
+        }
+
+        [HttpGet]
         public async Task<IActionResult> EditProduct(long productId)
         {
             var model = new AdminAddEditProductModel();
+            Dictionary<Core.Database.Types.ProductMeasureType, string> Translator = new Dictionary<Core.Database.Types.ProductMeasureType, string>();
 
-            using(var dbContext = new HealthyService.Core.Database.HealthyServiceContext())
+            Translator.Add(Core.Database.Types.ProductMeasureType.Piece, "Sztuka");
+            Translator.Add(Core.Database.Types.ProductMeasureType.Gram, "Gramy");
+
+            var types1 = new List<SelectListItem>();
+
+
+            types1.Add(new SelectListItem() { Text = Translator[Core.Database.Types.ProductMeasureType.Piece], Value = Core.Database.Types.ProductMeasureType.Piece.ToString() });
+            types1.Add(new SelectListItem() { Text = Translator[Core.Database.Types.ProductMeasureType.Gram], Value = Core.Database.Types.ProductMeasureType.Gram.ToString() });
+
+            model.ProductMeasures = new SelectList(types1, "Value", "Text");
+
+            using (var dbContext = new HealthyService.Core.Database.HealthyServiceContext())
             {
                 var product = await dbContext.Products.FindAsync(productId);
 
@@ -32,6 +88,8 @@ namespace HealthyService.WebPanel.Areas.Products.Controllers
                     model.Name = product.Name;
                     model.ProductMeasure = product.ProductMeasure;
                     model.Protein = (decimal)product.Protein;
+                    model.ProductId = product.Id;
+                    model.ProductId = productId;
                 }
             }
 
@@ -49,6 +107,7 @@ namespace HealthyService.WebPanel.Areas.Products.Controllers
 
                 return View(products);
         }
+        
 
       
         [HttpGet]
