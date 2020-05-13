@@ -16,7 +16,7 @@ namespace HealthyService.WebPanel.Areas.Users.Model
         public long? Weight { get; set; }
         [Range(1, 300, ErrorMessage = "Podaj wzrost w centymetrach")]
         public long? Height { get; set; }
-        public string Gender { get; set; }
+        public Core.Database.Types.GenderType Gender { get; set; }
 
         public string ActivityLevel { get; set; }
 

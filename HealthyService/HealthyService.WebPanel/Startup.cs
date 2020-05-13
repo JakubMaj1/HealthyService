@@ -88,12 +88,20 @@ namespace HealthyService.WebPanel
         private async void InitializeHealthyService()
         {
             //TODO: Odpal baze danych, wgraj dane startowe ... 
+            bool Recreate = false;
 
-            //HealthyService.Core.Database.DatabaseBus.DeleteDatabase();
+            if (Recreate)
+            {
+                HealthyService.Core.Database.DatabaseBus.DeleteDatabase();
 
-            HealthyService.Core.Database.DatabaseBus.MigrateDatabase();
+                HealthyService.Core.Database.DatabaseBus.MigrateDatabase();
 
-            //await new HealthyService.Core.Database.StartData().AddDataFromCodeAsync();
+                await new HealthyService.Core.Database.StartData().AddDataFromCodeAsync();
+            }
+            else
+            {
+                HealthyService.Core.Database.DatabaseBus.MigrateDatabase();
+            }
         }
     }
 }

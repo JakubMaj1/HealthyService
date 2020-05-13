@@ -15,21 +15,6 @@ namespace HealthyService.WebPanel.Areas.Products.Controllers
     public class HomeController : Controller
     {
         [HttpPost]
-        public IActionResult Status()
-        {
-
-            ///Pytanie jak to zrobić skoro widok model z produktów liste, a nie używamy modelu tutaj ? :) tak jak na głownym ? 
-            ///
-
-            return RedirectToAction("Index", "Home", new { Area = "Products" });
-        }
-
-
-
-
-
-
-        [HttpPost]
         public async Task<IActionResult> EditProduct(Model.AdminAddEditProductModel model)
         {
             using (var dbContext = new HealthyService.Core.Database.HealthyServiceContext())

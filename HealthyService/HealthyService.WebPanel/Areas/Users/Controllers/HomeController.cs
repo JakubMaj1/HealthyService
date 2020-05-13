@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Cache;
 using System.Threading.Tasks;
+using System.Security.Claims;
+using System.Text;
+using System.Security.Cryptography;
 using HealthyService.Core.Database.Tables;
 using HealthyService.WebPanel.Areas.Users.Model;
 using Microsoft.AspNetCore.Mvc;
@@ -48,15 +51,27 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
             {
                 using (var transaction = await dbContext.Database.BeginTransactionAsync())
                 {
-                    var LastMacro = await dbContext.UsersDetails.Where(q => q.IsActive && !q.IsDeleted).OrderByDescending(q => q.CreateDate).FirstOrDefaultAsync();
+                    var userNameIdentifierClaim = this.HttpContext.User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                    var UserLogin = userNameIdentifierClaim != null ? userNameIdentifierClaim.Value : null;
 
-                    UserDetails userDetails = UserDetailsDto.Copy(LastMacro);
+                    var UserId = await dbContext.Users
+                        .Where(q => EF.Functions.Like(q.Login, UserLogin))
+                        .Where(q => q.IsActive && !q.IsDeleted)
+                        .Select(q => q.Id).FirstOrDefaultAsync();
+
+                    UserDetails userDetails = new UserDetails();
+
+                    var LastMacro = await dbContext.UsersDetails.Where(q => q.IsActive && !q.IsDeleted).OrderByDescending(q => q.CreateDate).FirstOrDefaultAsync();
+    
+                    if(LastMacro != null)
+                        userDetails = UserDetailsDto.Copy(LastMacro);
 
                     userDetails.UserCarboLevel = model.UserCarboLevel;
                     userDetails.UserProteinLevel = model.UserProteinLevel;
                     userDetails.UserFatLevel = model.UserFatLevel;
                     userDetails.UserDemendLevel = model.UserDemendLevel;
                     userDetails.CreateDate = DateTime.Now;
+                    userDetails.UserId = UserId;
 
                     await dbContext.UsersDetails.AddAsync(userDetails);
 
@@ -74,39 +89,80 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
         [HttpGet]
         public async Task <IActionResult> MeasurementAdd()
         {
-            Dictionary<string, string> Translator2 = new Dictionary<string, string>();
-            Translator2.Add(Core.Database.Types.ActivityLevelType.Small.ToString(), "Mała aktywność");
-            Translator2.Add(Core.Database.Types.ActivityLevelType.Medium.ToString(), "Średnia aktywność");
-            Translator2.Add(Core.Database.Types.ActivityLevelType.Large.ToString(), "Duża aktywność");
-            Translator2.Add(Core.Database.Types.ActivityLevelType.ExtraLarge.ToString(), "Bardzo duża aktywność");
+            using (var dbContext = new Core.Database.HealthyServiceContext())
+            {
+                var userNameIdentifierClaim = this.HttpContext.User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var UserLogin = userNameIdentifierClaim != null ? userNameIdentifierClaim.Value : null;
 
-            Model.MeasurementAddModel model = new Model.MeasurementAddModel();
+                var UserId = await dbContext.Users
+                    .Where(q => EF.Functions.Like(q.Login, UserLogin))
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Select(q => q.Id).FirstOrDefaultAsync();
 
-            var types = new List<SelectListItem>();
+                UserDetails userDetails = new UserDetails();
 
-            types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.Small.ToString()], Value = Core.Database.Types.ActivityLevelType.Small.ToString() });
-            types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.Medium.ToString()], Value = Core.Database.Types.ActivityLevelType.Medium.ToString() });
-            types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.Large.ToString()], Value = Core.Database.Types.ActivityLevelType.Large.ToString() });
-            types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.ExtraLarge.ToString()], Value = Core.Database.Types.ActivityLevelType.ExtraLarge.ToString() });
+                var LastUserDetails = await dbContext.UsersDetails
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Where(q => q.UserId == UserId)
+                    .OrderByDescending(q => q.CreateDate)
+                    .FirstOrDefaultAsync();
 
-            model.ActivityLevels = new SelectList(types, "Value", "Text");
+                Dictionary<string, string> Translator2 = new Dictionary<string, string>();
+                Translator2.Add(Core.Database.Types.ActivityLevelType.Small.ToString(), "Mała aktywność");
+                Translator2.Add(Core.Database.Types.ActivityLevelType.Medium.ToString(), "Średnia aktywność");
+                Translator2.Add(Core.Database.Types.ActivityLevelType.Large.ToString(), "Duża aktywność");
+                Translator2.Add(Core.Database.Types.ActivityLevelType.ExtraLarge.ToString(), "Bardzo duża aktywność");
 
-            Dictionary<string, string> Translator3 = new Dictionary<string, string>();
+                Model.MeasurementAddModel model = new Model.MeasurementAddModel();
 
-            Translator3.Add(Core.Database.Types.GenderType.Woman.ToString(), "Kobieta");
-            Translator3.Add(Core.Database.Types.GenderType.Man.ToString(), "Mężczyzna");
+                var types = new List<SelectListItem>();
 
-            var types1 = new List<SelectListItem>();
-            
+                types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.Small.ToString()], Value = Core.Database.Types.ActivityLevelType.Small.ToString()
+                    //, Selected = LastUserDetails.ActivityLevel == Core.Database.Types.ActivityLevelType.Small ? true : false 
+                });
+                types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.Medium.ToString()], Value = Core.Database.Types.ActivityLevelType.Medium.ToString()
+                    //,Selected = LastUserDetails.ActivityLevel == Core.Database.Types.ActivityLevelType.Medium ? true : false
+                });
+                types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.Large.ToString()], Value = Core.Database.Types.ActivityLevelType.Large.ToString()
+                    //,Selected = LastUserDetails.ActivityLevel == Core.Database.Types.ActivityLevelType.Large ? true : false
+                });
+                types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.ExtraLarge.ToString()], Value = Core.Database.Types.ActivityLevelType.ExtraLarge.ToString()
+                    //,Selected = LastUserDetails.ActivityLevel == Core.Database.Types.ActivityLevelType.ExtraLarge ? true : false
+                });
 
-            types1.Add(new SelectListItem() { Text = Translator3[Core.Database.Types.GenderType.Woman.ToString()], Value = Core.Database.Types.GenderType.Woman.ToString() });
-            types1.Add(new SelectListItem() { Text = Translator3[Core.Database.Types.GenderType.Man.ToString()], Value = Core.Database.Types.GenderType.Man.ToString() });
+                model.ActivityLevels = new SelectList(types, "Value", "Text");
 
-            model.Genders = new SelectList(types1, "Value", "Text");
+                Dictionary<Core.Database.Types.GenderType, string> Translator3 = new Dictionary<Core.Database.Types.GenderType, string>();
 
+                Translator3.Add(Core.Database.Types.GenderType.Woman, "Kobieta");
+                Translator3.Add(Core.Database.Types.GenderType.Man, "Mężczyzna");
 
-            return View(model);
+                var types1 = new List<SelectListItem>();
+
+                types1.Add(new SelectListItem() { Text = Translator3[Core.Database.Types.GenderType.Woman], Value = Core.Database.Types.GenderType.Woman.ToString()
+                    //,Selected = LastUserDetails.Gender == Core.Database.Types.GenderType.Woman ? true : false
+                });
+                types1.Add(new SelectListItem() { Text = Translator3[Core.Database.Types.GenderType.Man], Value = Core.Database.Types.GenderType.Man.ToString()
+                    //,Selected = LastUserDetails.Gender == Core.Database.Types.GenderType.Man ? true : false
+                });
+
+                model.Genders = new SelectList(types1, "Value", "Text");
+                model.Age = LastUserDetails.Age;
+                model.Height = LastUserDetails.Height;
+                model.Weight = LastUserDetails.Weight;
+                model.ActivityLevel = LastUserDetails.ActivityLevel.ToString();
+                model.ArmCircumference = LastUserDetails.ArmCircumference;
+                model.CalfCircumference = LastUserDetails.CalfCircumference;
+                model.ChestCircumference = LastUserDetails.ChestCircumference;
+                model.ForearmCircumference = LastUserDetails.ForearmCircumference;
+                model.HipCircumference = LastUserDetails.HipCircumference;
+                model.ThighCircumference = LastUserDetails.ThighCircumference;
+                model.WaistCircumference = LastUserDetails.WaistCircumference;
+                model.Gender = LastUserDetails.Gender;
+                return View(model);
+            }
         }
+
         [HttpPost]
         public async Task<IActionResult> MeasurementAdd(MeasurementAddModel model)
         {
@@ -116,37 +172,42 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                 {
                     using (var transaction = await dbContext.Database.BeginTransactionAsync())
                     {
+                        var userNameIdentifierClaim = this.HttpContext.User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                        var UserLogin = userNameIdentifierClaim != null ? userNameIdentifierClaim.Value : null;
 
-                        var LastMacro = await dbContext.UsersDetails.Where(q => q.IsActive && !q.IsDeleted).OrderByDescending(q => q.CreateDate).FirstOrDefaultAsync();
+                        var UserId = await dbContext.Users
+                            .Where(q => EF.Functions.Like(q.Login, UserLogin))
+                            .Where(q => q.IsActive && !q.IsDeleted)
+                            .Select(q => q.Id).FirstOrDefaultAsync();
 
-                        UserDetails userDetails = UserDetailsDto.Copy(LastMacro);
+                        UserDetails userDetails = new UserDetails();
 
+                        var LastMacro = await dbContext.UsersDetails
+                            .Where(q => q.IsActive && !q.IsDeleted)
+                            .Where(q => q.UserId == UserId)
+                            .OrderByDescending(q => q.CreateDate)
+                            .FirstOrDefaultAsync();
 
+                        if(LastMacro != null)
+                           userDetails = UserDetailsDto.Copy(LastMacro);
 
                         Core.Database.Types.ActivityLevelType activityLevel = Core.Database.Types.ActivityLevelType.Small;
                         if(Enum.TryParse<Core.Database.Types.ActivityLevelType>(model.ActivityLevel,out activityLevel))
                         {
 
                         }
-                        Core.Database.Types.GenderType gender = Core.Database.Types.GenderType.Man;
-                        if (Enum.TryParse<Core.Database.Types.GenderType>(model.Gender,out gender))
-                        {
-
-                        }
-
-
-
-                            userDetails.Age = model.Age;
-                            userDetails.Height = model.Height;
-                            userDetails.Weight = model.Weight;
-                            userDetails.WaistCircumference = model.WaistCircumference;
-                            userDetails.ActivityLevel = activityLevel;
-                            userDetails.ArmCircumference = model.ArmCircumference;
-                            userDetails.CalfCircumference = model.CalfCircumference;
-                            userDetails.ChestCircumference = model.ChestCircumference;
-                            userDetails.HipCircumference = model.HipCircumference;
-                            userDetails.Gender = gender;
-                            userDetails.CreateDate = DateTime.Now;
+                        userDetails.Age = model.Age;
+                        userDetails.Height = model.Height;
+                        userDetails.Weight = model.Weight;
+                        userDetails.WaistCircumference = model.WaistCircumference;
+                        userDetails.ActivityLevel = activityLevel;
+                        userDetails.ArmCircumference = model.ArmCircumference;
+                        userDetails.CalfCircumference = model.CalfCircumference;
+                        userDetails.ChestCircumference = model.ChestCircumference;
+                        userDetails.HipCircumference = model.HipCircumference;
+                        userDetails.Gender = model.Gender;
+                        userDetails.CreateDate = DateTime.Now;
+                        userDetails.UserId = UserId;
 
                         await dbContext.UsersDetails.AddAsync(userDetails);
 

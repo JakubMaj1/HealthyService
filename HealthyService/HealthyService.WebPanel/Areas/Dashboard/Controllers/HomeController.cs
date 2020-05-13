@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using HealthyService.Core.Database.Tables;
 using Microsoft.AspNetCore.Authorization;
@@ -36,21 +37,34 @@ namespace HealthyService.WebPanel.Areas.Dashboard.Controllers
 
             using (var dbContext = new HealthyService.Core.Database.HealthyServiceContext())
             {
-                model.Products = await dbContext.Products.Where(q => q.Protein > 10).OrderByDescending(q => q.Protein).ToListAsync();
+                var userNameIdentifierClaim = this.HttpContext.User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var UserLogin = userNameIdentifierClaim != null ? userNameIdentifierClaim.Value : null;
 
-                model.Products2 = await dbContext.Products.Where(q => q.Fat < 5).OrderBy(q => q.Fat).ToListAsync();
+                var UserId = await dbContext.Users
+                    .Where(q => EF.Functions.Like(q.Login, UserLogin))
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Select(q => q.Id).FirstOrDefaultAsync();
 
+                model.Products = await dbContext.Products.Include(q=>q.User)
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Where(q => q.UserId == UserId || EF.Functions.Like(q.User.Login, "admin"))
+                    .Where(q => q.Protein > 10).OrderByDescending(q => q.Protein).ToListAsync();
 
-                // model.UsersDetails = await dbContext.UsersDetails.OrderBy(q => q.CreateDate).FirstOrDefaultAsync();
-                model.User = await dbContext.Users.Where(q => q.IsActive && !q.IsDeleted)
+                model.Products2 = await dbContext.Products.Include(q => q.User)
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Where(q => q.UserId == UserId || EF.Functions.Like(q.User.Login, "admin"))
+                    .Where(q => q.Fat < 5).OrderBy(q => q.Fat).ToListAsync();
+
+               model.UserDetailsFirst = await dbContext.UsersDetails
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Where(q => q.UserId == UserId)
                     .OrderBy(q => q.CreateDate).FirstOrDefaultAsync();
 
-               model.UserDetailsFirst = await dbContext.UsersDetails.Where(q => q.IsActive).OrderBy(q => q.CreateDate).FirstOrDefaultAsync();
-               model.UserDetailsLast = await dbContext.UsersDetails.Where(q => q.IsActive).OrderBy(q => q.CreateDate).LastOrDefaultAsync();
+               model.UserDetailsLast = await dbContext.UsersDetails
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Where(q => q.UserId == UserId)
+                    .OrderBy(q => q.CreateDate).LastOrDefaultAsync();
 
-                model.UserTest = await dbContext.Users.Where(q => q.IsActive && !q.IsDeleted).Where(q => q.Name == "Ku").FirstOrDefaultAsync();
-
-                //....https://docs.microsoft.com/pl-pl/ef/ef6/querying/related-data
                 return View(model);
 
             }
@@ -62,11 +76,9 @@ namespace HealthyService.WebPanel.Areas.Dashboard.Controllers
     {
         public List<Product> Products { get; set; }
         public List<Product> Products2 { get; set; }
-        public User User { get; set; }
         public UserDetails UserDetailsFirst { get; set; }
 
         public UserDetails UserDetailsLast { get; set; }
-        public User UserTest { get; set; }
     }
 
 }

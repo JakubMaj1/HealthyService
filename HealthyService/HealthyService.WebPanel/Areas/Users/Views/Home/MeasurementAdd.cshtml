@@ -61,22 +61,17 @@
 
                                 <div class="col-md-6 mb-4">
                                     <label>Stopień aktywności</label>
-                                    <select id="ActiveLevelBMR" asp-for="ActivityLevel" class="form-control">
-                                        <option selected>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <select asp-for="ActivityLevel" asp-items="Model.ActivityLevels" class="form-control">
                                     </select>
+                                    <span asp-validation-for="ActivityLevel"></span>
 
                                 </div>
 
                                 <div class="col-md-6 mb-4">
                                     <label>Płeć</label>
-                                    <select id="GenderBMR" asp-for="Gender" class="form-control">
-                                        <option selected>Mężczyzna</option>
-                                        <option>Kobieta</option>
-
+                                    <select asp-for="Gender" asp-items="Model.Genders" class="form-control">
                                     </select>
+                                    <span asp-validation-for="Gender"></span>
 
                                 </div>
                             </div>
