@@ -102,21 +102,21 @@
             <ul class="navbar-nav">
                 <li class="nav-item p-2 ">
                     Kalorie   <br />
-                    <span class="badge badge-pill bg-teal-800 position-static ml-auto ml-md-1 font-size-lg">2500 kcal</span>
+                    <span id="layoutKcal" class="badge badge-pill bg-teal-800 position-static ml-auto ml-md-1 font-size-lg"></span>
 
                 </li>
                 <li class="nav-item p-2">
                     <i>Białko</i> <br />
-                    <span class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg">200 g</span>
+                    <span id="layoutProtein" class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg"></span>
                 </li>
                 <li class="nav-item p-2">
                     <i>Węglowodany</i> <br />
-                    <span class="badge badge-pill bg-primary-800 position-static ml-auto ml-md-1 font-size-lg">200 g</span>
+                    <span id="layoutCarbo" class="badge badge-pill bg-primary-800 position-static ml-auto ml-md-1 font-size-lg"></span>
 
                 </li>
                 <li class="nav-item p-2">
                     <i>Tłuszcze</i> <br />
-                    <span class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg">200 g</span>
+                    <span id="layoutFat" class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg"></span>
 
                 </li>
             </ul>
@@ -149,7 +149,34 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/js/healthy.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            GetProtein();
+        });
+        function GetProtein(productId) {
+            var action = "/Users/Home/GetUserDetails";
+           
+            $.get(action, response);
+        }
 
+        function response(data) {
+            var model = JSON.parse(data);
+            if (model == null) {
+                $('#layoutProtein').html(0 +  ' g');
+                $('#layoutCarbo').html(0 +  ' g');
+                $('#layoutFat').html(0 +  ' g');
+                $('#layoutKcal').html(0 +  ' kcal');
+            }
+            else {
+                var kcal = (9 * model.UserFatLevel) + (4 * model.UserProteinLevel) + (4 * model.UserCarboLevel);
+                $('#layoutProtein').html(model.UserProteinLevel +  ' g');
+                $('#layoutCarbo').html(model.UserCarboLevel+  ' g');
+                $('#layoutFat').html(model.UserFatLevel+  ' g');
+                $('#layoutKcal').html(kcal+  ' kcal');
+            }
+        }
+
+    </script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>

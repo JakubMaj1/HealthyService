@@ -21,18 +21,10 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
 
         public async Task<IActionResult> MacroKcalAdd()
         {
-            //var userEmail = this.HttpContext.User.Identity.Name; 1
-
             MacroKcalAddModel model = new MacroKcalAddModel();
 
             using (var dbContext = new Core.Database.HealthyServiceContext())
             {
-                //var myDetails = await dbContext.UsersDetails.Include(q=>q.User)2
-                //    .Where(q=>q.IsActive && !q.IsDeleted)
-                //    .Where(q=>q.User.IsActive && !q.User.IsDeleted)
-                //    .Where(q => EF.Functions.Like(q.User.Email, userEmail))
-                //    .OrderByDescending(q => q.CreateDate).FirstOrDefaultAsync();
-
                 var Macro = await dbContext.UsersDetails.Where(q => q.IsActive && !q.IsDeleted).OrderByDescending(q => q.CreateDate).FirstOrDefaultAsync();
                 if(Macro != null)
                 {
@@ -351,6 +343,31 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
 
             }
             return RedirectToAction("Index", "Home", new { Area = "Dashboard" });
+        }
+
+
+        public async Task<IActionResult> GetUserDetails()
+        {
+            var userNameIdentifierClaim = this.HttpContext.User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            var UserLogin = userNameIdentifierClaim != null ? userNameIdentifierClaim.Value : null;
+
+            using (var dbContext = new Core.Database.HealthyServiceContext())
+            {
+                var UserId = await dbContext.Users
+                    .Where(q => EF.Functions.Like(q.Login, UserLogin))
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Select(q => q.Id).FirstOrDefaultAsync();
+
+                var lastUserDetails = await dbContext.UsersDetails
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Where(q => q.UserId == UserId)
+                    .OrderByDescending(q => q.CreateDate)
+                    .FirstOrDefaultAsync();
+
+                string jsonValue = Newtonsoft.Json.JsonConvert.SerializeObject(lastUserDetails);
+
+                return Json(jsonValue);
+            }
         }
     }
 }
