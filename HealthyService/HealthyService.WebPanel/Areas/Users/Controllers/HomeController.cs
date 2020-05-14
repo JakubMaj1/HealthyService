@@ -99,8 +99,6 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                     .Where(q => q.IsActive && !q.IsDeleted)
                     .Select(q => q.Id).FirstOrDefaultAsync();
 
-                UserDetails userDetails = new UserDetails();
-
                 var LastUserDetails = await dbContext.UsersDetails
                     .Where(q => q.IsActive && !q.IsDeleted)
                     .Where(q => q.UserId == UserId)
@@ -113,21 +111,17 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                 Translator2.Add(Core.Database.Types.ActivityLevelType.Large.ToString(), "Duża aktywność");
                 Translator2.Add(Core.Database.Types.ActivityLevelType.ExtraLarge.ToString(), "Bardzo duża aktywność");
 
-                Model.MeasurementAddModel model = new Model.MeasurementAddModel();
+                Model.MeasurementAddEditModel model = new Model.MeasurementAddEditModel();
 
                 var types = new List<SelectListItem>();
 
                 types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.Small.ToString()], Value = Core.Database.Types.ActivityLevelType.Small.ToString()
-                    //, Selected = LastUserDetails.ActivityLevel == Core.Database.Types.ActivityLevelType.Small ? true : false 
                 });
                 types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.Medium.ToString()], Value = Core.Database.Types.ActivityLevelType.Medium.ToString()
-                    //,Selected = LastUserDetails.ActivityLevel == Core.Database.Types.ActivityLevelType.Medium ? true : false
                 });
                 types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.Large.ToString()], Value = Core.Database.Types.ActivityLevelType.Large.ToString()
-                    //,Selected = LastUserDetails.ActivityLevel == Core.Database.Types.ActivityLevelType.Large ? true : false
                 });
                 types.Add(new SelectListItem() { Text = Translator2[Core.Database.Types.ActivityLevelType.ExtraLarge.ToString()], Value = Core.Database.Types.ActivityLevelType.ExtraLarge.ToString()
-                    //,Selected = LastUserDetails.ActivityLevel == Core.Database.Types.ActivityLevelType.ExtraLarge ? true : false
                 });
 
                 model.ActivityLevels = new SelectList(types, "Value", "Text");
@@ -147,24 +141,155 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                 });
 
                 model.Genders = new SelectList(types1, "Value", "Text");
-                model.Age = LastUserDetails.Age;
-                model.Height = LastUserDetails.Height;
-                model.Weight = LastUserDetails.Weight;
-                model.ActivityLevel = LastUserDetails.ActivityLevel.ToString();
-                model.ArmCircumference = LastUserDetails.ArmCircumference;
-                model.CalfCircumference = LastUserDetails.CalfCircumference;
-                model.ChestCircumference = LastUserDetails.ChestCircumference;
-                model.ForearmCircumference = LastUserDetails.ForearmCircumference;
-                model.HipCircumference = LastUserDetails.HipCircumference;
-                model.ThighCircumference = LastUserDetails.ThighCircumference;
-                model.WaistCircumference = LastUserDetails.WaistCircumference;
-                model.Gender = LastUserDetails.Gender;
+                if(LastUserDetails !=null)
+                {
+                    model.Age = LastUserDetails.Age;
+                    model.Height = LastUserDetails.Height;
+                    model.Weight = LastUserDetails.Weight;
+                    model.ActivityLevel = LastUserDetails.ActivityLevel.ToString();
+                    model.ArmCircumference = LastUserDetails.ArmCircumference;
+                    model.CalfCircumference = LastUserDetails.CalfCircumference;
+                    model.ChestCircumference = LastUserDetails.ChestCircumference;
+                    model.ForearmCircumference = LastUserDetails.ForearmCircumference;
+                    model.HipCircumference = LastUserDetails.HipCircumference;
+                    model.ThighCircumference = LastUserDetails.ThighCircumference;
+                    model.WaistCircumference = LastUserDetails.WaistCircumference;
+                    model.Gender = LastUserDetails.Gender;
+                }
+
                 return View(model);
             }
         }
 
         [HttpPost]
-        public async Task<IActionResult> MeasurementAdd(MeasurementAddModel model)
+        public async Task<IActionResult> MeasurementAdd(MeasurementAddEditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                using (var dbContext = new Core.Database.HealthyServiceContext())
+                {
+                    using (var transaction = await dbContext.Database.BeginTransactionAsync())
+                    {
+                        var userNameIdentifierClaim = this.HttpContext.User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                        var UserLogin = userNameIdentifierClaim != null ? userNameIdentifierClaim.Value : null;
+
+                        var UserId = await dbContext.Users
+                            .Where(q => EF.Functions.Like(q.Login, UserLogin))
+                            .Where(q => q.IsActive && !q.IsDeleted)
+                            .Select(q => q.Id).FirstOrDefaultAsync();
+
+                        UserDetails userDetails = new UserDetails();
+
+                        var FirstMacro = await dbContext.UsersDetails
+                            .Where(q => q.IsActive && !q.IsDeleted)
+                            .Where(q => q.UserId == UserId)
+                            .OrderByDescending(q => q.CreateDate)
+                            .LastOrDefaultAsync();
+
+                        if (FirstMacro != null)
+                        {
+
+                            Core.Database.Types.ActivityLevelType activityLevel = Core.Database.Types.ActivityLevelType.Small;
+                            if (Enum.TryParse<Core.Database.Types.ActivityLevelType>(model.ActivityLevel, out activityLevel))
+                            {
+
+                            }
+                            FirstMacro.Age = model.Age;
+                            FirstMacro.Height = model.Height;
+                            FirstMacro.Weight = model.Weight;
+                            FirstMacro.WaistCircumference = model.WaistCircumference;
+                            FirstMacro.ActivityLevel = activityLevel;
+                            FirstMacro.ArmCircumference = model.ArmCircumference;
+                            FirstMacro.CalfCircumference = model.CalfCircumference;
+                            FirstMacro.ChestCircumference = model.ChestCircumference;
+                            FirstMacro.HipCircumference = model.HipCircumference;
+                            FirstMacro.Gender = model.Gender;
+                            FirstMacro.CreateDate = DateTime.Now;
+                            FirstMacro.UserId = UserId;
+                            await dbContext.SaveChangesAsync();
+                            await transaction.CommitAsync();
+                        }
+                        
+                    }
+                }
+            }
+       
+            else
+            {
+
+            }
+            return RedirectToAction("Index", "Home", new { Area = "Dashboard" });
+        }
+        public async Task<IActionResult> MeasurementEdit()
+        {
+            using (var dbContext = new Core.Database.HealthyServiceContext())
+            {
+                var userNameIdentifierClaim = this.HttpContext.User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var UserLogin = userNameIdentifierClaim != null ? userNameIdentifierClaim.Value : null;
+
+                var UserId = await dbContext.Users
+                    .Where(q => EF.Functions.Like(q.Login, UserLogin))
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Select(q => q.Id).FirstOrDefaultAsync();
+
+                var LastUserDetails = await dbContext.UsersDetails
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Where(q => q.UserId == UserId)
+                    .OrderByDescending(q => q.CreateDate)
+                    .FirstOrDefaultAsync();
+
+                Dictionary<string, string> Translator2 = new Dictionary<string, string>();
+                Translator2.Add(Core.Database.Types.ActivityLevelType.Small.ToString(), "Mała aktywność");
+                Translator2.Add(Core.Database.Types.ActivityLevelType.Medium.ToString(), "Średnia aktywność");
+                Translator2.Add(Core.Database.Types.ActivityLevelType.Large.ToString(), "Duża aktywność");
+                Translator2.Add(Core.Database.Types.ActivityLevelType.ExtraLarge.ToString(), "Bardzo duża aktywność");
+
+                Model.MeasurementAddEditModel model = new Model.MeasurementAddEditModel();
+
+                var types = new List<SelectListItem>();
+
+                types.Add(new SelectListItem()
+                {
+                    Text = Translator2[Core.Database.Types.ActivityLevelType.Small.ToString()],
+                    Value = Core.Database.Types.ActivityLevelType.Small.ToString()
+                });
+                types.Add(new SelectListItem()
+                {
+                    Text = Translator2[Core.Database.Types.ActivityLevelType.Medium.ToString()],
+                    Value = Core.Database.Types.ActivityLevelType.Medium.ToString()
+                });
+                types.Add(new SelectListItem()
+                {
+                    Text = Translator2[Core.Database.Types.ActivityLevelType.Large.ToString()],
+                    Value = Core.Database.Types.ActivityLevelType.Large.ToString()
+                });
+                types.Add(new SelectListItem()
+                {
+                    Text = Translator2[Core.Database.Types.ActivityLevelType.ExtraLarge.ToString()],
+                    Value = Core.Database.Types.ActivityLevelType.ExtraLarge.ToString()
+                });
+
+                model.ActivityLevels = new SelectList(types, "Value", "Text");
+                if (LastUserDetails != null)
+                {
+                    model.Height = LastUserDetails.Height;
+                    model.Weight = LastUserDetails.Weight;
+                    model.ActivityLevel = LastUserDetails.ActivityLevel.ToString();
+                    model.ArmCircumference = LastUserDetails.ArmCircumference;
+                    model.CalfCircumference = LastUserDetails.CalfCircumference;
+                    model.ChestCircumference = LastUserDetails.ChestCircumference;
+                    model.ForearmCircumference = LastUserDetails.ForearmCircumference;
+                    model.HipCircumference = LastUserDetails.HipCircumference;
+                    model.ThighCircumference = LastUserDetails.ThighCircumference;
+                    model.WaistCircumference = LastUserDetails.WaistCircumference;
+                }
+
+                return View(model);
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MeasurementEdit(MeasurementAddEditModel model)
         {
             if (ModelState.IsValid)
             {
@@ -188,15 +313,15 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                             .OrderByDescending(q => q.CreateDate)
                             .FirstOrDefaultAsync();
 
-                        if(LastMacro != null)
-                           userDetails = UserDetailsDto.Copy(LastMacro);
+                        if (LastMacro != null)
+                            userDetails = UserDetailsDto.Copy(LastMacro);
 
                         Core.Database.Types.ActivityLevelType activityLevel = Core.Database.Types.ActivityLevelType.Small;
-                        if(Enum.TryParse<Core.Database.Types.ActivityLevelType>(model.ActivityLevel,out activityLevel))
+                        if (Enum.TryParse<Core.Database.Types.ActivityLevelType>(model.ActivityLevel, out activityLevel))
                         {
 
                         }
-                        userDetails.Age = model.Age;
+
                         userDetails.Height = model.Height;
                         userDetails.Weight = model.Weight;
                         userDetails.WaistCircumference = model.WaistCircumference;
@@ -205,7 +330,6 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                         userDetails.CalfCircumference = model.CalfCircumference;
                         userDetails.ChestCircumference = model.ChestCircumference;
                         userDetails.HipCircumference = model.HipCircumference;
-                        userDetails.Gender = model.Gender;
                         userDetails.CreateDate = DateTime.Now;
                         userDetails.UserId = UserId;
 
@@ -213,25 +337,20 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
 
                         await dbContext.SaveChangesAsync();
                         await transaction.CommitAsync();
+
                     }
 
-                    
+
 
                 }
             }
 
-              
+
             else
             {
 
             }
             return RedirectToAction("Index", "Home", new { Area = "Dashboard" });
         }
-        public IActionResult MeasurementEdit()
-        {
-            return View();
-        }
-
-
     }
 }

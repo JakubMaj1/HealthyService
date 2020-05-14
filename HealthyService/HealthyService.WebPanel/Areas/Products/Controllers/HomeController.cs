@@ -7,6 +7,8 @@ using HealthyService.WebPanel.Areas.Products.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+
 
 namespace HealthyService.WebPanel.Areas.Products.Controllers
 {
@@ -19,8 +21,10 @@ namespace HealthyService.WebPanel.Areas.Products.Controllers
         {
             using (var dbContext = new HealthyService.Core.Database.HealthyServiceContext())
             {
+
                 using (var transaction = await dbContext.Database.BeginTransactionAsync())
                 {
+
                     var product = await dbContext.Products.FindAsync(model.ProductId);
 
                     if (product == null)
@@ -46,6 +50,7 @@ namespace HealthyService.WebPanel.Areas.Products.Controllers
         [HttpGet]
         public async Task<IActionResult> EditProduct(long productId)
         {
+
             var model = new AdminAddEditProductModel();
             Dictionary<Core.Database.Types.ProductMeasureType, string> Translator = new Dictionary<Core.Database.Types.ProductMeasureType, string>();
 
@@ -62,6 +67,7 @@ namespace HealthyService.WebPanel.Areas.Products.Controllers
 
             using (var dbContext = new HealthyService.Core.Database.HealthyServiceContext())
             {
+                
                 var product = await dbContext.Products.FindAsync(productId);
 
                 if(product == null)
@@ -127,13 +133,23 @@ namespace HealthyService.WebPanel.Areas.Products.Controllers
                 {
                     using (var transaction = await dbContext.Database.BeginTransactionAsync())
                     {
+                        var userNameIdentifierClaim = this.HttpContext.User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                        var UserLogin = userNameIdentifierClaim != null ? userNameIdentifierClaim.Value : null;
+
+                        var UserId = await dbContext.Users
+                            .Where(q => EF.Functions.Like(q.Login, UserLogin))
+                            .Where(q => q.IsActive && !q.IsDeleted)
+                            .Select(q => q.Id).FirstOrDefaultAsync();
+
+
                         await dbContext.Products.AddAsync(new HealthyService.Core.Database.Tables.Product
                         {
                             Name = model.Name,
                             Protein = (float)model.Protein,
                             Carbo = (float)model.Carbo,
                             Fat = (float)model.Fat,
-                            ProductMeasure = model.ProductMeasure
+                            ProductMeasure = model.ProductMeasure,
+                            UserId = UserId
                         });
                         await dbContext.SaveChangesAsync();
                         await transaction.CommitAsync();

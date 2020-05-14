@@ -1,4 +1,5 @@
-﻿
+﻿@model HealthyService.WebPanel.Areas.Users.Model.MeasurementAddEditModel
+
 @{
     ViewData["Title"] = "MeasurementEdit";
     Layout = "~/Views/Shared/_Layout2.cshtml";
@@ -22,25 +23,27 @@
                             </div>
 
 
-                            
+
 
 
                         </div>
 
-                        
+
                     </div>
 
                     <div class="col-md-6  p-4">
                         <h3 style="text-align:center"> Dane Podstawowe</h3>
                         <hr>
+                        <form asp-area="Users" asp-controller="Home" asp-action="MeasurementEdit" method="post" class="form-validate-jquery user" role="form">
 
-                        <form>
                             <div class="form-group row">
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user" placeholder="Wzrost">
+                                    <input type="text" asp-for="Height" class="form-control form-control-user" placeholder="Wzrost">
+                                    <span asp-validation-for="Height"></span>
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user" placeholder="Waga">
+                                    <input type="text" asp-for="Weight" class="form-control form-control-user" placeholder="Waga">
+                                    <span asp-validation-for="Weight"></span>
                                 </div>
 
 
@@ -49,69 +52,71 @@
                             <div class="form-group row">
 
                                 <div class="col-md-12">
-                                    <label>Stopień aktywności </label>
-                                    <select id="ActiveLevelBMR" class="form-control">
-                                        <option selected>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
+                                    <label>Stopień aktywności</label>
+                                    <select asp-for="ActivityLevel" asp-items="Model.ActivityLevels" class="form-control">
                                     </select>
-
+                                    <span asp-validation-for="ActivityLevel"></span>
                                 </div>
                             </div>
 
 
-                                <div class="row pl-3">
-                                    1 - Bardzo niska aktywność (Brak treningu)<br />
+                            <div class="row pl-3">
+                                1 - Bardzo niska aktywność (Brak treningu)<br />
 
 
-                                    2 - Niska aktywność ( 1 trening w tygodniu)<br />
+                                2 - Niska aktywność ( 1 trening w tygodniu)<br />
 
 
-                                    3 - Umiarkowana aktywność (2-3 treningi w tygodniu)<br />
+                                3 - Umiarkowana aktywność (2-3 treningi w tygodniu)<br />
 
 
-                                    4 - Wysoka aktywność ( 4-5 treningów w tygodniu)<br />
+                                4 - Wysoka aktywność ( 4-5 treningów w tygodniu)<br />
+                            </div>
+
+
+                            <hr>
+                            <h3 style="text-align:center">
+                                Obwody
+                            </h3>
+
+                            <hr>
+                            <div class="form-group row">
+                                <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control form-control-user" asp-for="ChestCircumference" placeholder="Klatki piersiowej">
+                                    <span asp-validation-for="ChestCircumference"></span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" asp-for="WaistCircumference" placeholder="Pasa">
+                                    <span asp-validation-for="WaistCircumference"></span>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" asp-for="HipCircumference" placeholder="Bioder">
+                                    <span asp-validation-for="HipCircumference"></span>
                                 </div>
 
 
-                                <hr>
-                                <h3 style="text-align:center">
-                                    Obwody
-                                </h3>
 
-                                <hr>
-                                <div class="form-group row">
-                                    <div class="col-sm-4 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" placeholder="Klatki piersiowej">
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control form-control-user" placeholder="Pasa">
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control form-control-user" placeholder="Bioder">
-                                    </div>
-
-
-
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" asp-for="ArmCircumference" placeholder="Ramienia">
+                                    <span asp-validation-for="ArmCircumference"></span>
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control form-control-user" placeholder="Ramienia">
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control form-control-user" placeholder="Uda">
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <input type="text" class="form-control form-control-user" placeholder="Łydki">
-                                    </div>
-
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" asp-for="ThighCircumference" placeholder="Uda">
+                                    <span asp-validation-for="ThighCircumference"></span>
                                 </div>
-                                <hr>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control form-control-user" asp-for="CalfCircumference" placeholder="Łydki">
+                                    <span asp-validation-for="CalfCircumference"></span>
+                                </div>
 
-                                <a class="btn btn-primary btn-user btn-block text-white">
-                                    Zapisz
-                                </a>
+                            </div>
+                            <hr>
+
+                            <button class="btn btn-primary btn-user btn-block text-white">
+                                Zapisz
+                            </button>
 
                         </form>
 

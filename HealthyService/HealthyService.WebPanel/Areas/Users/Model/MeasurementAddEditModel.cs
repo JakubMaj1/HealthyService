@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace HealthyService.WebPanel.Areas.Users.Model
 {
-    public class MeasurementAddModel
+    public class MeasurementAddEditModel
     {
         [Range(1, 99, ErrorMessage = "Należy podać wiek z przedziału 1 - 99")]
         [Required(ErrorMessage ="dsada")]
