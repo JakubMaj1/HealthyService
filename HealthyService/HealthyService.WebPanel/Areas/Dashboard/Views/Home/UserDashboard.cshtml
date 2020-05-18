@@ -8,279 +8,513 @@
 <div class="container mt-4">
 
     <div class="row">
-        <div class="col-md-4 ">
+        @{
+            if (Model.UserDetailsFirst != null)
+            {
+                <div class="col-md-4 ">
 
-            <!-- Middle placement -->
-            <div class="card">
-                <div class="card-header header-elements-inline">
-                    <h6 class="card-title">Początkowe Pomiary</h6>
+                    <!-- Middle placement -->
 
-                </div>
-
-
-                <div id="collapseOne" class="card-body">
-
-                    <div class="card-img-actions mb-2">
-                        <img class="img-fluid" src="../../img/centimeter.jpg" alt="">
-                        <div class="card-img-actions-overlay">
-                            @{
-                                if (Model.UserDetailsFirst != null)
-                                {
-                                    <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                    <div class="card">
+                                <div class="card-header header-elements-inline">
+                                    <h6 class="card-title"><b>Początkowe Pomiary</b></h6>
+                                    <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline-info  ml-2">
                                         Edytuj
                                     </a>
+                                </div>
 
+
+                        <div id="collapseOne" class="card-body">
+                            <hr>
+                            <div style="font-size:12px;">
+                                @{
+
+                                    <div>Obwód łydki: @(Model.UserDetailsFirst.CalfCircumference != null ? Model.UserDetailsFirst.CalfCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                    <div>Obwód bioder: @(Model.UserDetailsFirst.HipCircumference != null ? Model.UserDetailsFirst.HipCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                    <div>Obwód klatki: @(Model.UserDetailsFirst.ChestCircumference != null ? Model.UserDetailsFirst.ChestCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                    <div>Obwód pasa: @(Model.UserDetailsFirst.WaistCircumference != null ? Model.UserDetailsFirst.WaistCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                    <div>Obwód Ramienia: @(Model.UserDetailsFirst.ArmCircumference != null ? Model.UserDetailsFirst.ArmCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                    <div>Obwód Przedramienia: @(Model.UserDetailsFirst.ForearmCircumference != null ? Model.UserDetailsFirst.ForearmCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                    <div>Obwód Uda: @(Model.UserDetailsFirst.ThighCircumference != null ? Model.UserDetailsFirst.ThighCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+
+
+                                }
+                            </div>
+
+
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <span class="font-size-sm text-uppercase font-weight-semibold">
+
+                                @Model.UserDetailsFirst.CreateDate
+
+                            </span>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+                <div class="col-md-4 ">
+
+                    <!-- Middle placement -->
+                    <div class="card">
+
+                        
+                        <div class="card-header header-elements-inline">
+                            <h6 class="card-title"> <b>Aktualne Pomiary</b></h6>
+                            <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline-info  ml-2">
+                                Dodaj
+                            </a>
+                        </div>
+
+                        <div id="collapseOne" class="card-body ">
+                       
+                            <hr />
+                            @{
+                                if (@Model.UserDetailsLast != null)
+                                {
+                                                        <div style="font-size:12px;">
+
+                                                            @{
+                                                                <div>Obwód łydki: @(Model.UserDetailsLast.CalfCircumference != null ? Model.UserDetailsLast.CalfCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                                                <div>Obwód bioder: @(Model.UserDetailsLast.HipCircumference != null ? Model.UserDetailsLast.HipCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                                                <div>Obwód Klatki: @(Model.UserDetailsLast.ChestCircumference != null ? Model.UserDetailsLast.ChestCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                                                <div> Obwód Pasa @(Model.UserDetailsLast.WaistCircumference != null ? Model.UserDetailsLast.WaistCircumference.ToString() + " cm" : "Brak danych do wyświetlania")</div>
+
+                                                                <div>Obwód Ramienia: @(Model.UserDetailsLast.ArmCircumference != null ? Model.UserDetailsLast.ArmCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                                                <div>Obwód Przedramienia: @(Model.UserDetailsLast.ForearmCircumference != null ? Model.UserDetailsLast.ForearmCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+
+                                                                <div>Obwód Uda: @(Model.UserDetailsLast.ThighCircumference != null ? Model.UserDetailsLast.ThighCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+                                                            }
+                                                        </div>
                                 }
                                 else
                                 {
                                     <div>
-                                        <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
-                                            Dodaj
+                                        <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-secondary w-100 ">
+                                            <div>Uzupełnij dane</div>
                                         </a>
                                     </div>
+
                                 }
                             }
 
+
+
                         </div>
-
+                        <div class="card-footer d-flex justify-content-between">
+                            <span class="font-size-sm text-uppercase font-weight-semibold">
+                                @(Model.UserDetailsLast != null ? Model.UserDetailsLast.CreateDate : DateTime.Now)
+                            </span>
+                            <span class="font-size-sm text-uppercase text-success font-weight-semibold">
+                                @if (Model.UserDetailsLast != null)
+                                {
+                                    @((DateTime.Now - Model.UserDetailsLast.CreateDate).Days)
+                                }
+                                else
+                                {
+                                }
+                            </span>
+                        </div>
                     </div>
-                    <h5 class="card-title">Wymiary</h5>
-                    <hr>
-                    @{
-                        if (@Model.UserDetailsFirst != null)
-                        {
-                            <div>
-                                Obwód łydki : @Model.UserDetailsFirst.CalfCircumference cm<br />
-                                Obwód Bioder : @Model.UserDetailsFirst.HipCircumference cm <br />
-                                Obwód klatki : @Model.UserDetailsFirst.ChestCircumference cm <br />
-                                Obwód pasa : @Model.UserDetailsFirst.WaistCircumference cm <br />
-                            </div>
-                        }
-                        else
-                        {
-                            <div>
-                                <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-secondary w-100 ">
-                                    Uzupełnij dane
-                                </a>
-                            </div>
-                        }
-                    }
-
-
 
                 </div>
-                <div class="card-footer d-flex justify-content-between">
-                    <span class="font-size-sm text-uppercase font-weight-semibold">
+            }
+            else
+            {
 
-                        @{
-                            if (@Model.UserDetailsFirst != null)
-                            {
-                                @Model.UserDetailsFirst.CreateDate
-                            }
-                            else
-                            {
-                                <div>
-                                    Dodaj wpis z początkowymi pomiarami.
+                    <div class="col-md-5 ">
+
+                        <!-- Middle placement -->
+                        <div class="card">
+
+                            <div class="card-header header-elements-inline">
+                                <h6 class="card-title">Początkowe Pomiary</h6>
+
+                            </div>
+
+
+                            <div id="collapseOne" class="card-body ">
+                                <div class="card-img-actions mb-2">
+                                    <img class="img-fluid" src="../../img/centimeter.jpg" alt="">
+                                    <div class="card-img-actions-overlay ">
+
+                                        <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                            @{ if (Model.UserDetailsFirst != null)
+                                                {
+                                                    <div>Aktualizuj</div>
+
+                                                }
+                                                else
+                                                {
+                                                    <div>Dodaj</div>
+
+                                                }
+                                            }
+                                        </a>
+                                    </div>
                                 </div>
-                            }
-                        }
-                    </span>
-                </div>
+                                <h5 class="card-title">Wymiary</h5>
+                                <hr />
+                                @{
+                                    if (@Model.UserDetailsLast != null)
+                                    {
+                                        <div>
+                                            @{
+                                                if (Model.UserDetailsLast.CalfCircumference != null)
+                                                {
+                                                    <div>Obwód łydki: @Model.UserDetailsLast.CalfCircumference  cm  <br /></div>
+                                                }
+                                                else
+                                                {
+                                                    <div> Obwód łydki: Brak Danych do Wyświetlenia<br /></div>
+                                                }
+                                                if (Model.UserDetailsLast.HipCircumference != null)
+                                                {
+                                                    <div>Obwód bioder: @Model.UserDetailsLast.HipCircumference  cm  <br /></div>
+                                                }
+                                                else
+                                                {
+                                                    <div> Obwód bioder: Brak Danych do Wyświetlenia<br /></div>
+                                                }
+                                                if (Model.UserDetailsLast.ChestCircumference != null)
+                                                {
+                                                    <div>Obwód klatki: @Model.UserDetailsLast.ChestCircumference  cm  <br /></div>
+                                                }
+                                                else
+                                                {
+                                                    <div> Obwód klatki: Brak Danych do Wyświetlenia<br /></div>
+                                                }
+                                                if (Model.UserDetailsLast.WaistCircumference != null)
+                                                {
+                                                    <div>Obwód pasa: @Model.UserDetailsLast.WaistCircumference  cm  <br /></div>
+                                                }
+                                                else
+                                                {
+                                                    <div> Obwód pasa: Brak Danych do Wyświetlenia<br /></div>
+                                                }
 
-            </div>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-secondary w-100 ">
+                                                <div>Uzupełnij dane</div>
+                                            </a>
+                                        </div>
 
-        </div>
+                                    }
+                                }
 
-        <div class="col-md-4 ">
 
-            <!-- Middle placement -->
-            <div class="card">
 
-                <div class="card-header header-elements-inline">
-                    <h6 class="card-title">Aktualne Pomiary</h6>
-                    <div class="header-elements">
-                        <div class="list-icons">
-                            <a class="list-icons-item" data-action="collapse"></a>
+                             </div>
+                                <div class="card-footer d-flex justify-content-between">
+                                    <span class="font-size-sm text-uppercase font-weight-semibold">
+                                        @(Model.UserDetailsLast != null ? Model.UserDetailsLast.CreateDate : DateTime.Now)
+                                    </span>
+                                    <span class="font-size-sm text-uppercase text-success font-weight-semibold">
+                                        @if (Model.UserDetailsLast != null)
+                                        {
+                                            @((DateTime.Now - Model.UserDetailsLast.CreateDate).Days )
+                                        }
+                                        else
+                                        {
+                                        }
+                                    </span>
+                                </div>
                         </div>
-                    </div>
-                </div>
+
+                     </div>
+            }
+        }
+       
 
 
-                <div id="collapseOne" class="card-body collapse">
-                    <div class="card-img-actions mb-2">
-                        <img class="img-fluid" src="../../img/centimeter.jpg" alt="">
-                        <div class="card-img-actions-overlay ">
 
-                            <a asp-area="Users" asp-controller="Home" asp-action="MeasurementEdit" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
-                                Aktualizuj
-                            </a>
-                        </div>
-                    </div>
-                    <h5 class="card-title">Wymiary</h5>
-                    <hr />
-                    @{
-                        if (@Model.UserDetailsLast != null)
-                        {
-                            <div>
-                                Waga
-                                Obwód łydki: @Model.UserDetailsLast.CalfCircumference cm <br />
-                                Obwód bioder :  @Model.UserDetailsLast.HipCircumference cm <br />
-                                Obwód klatki :  @Model.UserDetailsLast.ChestCircumference cm <br />
-                                Obwód pasa :  @Model.UserDetailsLast.WaistCircumference cm <br />
-                            </div>
-                        }
-                        else
-                        {
-                            <div>
-                                <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-secondary w-100 ">
-                                    Uzupełnij dane
+        @{
+            if (Model.UserDetailsFirst != null)
+            {
+                <div class="col-md-4">
+
+                    <!-- Overlay buttons -->
+                    <div class="card">
+                        <div class="card-img-actions">
+                            <img class="card-img-top img-fluid" src="../../img/Split.jpg" alt="">
+                            <div class="card-img-actions-overlay card-img-top">
+
+                                <a asp-area="Training" asp-controller="Home" asp-action="PrimaryTraining" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                    Treningi
                                 </a>
                             </div>
-
-                        }
-                    }
-
-
-
-                </div>
-                <div class="card-footer d-flex justify-content-between">
-                    <span class="font-size-sm text-uppercase font-weight-semibold">
-                        @(Model.UserDetailsLast != null ? Model.UserDetailsLast.CreateDate : DateTime.Now)
-                    </span>
-                    <span class="font-size-sm text-uppercase text-success font-weight-semibold">5 Dni temu </span>
-                </div>
-            </div>
-
-        </div>
-
-
-
-        <div class="col-md-4">
-
-            <!-- Overlay buttons -->
-            <div class="card">
-                <div class="card-img-actions">
-                    <img class="card-img-top img-fluid" src="../../img/DashTraining.png" alt="">
-                    <div class="card-img-actions-overlay card-img-top">
-
-                        <a asp-area="Training" asp-controller="Home" asp-action="PrimaryTraining" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
-                            Szczegóły
-                        </a>
-                    </div>
-                </div>
-
-                @*<div class="card-body">
-                        <h5 class="card-title">Trening</h5>
-                        <p class="card-text">Dowiedz się więcej na temat treningu, zapoznaj się z proponowanymi planami.</p>
-                    </div>
-
-                    <div class="card-footer d-flex">
-                        <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
-                    </div>*@
-            </div>
-            <div class="card">
-                <div class="card-img-actions">
-                    <img class="card-img-top img-fluid" src="../../img/DashCalculatores.png" alt="">
-                    <div class="card-img-actions-overlay card-img-top">
-
-                        <a asp-area="Training" asp-controller="Home" asp-action="PrimaryTraining" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
-                            Szczegóły
-                        </a>
-                    </div>
-                </div>
-
-                @*<div class="card-body">
-                        <h5 class="card-title">Kalkulatory</h5>
-                        <p class="card-text">Skorzystaj z kalkulatorów, oblicz swoje zapotrzebowanie, BMI oraz inne.</p>
-                    </div>
-
-                    <div class="card-footer d-flex">
-                        <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
-                    </div>*@
-            </div>
-
-            <div class="card">
-                <div class="card-header header-elements-inline">
-                    <h5 class="card-title">Produkty Wysokobiałkowe</h5>
-                    <div class="header-elements">
-                        <div class="list-icons">
-                            <a class="list-icons-item" data-action="collapse"></a>
                         </div>
-                    </div>
-                </div>
 
-                <div class="table-responsive table-scrollable collapse ">
-                    <div class="card-body ">
-                        Wartości podane na 100g produktu.
-                    </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Produkt</th>
-                                <th>B</th>
-                                <th>W</th>
-                                <th>T</th>
-
-                            </tr>
-                        </thead>
-                        <hr />
-                        @{
-
-                            foreach (var product in Model.Products)
-                            {
-                                <tbody>
-                                <td>@product.Name</td>
-                                <td>@product.Protein</td>
-                                <td>@product.Carbo</td>
-                                <td>@product.Fat</td>
-                                </tbody>
-                            }
-                        }
-                    </table>
-                </div>
-
-            </div>
-            <div class="card">
-                <div class="card-header header-elements-inline">
-                    <h5 class="card-title">Produkty Niskotłuszczowe</h5>
-                    <div class="header-elements">
-                        <div class="list-icons">
-                            <a class="list-icons-item" data-action="collapse"></a>
+                        @*<div class="card-body">
+                            <h5 class="card-title">Trening</h5>
+                            <p class="card-text">Dowiedz się więcej na temat treningu, zapoznaj się z proponowanymi planami.</p>
                         </div>
+
+                        <div class="card-footer d-flex">
+                            <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
+                        </div>*@
                     </div>
+                    <div class="card">
+                        <div class="card-img-actions">
+                            <img class="card-img-top img-fluid" src="../../img/Calculators.jpg" alt="">
+                            <div class="card-img-actions-overlay card-img-top">
+
+                                <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                    Kalkulatory
+                                </a>
+                            </div>
+                        </div>
+
+                        @*<div class="card-body">
+                            <h5 class="card-title">Kalkulatory</h5>
+                            <p class="card-text">Skorzystaj z kalkulatorów, oblicz swoje zapotrzebowanie, BMI oraz inne.</p>
+                        </div>
+
+                        <div class="card-footer d-flex">
+                            <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
+                        </div>*@
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header header-elements-inline">
+                            <h5 class="card-title">Produkty Wysokobiałkowe</h5>
+                            <div class="header-elements">
+                                <div class="list-icons">
+                                    <a class="list-icons-item" data-action="collapse"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive table-scrollable collapse ">
+                            <div class="card-body ">
+                                Wartości podane na 100g produktu.
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Produkt</th>
+                                        <th>B</th>
+                                        <th>W</th>
+                                        <th>T</th>
+
+                                    </tr>
+                                </thead>
+                                <hr />
+                                @{
+
+                                    foreach (var product in Model.Products)
+                                    {
+                                        <tbody>
+                                        <td>@product.Name</td>
+                                        <td>@product.Protein</td>
+                                        <td>@product.Carbo</td>
+                                        <td>@product.Fat</td>
+                                        </tbody>
+                                    }
+                                }
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="card">
+                        <div class="card-header header-elements-inline">
+                            <h5 class="card-title">Produkty Niskotłuszczowe</h5>
+                            <div class="header-elements">
+                                <div class="list-icons">
+                                    <a class="list-icons-item" data-action="collapse"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive table-scrollable collapse ">
+                            <div class="card-body ">
+                                Wartości podane na 100g produktu.
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Produkt</th>
+                                        <th>B</th>
+                                        <th>W</th>
+                                        <th>T</th>
+
+                                    </tr>
+                                </thead>
+                                <hr />
+                                @{ foreach (var product2 in Model.Products2)
+                                    {
+                                        <tbody>
+
+                                        <td>@product2.Name</td>
+                                        <td>@product2.Protein</td>
+                                        <td>@product2.Carbo</td>
+                                        <td>@product2.Fat</td>
+
+                                        </tbody>
+                                    }
+                                }
+                            </table>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="table-responsive table-scrollable collapse ">
-                    <div class="card-body ">
-                        Wartości podane na 100g produktu.
+            }
+            else
+            {
+                <div class="col-md-3">
+
+                    <!-- Overlay buttons -->
+                    <div class="card">
+                        <div class="card-img-actions">
+                            <img class="card-img-top img-fluid" src="../../img/Split.jpg" alt="">
+                            <div class="card-img-actions-overlay card-img-top">
+
+                                <a asp-area="Training" asp-controller="Home" asp-action="PrimaryTraining" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                    Treningi
+                                </a>
+                            </div>
+                        </div>
+
+                        @*<div class="card-body">
+                            <h5 class="card-title">Trening</h5>
+                            <p class="card-text">Dowiedz się więcej na temat treningu, zapoznaj się z proponowanymi planami.</p>
+                        </div>
+
+                        <div class="card-footer d-flex">
+                            <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
+                        </div>*@
                     </div>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Produkt</th>
-                                <th>B</th>
-                                <th>W</th>
-                                <th>T</th>
+                    <div class="card">
+                        <div class="card-img-actions">
+                            <img class="card-img-top img-fluid" src="../../img/Calculators.jpg" alt="">
+                            <div class="card-img-actions-overlay card-img-top">
 
-                            </tr>
-                        </thead>
-                        <hr @{ foreach (var product2 in Model.Products2) {
-                        <tbody>
+                                <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
+                                    Kalkulatory
+                                </a>
+                            </div>
+                        </div>
 
-                        <td>@product2.Name</td>
-                        <td>@product2.Protein</td>
-                        <td>@product2.Carbo</td>
-                        <td>@product2.Fat</td>
+                        @*<div class="card-body">
+                            <h5 class="card-title">Kalkulatory</h5>
+                            <p class="card-text">Skorzystaj z kalkulatorów, oblicz swoje zapotrzebowanie, BMI oraz inne.</p>
+                        </div>
 
-                        </tbody>
-                    }
-}
-</table>
-</div>
+                        <div class="card-footer d-flex">
+                            <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header header-elements-inline">
+                            <h5 class="card-title">Produkty Wysokobiałkowe</h5>
+                            <div class="header-elements">
+                                <div class="list-icons">
+                                    <a class="list-icons-item" data-action="collapse"></a>
+                                </div>
+                            </div>
+                        </div>
 
-</div>
+                        <div class="table-responsive table-scrollable collapse ">
+                            <div class="card-body ">
+                                Wartości podane na 100g produktu.
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Produkt</th>
+                                        <th>B</th>
+                                        <th>W</th>
+                                        <th>T</th>
 
-</div>
-</div>
+                                    </tr>
+                                </thead>
+                                <hr />
+                                @{
+
+                                    foreach (var product in Model.Products)
+                                    {
+                                        <tbody>
+                                        <td>@product.Name</td>
+                                        <td>@product.Protein</td>
+                                        <td>@product.Carbo</td>
+                                        <td>@product.Fat</td>
+                                        </tbody>
+                                    }
+                                }
+                            </table>
+                        </div>
+
+                    </div>
+                    <div class="card">
+                        <div class="card-header header-elements-inline">
+                            <h5 class="card-title">Produkty Niskotłuszczowe</h5>
+                            <div class="header-elements">
+                                <div class="list-icons">
+                                    <a class="list-icons-item" data-action="collapse"></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive table-scrollable collapse ">
+                            <div class="card-body ">
+                                Wartości podane na 100g produktu.
+                            </div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Produkt</th>
+                                        <th>B</th>
+                                        <th>W</th>
+                                        <th>T</th>
+
+                                    </tr>
+                                </thead>
+                                <hr />
+                                @{ foreach (var product2 in Model.Products2)
+                                    {
+                                        <tbody>
+
+                                        <td>@product2.Name</td>
+                                        <td>@product2.Protein</td>
+                                        <td>@product2.Carbo</td>
+                                        <td>@product2.Fat</td>
+
+                                        </tbody>
+                                    }
+                                }
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        }
+    </div>
 
 </div>

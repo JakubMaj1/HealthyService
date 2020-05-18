@@ -58,11 +58,13 @@ namespace HealthyService.WebPanel.Areas.Dashboard.Controllers
                model.UserDetailsFirst = await dbContext.UsersDetails
                     .Where(q => q.IsActive && !q.IsDeleted)
                     .Where(q => q.UserId == UserId)
+                    .Where(q => q.Age != null)
                     .OrderBy(q => q.CreateDate).FirstOrDefaultAsync();
 
                model.UserDetailsLast = await dbContext.UsersDetails
                     .Where(q => q.IsActive && !q.IsDeleted)
                     .Where(q => q.UserId == UserId)
+                    .Where(q => q.Age != null)
                     .OrderBy(q => q.CreateDate).LastOrDefaultAsync();
 
                 return View(model);

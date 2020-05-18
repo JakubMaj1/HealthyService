@@ -2363,29 +2363,6 @@
 .border-right-slate-800 {
   border-right-color: #37474F; }
 
-.text-black {
-  color: #000; }
-  .text-black[href]:hover, .text-black[href]:focus {
-    color: black; }
-
-.bg-black {
-  background-color: #000; }
-
-.border-black {
-  border-color: #000; }
-
-.border-top-black {
-  border-top-color: #000; }
-
-.border-bottom-black {
-  border-bottom-color: #000; }
-
-.border-left-black {
-  border-left-color: #000; }
-
-.border-right-black {
-  border-right-color: #000; }
-
 .border-transparent {
   border-color: transparent !important; }
 
@@ -2438,4 +2415,4 @@
   background-color: rgba(255, 255, 255, 0.1); }
 
 .bg-body {
-  background-color: #262d3c; }
+  background-color: #eeeded; }

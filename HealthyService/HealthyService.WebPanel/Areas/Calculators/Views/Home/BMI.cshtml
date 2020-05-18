@@ -4,6 +4,28 @@
     Layout = "_Layout2";
 
 }
+<script>
+     function BMI() {
+        var WeightBMIvalue = parseFloat(document.getElementById("WeightBMI").value);
+        var HeightBMIvalue = parseFloat(document.getElementById("HeightBMI").value);
+        var ResultBMI = ((WeightBMIvalue / (HeightBMIvalue * HeightBMIvalue)) * 10000);
+        ResultBMI = Math.round(ResultBMI * 100) / 100;
+
+        if (HeightBMIvalue > 100 && WeightBMIvalue > 20 && HeightBMIvalue < 240 && WeightBMIvalue < 200) {
+            document.getElementById("BMIInfo").innerHTML = "Wskaźnik BMI";
+            document.getElementById("BMIValue").innerHTML = ResultBMI;
+            document.getElementById("BMIInfo2").innerHTML = "Porównaj wynik z podanymi warościami";
+
+        }
+
+        else {
+            document.getElementById("BMIInfo2").innerHTML = "Nieprawidłowa wartość";
+        }
+
+
+    }
+
+</script>
 <br />
     <h1 style="text-align:center">Kalkulator BMI</h1>
 

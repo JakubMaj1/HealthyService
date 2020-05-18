@@ -25,12 +25,26 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
 
             using (var dbContext = new Core.Database.HealthyServiceContext())
             {
-                var Macro = await dbContext.UsersDetails.Where(q => q.IsActive && !q.IsDeleted).OrderByDescending(q => q.CreateDate).FirstOrDefaultAsync();
-                if(Macro != null)
+
+                var userNameIdentifierClaim = this.HttpContext.User.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+                var UserLogin = userNameIdentifierClaim != null ? userNameIdentifierClaim.Value : null;
+
+                var UserId = await dbContext.Users
+                    .Where(q => EF.Functions.Like(q.Login, UserLogin))
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Select(q => q.Id).FirstOrDefaultAsync();
+
+                var LastUserDetails = await dbContext.UsersDetails
+                    .Where(q => q.IsActive && !q.IsDeleted)
+                    .Where(q => q.UserId == UserId)
+                    .OrderByDescending(q => q.CreateDate)
+                    .FirstOrDefaultAsync();
+
+                if(LastUserDetails != null)
                 {
-                    model.UserCarboLevel = Macro.UserCarboLevel;
-                    model.UserFatLevel = Macro.UserFatLevel;
-                    model.UserProteinLevel = Macro.UserProteinLevel;
+                    model.UserCarboLevel = LastUserDetails.UserCarboLevel != null ? LastUserDetails.UserCarboLevel.Value : 0;
+                    model.UserFatLevel = LastUserDetails.UserFatLevel != null ? LastUserDetails.UserFatLevel.Value : 0;
+                    model.UserProteinLevel = LastUserDetails.UserProteinLevel != null ? LastUserDetails.UserProteinLevel.Value :0;
                 }
 
                 return View(model);
@@ -53,7 +67,10 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
 
                     UserDetails userDetails = new UserDetails();
 
-                    var LastMacro = await dbContext.UsersDetails.Where(q => q.IsActive && !q.IsDeleted).OrderByDescending(q => q.CreateDate).FirstOrDefaultAsync();
+                    var LastMacro = await dbContext.UsersDetails.Include(q=>q.User)// Dostęp do właściwości uzytkownika 
+                        .Where(q => EF.Functions.Like(q.User.Login, UserLogin))
+                        .Where(q => q.IsActive && !q.IsDeleted)
+                        .OrderByDescending(q => q.CreateDate).FirstOrDefaultAsync();
     
                     if(LastMacro != null)
                         userDetails = UserDetailsDto.Copy(LastMacro);
@@ -172,13 +189,25 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
 
                         UserDetails userDetails = new UserDetails();
 
+
+
                         var FirstMacro = await dbContext.UsersDetails
                             .Where(q => q.IsActive && !q.IsDeleted)
                             .Where(q => q.UserId == UserId)
+                            .Where(q=> q.Age != null)
                             .OrderByDescending(q => q.CreateDate)
                             .LastOrDefaultAsync();
 
-                        if (FirstMacro != null)
+                        var LastMacro = await dbContext.UsersDetails
+                            .Where(q => q.IsActive && !q.IsDeleted)
+                            .Where(q => q.UserId == UserId)
+                            .OrderByDescending(q => q.CreateDate)
+                            .FirstOrDefaultAsync();
+
+                        if (LastMacro != null)
+                            userDetails = UserDetailsDto.Copy(LastMacro);
+
+                        if (FirstMacro != null && FirstMacro.Age != null)
                         {
 
                             Core.Database.Types.ActivityLevelType activityLevel = Core.Database.Types.ActivityLevelType.Small;
@@ -201,7 +230,32 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                             await dbContext.SaveChangesAsync();
                             await transaction.CommitAsync();
                         }
-                        
+                        else
+                        {
+                            Core.Database.Types.ActivityLevelType activityLevel = Core.Database.Types.ActivityLevelType.Small;
+                            if (Enum.TryParse<Core.Database.Types.ActivityLevelType>(model.ActivityLevel, out activityLevel))
+                            {
+
+                            }
+                            userDetails.Age = model.Age;
+                            userDetails.Gender = model.Gender;
+                            userDetails.Height = model.Height;
+                            userDetails.Weight = model.Weight;
+                            userDetails.WaistCircumference = model.WaistCircumference;
+                            userDetails.ActivityLevel = activityLevel;
+                            userDetails.ArmCircumference = model.ArmCircumference;
+                            userDetails.CalfCircumference = model.CalfCircumference;
+                            userDetails.ChestCircumference = model.ChestCircumference;
+                            userDetails.HipCircumference = model.HipCircumference;
+                            userDetails.CreateDate = DateTime.Now;
+                            userDetails.UserId = UserId;
+
+                            await dbContext.UsersDetails.AddAsync(userDetails);
+
+                            await dbContext.SaveChangesAsync();
+                            await transaction.CommitAsync();
+
+                        }
                     }
                 }
             }
@@ -261,9 +315,16 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                     Value = Core.Database.Types.ActivityLevelType.ExtraLarge.ToString()
                 });
 
+
+
+
+
+
                 model.ActivityLevels = new SelectList(types, "Value", "Text");
                 if (LastUserDetails != null)
                 {
+                    model.Age = LastUserDetails.Age;
+                    model.Gender = LastUserDetails.Gender;
                     model.Height = LastUserDetails.Height;
                     model.Weight = LastUserDetails.Weight;
                     model.ActivityLevel = LastUserDetails.ActivityLevel.ToString();
@@ -313,7 +374,8 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                         {
 
                         }
-
+                        userDetails.Age = model.Age;
+                        userDetails.Gender = model.Gender;
                         userDetails.Height = model.Height;
                         userDetails.Weight = model.Weight;
                         userDetails.WaistCircumference = model.WaistCircumference;

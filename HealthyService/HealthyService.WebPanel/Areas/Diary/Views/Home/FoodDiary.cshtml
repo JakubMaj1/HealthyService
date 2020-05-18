@@ -3,87 +3,269 @@
     ViewData["Title"] = "FoodDiary";
     Layout = "~/Views/Shared/_Layout2.cshtml";
 }
+<script>
+    $(document).ready(function () {
 
-    <div class="container">
-        <div class="row pt-4">
-            <div class="col-lg-3">
-                <input type="text" class="form-control form-control-lg" placeholder="Nazwa posiłku">
-                <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-primary mt-1 bg-primary-400 text-white border-green-700 w-100 border-0 ">
-                    Dodaj
-                </a>
-            </div>
-            <div class="col-lg-3">
-                <input type="datetime-local" class="form-control form-control-lg" placeholder="Nazwa posiłku">
-            </div>
-            <div class="col-lg-3 ">
-                <select data-placeholder="Wyszukaj Produkt" class="form-control  select-minimum " >
-                    <option></option>
-                    <optgroup label="Mountain Time Zone">
-                        <option value="AZ">Arizona</option>
-                        <option value="CO">Colorado</option>                       
-                    </optgroup>
-                    <optgroup label="Central Time Zone">
-                        <option value="AL">Alabama</option>
-                        <option value="IA">Iowa</option>
-                    </optgroup>
-                </select>
-            </div>
-            <div class="col-lg-3 pl-5 pt-1">
-                <button type="button" class="btn btn-link left mr-auto text-black" data-toggle="modal" data-target="#modal_AddProductDatabase" style="font-size:15px;">Dodaj własny produkt <i class="icon-plus-circle2 ml-1"></i></button>
+        $('#metricDefinitionItems').select2({
+            ajax: {
+                delay: 500,
+                url: '@Url.Action("GetProducts", "Home", new { area = "Diary" })',
+                data: function (params) {
+                    var query = {
+                        search: params.term,
+                    };
+
+                    return query;
+                }
+            }
+        });
+
+    });
+</script>
+
+
+
+<div class="row m-2 mt-4">
+
+    <div class="col-md-7 ">
+        <div class="card border-top-1 border-top-indigo-600 rounded-top-0 card_to_block">
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-lg-8 p-3">
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <span class="input-group-text"><i class="icon-calendar2"></i></span>
+                        </span>
+                        <input type="text" class="form-control pickadate" placeholder="Wybierz datę&hellip;">
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
 
+        <div class="card border-top-1 border-top-indigo-600 rounded-top-0 card_to_block">
 
+            <div id="metric_crud">
+                <div class="card-header header-elements-md-inline p-4 bg-grey-400">
+                    <h5>
+                        <i class="icon-album mr-2"></i>
+                        <span class="font-weight-semibold">
+                            Dodaj posiłek
+                        </span>
+                    </h5>
 
-
-
-    <div id="modal_AddProductDatabase" class="modal fade" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header bg-grey-600">
-                    <h6 class="modal-title">Dodaj swój produkt do bazy danych</h6>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
-                    <h6 class="font-weight-semibold">Uzupełnij informacje o produkcie</h6>
-                    <hr>
-                    <div>
-                        <form method="post" class="form-validate-jquery user" role="form">
-                            <div class="form-group row">
-                                <div class="col-sm-12 mb-3 mb-sm-0">
-                                    <i>Nazwa Produktu</i>
-                                    <input type="text" class="form-control form-control-user" placeholder="Ryż biały">
-                                </div>
-                                <div class="col-sm-4">
-                                    <i>Białko</i>
-                                    <input type="text" class="form-control form-control-user" placeholder="5">
-                                </div>
-                                <div class="col-sm-4">
-                                    <i>Węglowodany</i>
-                                    <input type="text" class="form-control form-control-user" placeholder="10">
-                                </div>
-                                <div class="col-sm-4">
-                                    <i>Tłuszcze</i>
-                                    <input type="text" class="form-control form-control-user" placeholder="5">
+
+                <div class="m-3">
+                    <form id="addMetricValueFormInternal" autocomplete="on" role="form" asp-area="Counters" asp-controller="ProductItems" asp-action="AddMetricValue" method="post" class="form-validate-jquery">
+
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div class="counter_input_box">
+                                    <div class="form-group">
+                                        <label>Nazwa <span class="text-danger">*</span></label>
+                                        <input class="form-control touchspin-empty" placeholder="" required>
+                                    </div>
                                 </div>
                             </div>
-                            <hr>
+
+                            <div class="col-md-5 col-xs-6">
+                                <label> Wyszukaj produkt <span class="text-danger">*</span></label>
+
+                                <select id="metricDefinitionItems" data-placeholder="+" class="form-control select-search select-minimum">
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <table class="table datatable-basic">
+                                <thead class="text-center">
+                                    <tr>
+                                        <th>Nazwa Produktu</th>
+                                        <th>Ilość</th>
+                                        <th>Białko</th>
+                                        <th>Węglowodany</th>
+                                        <th>Tłuszcze</th>
+                                        <th>Kalorie</th>
+                                        <th class="text-center">Usuń</th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody class="text-center">
+                                <td>
+                                    Banan
+                                </td>
+                                <td class="w-25">
+                                    <input class="form-control icon-font-size2" placeholder="Ilość" required>
+                                </td>
+                                <td class="text-center">
+                                    5
+                                </td>
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    5
+                                </td>
+                                <td>
+                                    2222
+
+                                </td>
+                                <td>
+                                    <a asp-area="Diary" asp-controller="Home" asp-action="FoodDiary"><span class="icon-x text-danger"></span></a>
+
+                                </td>
+
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Kliknij by zapisać</label><br />
+                                    <button type="button" onclick="submitAddMetricValueForm();" class="btn btn-success btn-ladda btn-ladda-spinner" data-style="expand-right" data-spinner-color="#333" data-spinner-size="20">
+                                        <i class="icon-plus-circle2 mr-2"></i>
+                                        <span class="ladda-label">Zatwierdź</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+        <div class="col-md-5">
+            <div class="card border-top-1 border-top-indigo-600 rounded-top-0 card_to_block">
+
+                <div id="metric_crud">
+                    <div class="card-header header-elements-md-inline pb-1">
+                        <h5>
+                            <i class="icon-album mr-2"></i>
+                            <span class="font-weight-semibold">
+                                Dodaj własny produkt
+                            </span>
+                        </h5>
+
+                    </div>
+
+                    <div class="m-3">
+                        <form id="addMetricValueFormInternal" autocomplete="on" role="form" asp-area="Counters" asp-controller="ProductItems" asp-action="AddMetricValue" method="post" class="form-validate-jquery">
+
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="counter_input_box">
+                                        <div class="form-group">
+                                            <label>Nazwa <span class="text-danger">*</span></label>
+                                            <input class="form-control touchspin-empty" placeholder="" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-xs-6">
+
+                                    <div class="form-group">
+                                        <label for="MetricDefinition">Jednostka <span class="text-danger">*</span></label>
+                                        <select id="metricDefinitionItems" class="form-control" required data-placeholder="">
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Białko<span class="text-danger">*</span></label>
+                                        <input class="form-control touchspin-empty" placeholder="" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4 col-xs-6">
+
+                                    <div class="form-group">
+                                        <label for="MetricDefinition">Węglowodany <span class="text-danger">*</span></label>
+                                        <input class="form-control touchspin-empty" placeholder="" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-xs-6">
+
+                                    <div class="form-group">
+                                        <label for="MetricDefinition">Tłuszcze <span class="text-danger">*</span></label>
+                                        <input class="form-control touchspin-empty" placeholder="" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Kliknij by zapisać</label><br />
+                                        <button type="button" onclick="submitAddMetricValueForm();" class="btn btn-light btn-ladda btn-ladda-spinner" data-style="expand-right" data-spinner-color="#333" data-spinner-size="20">
+                                            <i class="icon-plus-circle2 mr-2"></i>
+                                            <span class="ladda-label">Zatwierdź</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link" data-dismiss="modal">Anuluj</button>
-                    <button type="button" class="btn bg-grey-600">Zapisz</button>
+            </div>
+        </div>
+
+    </div>
+<div id="modal_AddProductDatabase" class="modal fade" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-grey-600">
+                <h6 class="modal-title">Dodaj swój produkt do bazy danych</h6>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h6 class="font-weight-semibold">Uzupełnij informacje o produkcie</h6>
+                <hr>
+                <div>
+                    <form method="post" class="form-validate-jquery user" role="form">
+                        <div class="form-group row">
+                            <div class="col-sm-12 mb-3 mb-sm-0">
+                                <i>Nazwa Produktu</i>
+                                <input type="text" class="form-control form-control-user" placeholder="Ryż biały">
+                            </div>
+                            <div class="col-sm-4">
+                                <i>Białko</i>
+                                <input type="text" class="form-control form-control-user" placeholder="5">
+                            </div>
+                            <div class="col-sm-4">
+                                <i>Węglowodany</i>
+                                <input type="text" class="form-control form-control-user" placeholder="10">
+                            </div>
+                            <div class="col-sm-4">
+                                <i>Tłuszcze</i>
+                                <input type="text" class="form-control form-control-user" placeholder="5">
+                            </div>
+                        </div>
+                        <hr>
+                    </form>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link" data-dismiss="modal">Anuluj</button>
+                <button type="button" class="btn bg-grey-600">Zapisz</button>
             </div>
         </div>
     </div>
+</div>
 
 
 
-    @*<div class="page-content">
+@*<div class="page-content">
 
         <div class="content-wrapper">
 
@@ -275,7 +457,7 @@
 
         </div>
     </div>
-    
+
     <div id="modal_AddProduct" class="modal fade" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -305,7 +487,7 @@
                                     <i>Waga produktu</i>
                                     <input type="text" class="form-control form-control-user"  placeholder="100g">
                                 </div>
-                                
+
 
 
 
@@ -313,7 +495,7 @@
 
                             <hr>
 
-                            
+
 
                         </form>
                     </div>
@@ -354,8 +536,8 @@
                                     <i>Nazwa Posiłku</i>
                                     <input type="text" class="form-control form-control-user"  placeholder="Śniadanie">
                                 </div>
-                                
-                                
+
+
 
 
 
@@ -363,7 +545,7 @@
 
                             <hr>
 
-                            
+
 
                         </form>
                     </div>
@@ -380,4 +562,3 @@
     </div>
     </div>*@
 
-    

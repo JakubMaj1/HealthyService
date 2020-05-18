@@ -53,14 +53,14 @@ var App = function () {
                 totalHeight += $this.find('.' + navSubmenuClass).filter(':visible').outerHeight();
                 if($this.children('.' + navSubmenuClass).length) {
                     if(($this.children('.' + navSubmenuClass).offset().top + $this.find('.' + navSubmenuClass).filter(':visible').outerHeight()) > document.body.clientHeight) {
-                        $this.addClass(navSubmenuReversedClass);
+                        $this.addClass(navSubmenuReversedClass)
                     }
                     else {
-                        $this.removeClass(navSubmenuReversedClass);
+                        $this.removeClass(navSubmenuReversedClass)
                     }
                 }
             });
-        };
+        }
 
         // If sidebar is resized by default
         if($('body').hasClass('sidebar-xs')) {
@@ -180,7 +180,7 @@ var App = function () {
         $('.sidebar-mobile-expand').on('click', function (e) {
             e.preventDefault();
             var $sidebar = $(this).parents('.sidebar'),
-                sidebarFullscreenClass = 'sidebar-fullscreen';
+                sidebarFullscreenClass = 'sidebar-fullscreen'
 
             if(!$sidebar.hasClass(sidebarFullscreenClass)) {
                 $sidebar.addClass(sidebarFullscreenClass);
@@ -556,7 +556,7 @@ var App = function () {
             App.initDropdownSubmenu();
             App.initHeaderElementsToggle();
         }
-    };
+    }
 }();
 
 

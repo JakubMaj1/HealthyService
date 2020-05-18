@@ -5,15 +5,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HealthyService.WebPanel</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/assets/css/colors.css" />
-    <link rel="stylesheet" href="~/assets/css/bootstrap_limitless.css" />
-    <link rel="stylesheet" href="~/assets/css/components.css" />
-    <link rel="stylesheet" href="~/assets/css/layout.css" />
     <link rel="stylesheet" href="~/global_assets/css/icons/icomoon/styles.min.css" />
+
+    <link rel="stylesheet" href="~/assets/css/bootstrap_limitless.css" />
+    <link rel="stylesheet" href="~/assets/css/layout.css" />
+    <link rel="stylesheet" href="~/assets/css/colors.css" />
+    <link rel="stylesheet" href="~/assets/css/components.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
+    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="~/global_assets/js/plugins/loaders/blockui.min.js"></script>
+    <script src="~/global_assets/js/plugins/ui/ripple.min.js"></script>
+    <script src="~/global_assets/js/plugins/ui/slinky.min.js"></script>
+    <script src="~/global_assets/js/plugins/ui/ripple.min.js"></script>
+    <!-- /core JS files -->
+    <!-- Theme JS files -->
+    @*<script src="~/global_assets/js/plugins/forms/styling/switchery.min.js"></script>*@
+    @*<script src="~/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+        <script src="~/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+        <script src="~/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+        <script src="~/global_assets/js/plugins/pickers/anytime.min.js"></script>*@
+
+    @*<script src="~/global_assets/js/plugins/pickers/pickadate/picker.js"></script>
+        <script src="~/global_assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+        <script src="~/global_assets/js/plugins/pickers/pickadate/picker.time.js"></script>
+        <script src="~/global_assets/js/plugins/pickers/pickadate/legacy.js"></script>
+
+        <script src="~/global_assets/js/plugins/notifications/jgrowl.min.js"></script>
+        <script src="~/global_assets/js/plugins/notifications/noty.min.js"></script>
+        <script src="~/global_assets/js/plugins/tables/datatables/datatables.min.js"></script>
+        <script src="~/global_assets/js/plugins/tables/datatables/extensions/col_reorder.min.js"></script>
+        <script src="~/global_assets/js/plugins/tables/datatables/extensions/responsive.min.js"></script>*@
+    <script src="~/global_assets/js/plugins/forms/selects/select2.min.js"></script>
+
+    <script src="~/global_assets/js/plugins/forms/inputs/touchspin.min.js"></script>
+    <script src="~/global_assets/js/plugins/extensions/jquery_ui/interactions.min.js"></script>
+
+
+    <script src="~/global_assets/js/plugins/extensions/jquery_ui/widgets.min.js"></script>
+    <script src="~/global_assets/js/plugins/extensions/jquery_ui/effects.min.js"></script>
+    <script src="~/global_assets/js/plugins/extensions/mousewheel.min.js"></script>
+    <script src="~/global_assets/js/plugins/extensions/jquery_ui/globalize/globalize.js"></script>
+
+
+
+
+    <script src="~/global_assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+    <script src="~/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script src="~/global_assets/js/plugins/forms/styling/switch.min.js"></script>
+    <script src="~/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script src="~/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+
+    <script src="~/global_assets/js/plugins/ui/sticky.min.js"></script>
+
+
+    <script src="~/global_assets/js/plugins/extensions/rowlink.js"></script>
+    <script src="~/global_assets/js/plugins/visualization/echarts/echarts.min.js"></script>
+    <script src="~/global_assets/js/plugins/ui/fullcalendar/core/main.min.js"></script>
+    <script src="~/global_assets/js/plugins/ui/fullcalendar/daygrid/main.min.js"></script>
+    <script src="~/global_assets/js/plugins/ui/fullcalendar/timegrid/main.min.js"></script>
+    <script src="~/global_assets/js/plugins/ui/fullcalendar/interaction/main.min.js"></script>
+
+    <script src="~/global_assets/js/plugins/uploaders/dropzone.min.js"></script>
+    <script src="~/global_assets/js/plugins/notifications/pnotify.min.js"></script>
+
+    <script src="~/global_assets/js/plugins/sliders/ion_rangeslider.min.js"></script>
+    <script src="~/global_assets/js/plugins/ui/moment/moment_locales.min.js"></script>
+
+    <!-- Form Controlers -->
+    <script src="~/global_assets/js/plugins/forms/inputs/inputmask.js"></script>
+    <script src="~/global_assets/js/plugins/forms/styling/uniform.min.js"></script>
+    <script src="~/global_assets/js/plugins/forms/inputs/autosize.min.js"></script>
+    <script src="~/global_assets/js/plugins/forms/inputs/formatter.min.js"></script>
+    <script src="~/global_assets/js/plugins/forms/inputs/typeahead/typeahead.bundle.min.js"></script>
+    <script src="~/global_assets/js/plugins/forms/inputs/typeahead/handlebars.min.js"></script>
+    <script src="~/global_assets/js/plugins/forms/inputs/passy.js"></script>
+    <script src="~/global_assets/js/plugins/forms/inputs/maxlength.min.js"></script>
+
+    <!-- <script src="~/global_assets/js/plugins/forms/tags/tagsinput.min.js"></script> -->
+    <script src="~/global_assets/js/plugins/forms/tags/tokenfield.min.js"></script>
+
+    <script src="~/global_assets/js/plugins/forms/wizards/steps.min.js"></script>
+
+    <script src="~/global_assets/js/plugins/visualization/d3/d3.min.js"></script>
+    <script src="~/global_assets/js/plugins/visualization/d3/d3_tooltip.js"></script>
+
+    <script src="~/global_assets/js/plugins/ui/moment/moment.min.js"></script>
+    <script src="~/global_assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script src="~/global_assets/js/plugins/pickers/anytime.min.js"></script>
+    <script src="~/global_assets/js/plugins/pickers/pickadate/picker.js"></script>
+    <script src="~/global_assets/js/plugins/pickers/pickadate/picker.date.js"></script>
+    <script src="~/global_assets/js/plugins/pickers/pickadate/picker.time.js"></script>
+    <script src="~/global_assets/js/plugins/pickers/pickadate/legacy.js"></script>
+    <script src="~/global_assets/js/plugins/notifications/jgrowl.min.js"></script>
+    <script src="~/global_assets/js/demo_pages/picker_date.js"></script>
+    <script src="~/assets/js/app.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/healthy.js" ></script>
+
 </head>
 <body class="mr-1">
-    <div class="navbar navbar-light navbar-expand-md">
+    <div class="navbar navbar-dark navbar-expand-md  bg-slate">
         <div class="navbar-brand">
             <a asp-area="Dashboard" asp-controller="Home" asp-action="UserDashboard" class="d-inline-block" style="color:white;">
                 <i class="icon-home"></i> Healthy Service
@@ -95,30 +196,34 @@
             </ul>
         </div>
     </div>
-    <div class="navbar navbar-expand-md navbar-dark">
+    <div class="navbar navbar-expand-md navbar-light">
 
 
         <div class="navbar-collapse collapse" id="navbar-second">
             <ul class="navbar-nav">
-                <li class="nav-item p-2 ">
-                    Kalorie   <br />
-                    <span id="layoutKcal" class="badge badge-pill bg-teal-800 position-static ml-auto ml-md-1 font-size-lg"></span>
+                <li class="nav-item p-2" style="text-align:center">
+
+                    <i>Kalorie</i>    <br />
+                    <span id="layoutKcal" class="badge badge-pill bg-teal-800 position-static ml-auto ml-md-1 font-size-lg pl-3 pr-3"></span>
 
                 </li>
-                <li class="nav-item p-2">
+                <li class="nav-item p-2" style="text-align:center">
+
                     <i>Białko</i> <br />
-                    <span id="layoutProtein" class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg"></span>
+                    <span id="layoutProtein" class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg pl-4 pr-4"></span>
                 </li>
-                <li class="nav-item p-2">
+                <li class="nav-item p-2" style="text-align:center">
                     <i>Węglowodany</i> <br />
-                    <span id="layoutCarbo" class="badge badge-pill bg-primary-800 position-static ml-auto ml-md-1 font-size-lg"></span>
+                    <span id="layoutCarbo" class="badge badge-pill bg-primary-800 position-static ml-auto ml-md-1 font-size-lg pl-4 pr-4 "></span>
 
                 </li>
-                <li class="nav-item p-2">
+                <li class="nav-item p-2" style="text-align:center">
+
                     <i>Tłuszcze</i> <br />
-                    <span id="layoutFat" class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg"></span>
+                    <span id="layoutFat" class="badge badge-pill bg-primary-700 position-static ml-auto ml-md-1 font-size-lg pl-4 pr-4"></span>
 
                 </li>
+
             </ul>
 
             <ul class="navbar-nav ml-md-auto">
@@ -134,45 +239,31 @@
 
     @RenderBody()
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="~/global_assets/js/plugins/forms/selects/select2.min.js"></script>
-    <script src="~/global_assets/js/demo_pages/form_select2.js"></script>
-
-    <script src="~/assets/js/app.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
-    <script src="~/lib/jquery-validation/dist/additional-methods.min.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/healthy.js" asp-append-version="true"></script>
     <script>
         $(document).ready(function () {
             GetProtein();
         });
         function GetProtein(productId) {
             var action = "/Users/Home/GetUserDetails";
-           
+
             $.get(action, response);
         }
 
         function response(data) {
             var model = JSON.parse(data);
-            if (model == null) {
-                $('#layoutProtein').html(0 +  ' g');
-                $('#layoutCarbo').html(0 +  ' g');
-                $('#layoutFat').html(0 +  ' g');
-                $('#layoutKcal').html(0 +  ' kcal');
+            if (model.UserProteinLevel == null) {
+                $('#layoutProtein').html(0 + ' g');
+                $('#layoutCarbo').html(0 + ' g');
+                $('#layoutFat').html(0 + ' g');
+                $('#layoutKcal').html(0 + ' kcal');
             }
             else {
                 var kcal = (9 * model.UserFatLevel) + (4 * model.UserProteinLevel) + (4 * model.UserCarboLevel);
-                $('#layoutProtein').html(model.UserProteinLevel +  ' g');
-                $('#layoutCarbo').html(model.UserCarboLevel+  ' g');
-                $('#layoutFat').html(model.UserFatLevel+  ' g');
-                $('#layoutKcal').html(kcal+  ' kcal');
+                $('#layoutProtein').html(model.UserProteinLevel + ' g');
+                $('#layoutCarbo').html(model.UserCarboLevel + ' g');
+                $('#layoutFat').html(model.UserFatLevel + ' g');
+                $('#layoutKcal').html(kcal + ' kcal');
             }
         }
 

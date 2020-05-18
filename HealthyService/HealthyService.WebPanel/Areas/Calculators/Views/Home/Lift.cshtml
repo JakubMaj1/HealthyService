@@ -4,6 +4,51 @@
     Layout = "_Layout2";
 
 }
+
+<script>
+      function sprawdz2() {
+
+        var loadValue = parseFloat(document.getElementById("load").value);
+        var repetitionValue = parseFloat(document.getElementById("repetition").value);
+        var factor = 1.33 - (0.03 * (10 - repetitionValue));
+
+        if (repetitionValue == 1)
+            factor = 1;
+
+        if (repetitionValue > 10) {
+            var spanRepetition = $("#userMessageRepetition");
+            spanRepetition.show();
+            return;
+        }
+        else {
+            var spanRepetition = $("#userMessageRepetition");
+            spanRepetition.hide();
+        }
+
+        var Result2 = (loadValue * factor).toFixed(2);
+
+        var Result250 = (Result2 * 0.5).toFixed(2);;
+
+        var Result260 = (Result2 * 0.6).toFixed(2);;
+
+        var Result270 = (Result2 * 0.7).toFixed(2);;
+
+        var Result280 = (Result2 * 0.8).toFixed(2);;
+
+        var Result290 = (Result2 * 0.9).toFixed(2);;
+
+        if (loadValue > 0) {
+
+            document.getElementById("MaxInfo").innerHTML = "Maksymalne obciążenie";
+            document.getElementById("maxLoad").innerHTML = Result2 + " kg";
+            document.getElementById("maxLoad50").innerHTML = "50 % ciężaru : " + (Result250) + " kg";
+            document.getElementById("maxLoad60").innerHTML = "60 % ciężaru : " + (Result260) + " kg";
+            document.getElementById("maxLoad70").innerHTML = "70 % ciężaru : " + (Result270) + " kg";
+            document.getElementById("maxLoad80").innerHTML = "80 % ciężaru : " + (Result280) + " kg";
+            document.getElementById("maxLoad90").innerHTML = "90 % ciężaru : " + (Result290) + " kg";
+        }
+    }
+</script>
 <br />
     <h1 style="text-align:center">Kalkulator Wyciskania</h1>
 

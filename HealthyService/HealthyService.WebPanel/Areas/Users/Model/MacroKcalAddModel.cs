@@ -8,17 +8,20 @@ namespace HealthyService.WebPanel.Areas.Users.Model
 {
     public class MacroKcalAddModel
     {
-        [Required(ErrorMessage ="Podaj zapotrzebowanie") ]
-        public long UserDemendLevel { get; set;}
-        [Required(ErrorMessage = "Podaj Białko")]
+       
+        public long UserDemendLevel { get; set; }
+        [Range(0, 100000)]
+        [Required]
+        public long UserProteinLevel { get; set;}
+        [Range(0, 100000)]
 
-        public long? UserProteinLevel { get; set;}
-        [Required(ErrorMessage = "Podaj Węglowodany")]
+        [Required]
 
-        public long? UserCarboLevel { get; set;}
-        [Required(ErrorMessage = "Podaj Tłuszcze")]
+        public long UserCarboLevel { get; set;}
+        [Range(0, 100000)]
+        [Required]
 
-        public long? UserFatLevel { get; set;}
+        public long UserFatLevel { get; set;}
 
 
         //kalorie

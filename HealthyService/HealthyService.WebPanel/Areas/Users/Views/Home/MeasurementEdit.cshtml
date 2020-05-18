@@ -38,21 +38,27 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-6">
+                                    <i>Wzrost</i>
+
                                     <input type="text" asp-for="Height" class="form-control form-control-user" placeholder="Wzrost">
                                     <span asp-validation-for="Height"></span>
                                 </div>
                                 <div class="col-sm-6">
+                                    <i>Waga</i>
+
                                     <input type="text" asp-for="Weight" class="form-control form-control-user" placeholder="Waga">
                                     <span asp-validation-for="Weight"></span>
                                 </div>
 
+                                <input asp-for="Age" hidden />
+                                <input asp-for="Gender" hidden />
 
 
                             </div>
                             <div class="form-group row">
 
                                 <div class="col-md-12">
-                                    <label>Stopień aktywności</label>
+                                    <i>Stopień aktywności:</i>
                                     <select asp-for="ActivityLevel" asp-items="Model.ActivityLevels" class="form-control">
                                     </select>
                                     <span asp-validation-for="ActivityLevel"></span>
@@ -82,14 +88,20 @@
                             <hr>
                             <div class="form-group row">
                                 <div class="col-sm-4 mb-3 mb-sm-0">
+                                    <i>Klatki piersiowej</i>
+
                                     <input type="text" class="form-control form-control-user" asp-for="ChestCircumference" placeholder="Klatki piersiowej">
                                     <span asp-validation-for="ChestCircumference"></span>
                                 </div>
                                 <div class="col-sm-4">
+                                    <i>Pasa</i>
+
                                     <input type="text" class="form-control form-control-user" asp-for="WaistCircumference" placeholder="Pasa">
                                     <span asp-validation-for="WaistCircumference"></span>
                                 </div>
                                 <div class="col-sm-4">
+                                    <i>Bioder</i>
+
                                     <input type="text" class="form-control form-control-user" asp-for="HipCircumference" placeholder="Bioder">
                                     <span asp-validation-for="HipCircumference"></span>
                                 </div>
@@ -99,14 +111,20 @@
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-4">
+                                    <i>Ramienia</i>
+
                                     <input type="text" class="form-control form-control-user" asp-for="ArmCircumference" placeholder="Ramienia">
                                     <span asp-validation-for="ArmCircumference"></span>
                                 </div>
                                 <div class="col-sm-4">
+                                    <i>Uda</i>
+
                                     <input type="text" class="form-control form-control-user" asp-for="ThighCircumference" placeholder="Uda">
                                     <span asp-validation-for="ThighCircumference"></span>
                                 </div>
                                 <div class="col-sm-4">
+                                    <i>Łydki</i>
+
                                     <input type="text" class="form-control form-control-user" asp-for="CalfCircumference" placeholder="Łydki">
                                     <span asp-validation-for="CalfCircumference"></span>
                                 </div>

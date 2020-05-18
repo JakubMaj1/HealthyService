@@ -2,7 +2,56 @@
     ViewData["Title"] = "BMR";
     Layout = "_Layout2";
 }
+<script>
+        function BMR() {
+        var WeightBMRValue = parseFloat(document.getElementById("WeightBMR").value);
+        var HeightBMRValue = parseFloat(document.getElementById("HeightBMR").value);
+        var AgeBMRValue = parseFloat(document.getElementById("AgeBMR").value);
+        var ActiveLevelBMRValue = parseFloat(document.getElementById("ActiveLevelBMR").value);
+        var GenderBMRValue = (document.getElementById("GenderBMR").value);
+        var Faktor = 1.9 - (0.2 * (4 - ActiveLevelBMRValue));
+        var ResultBMR = (((9.99 * WeightBMRValue) + (6.25 * HeightBMRValue) - (4.92 * AgeBMRValue) + 5) * Faktor);
+        ResultBMR = Math.round(ResultBMR);
 
+        //  1.3         
+        //  1.5
+        //  1,7
+        //  1.9
+
+
+
+
+        if (HeightBMRValue > 100 && WeightBMRValue > 20 && HeightBMRValue < 240 && WeightBMRValue < 200) {
+
+            switch (GenderBMRValue) {
+
+                case "Mężczyzna":
+
+                    document.getElementById("BMRValueInfo").innerHTML = "Aby utrzymać wagę ";
+                    document.getElementById("BMRValue").innerHTML = ResultBMR + " kcal";
+                    document.getElementById("BMRValueInfo2").innerHTML = "Aby stracić na wadze ";
+                    document.getElementById("BMRValueMinus").innerHTML = (ResultBMR - 200) + " kcal";
+                    document.getElementById("BMRValueInfo3").innerHTML = "Aby przybrać na wadze ";
+                    document.getElementById("BMRValuePlus").innerHTML = (ResultBMR + 200) + " kcal";
+                    break;
+
+                case "Kobieta":
+                    document.getElementById("BMRValueInfo").innerHTML = "Aby utrzymać wagę ";
+                    document.getElementById("BMRValue").innerHTML = (ResultBMR - 166) + " kcal";
+                    document.getElementById("BMRValueInfo2").innerHTML = "Aby stracić na wadze ";
+                    document.getElementById("BMRValueMinus").innerHTML = ((ResultBMR - 166) - 150) + " kcal";
+                    document.getElementById("BMRValueInfo3").innerHTML = "Aby przybrać na wadze ";
+                    document.getElementById("BMRValuePlus").innerHTML = ((ResultBMR - 166) + 100) + " kcal";
+
+
+
+                    break;
+
+            }
+
+        }
+    }
+</script>
 <br />
 <h1 style="text-align:center">Kalkulator Zapotrzebowania Kalorycznego</h1>
 
