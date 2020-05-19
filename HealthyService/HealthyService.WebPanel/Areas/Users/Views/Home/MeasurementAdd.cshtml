@@ -21,7 +21,7 @@
                         
                         <div class="card-body">
 
-                            <div class="card-img-actions mb-3">
+                            <div class="card-img-actions">
                                 <img class="card-img img-fluid" src="../../img/Humen.jpg" alt="">
 
                             </div>
@@ -35,8 +35,8 @@
 
                     </div>
 
-                    <div class="col-md-6  p-4">
-                        <h3 style="text-align:center"> Dane Podstawowe</h3>
+                    <div class="col-md-6  p-2 pl-4 pr-4">
+                        <h2 style="text-align:center"> Dane Podstawowe</h2>
                         <hr>
 
                         <form asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" method="post" class="form-validate-jquery user" role="form">
@@ -65,7 +65,7 @@
                             </div>
                             <div class="form-group row">
 
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-6 mb-1">
                                     <i>Stopień aktywności:</i>
 
                                     <select asp-for="ActivityLevel" asp-items="Model.ActivityLevels" class="form-control">
@@ -74,7 +74,7 @@
 
                                 </div>
 
-                                <div class="col-md-6 mb-4">
+                                <div class="col-md-6 mb-1">
                                     <i>Płeć:</i>
 
                                     <select asp-for="Gender" asp-items="Model.Genders" class="form-control">
@@ -84,41 +84,41 @@
                                 </div>
                             </div>
                             <div class="row pl-3">
-                                1 - Bardzo niska aktywność (Brak treningu)<br />
+                                1 - Mała aktywność (Brak treningu)<br />
 
 
-                                2 - Niska aktywność ( 1 trening w tygodniu)<br />
+                                2 - Średnia aktywność ( 1 trening w tygodniu)<br />
 
 
-                                3 - Umiarkowana aktywność (2-3 treningi w tygodniu)<br />
+                                3 - Duzą aktywność (2-3 treningi w tygodniu)<br />
 
 
-                                4 - Wysoka aktywność ( 4-5 treningów w tygodniu)<br />
+                                4 - Bardzo duża aktywność ( 4-5 treningów w tygodniu)<br />
                             </div>
 
                             <hr>
-                            <h3 style="text-align:center">
-                                Obwody
-                            </h3>
+                            <h4 style="text-align:center">
+                                Wymiary
+                            </h4>
 
                             <hr>
                             <div class="form-group row">
                                 <div class="col-sm-4 mb-3 mb-sm-0">
-                                    <i>Klatki piersiowej</i>
+                                    <i> Obwód <br />Klatki piersiowej</i>
 
-                                    <input type="text" class="form-control form-control-user" asp-for="ChestCircumference" placeholder="Klatki piersiowej">
+                                    <input type="text" class="form-control form-control-user" asp-for="ChestCircumference" placeholder="Uzupełnij">
                                     <span asp-validation-for="ChestCircumference"></span>
                                 </div>
                                 <div class="col-sm-4">
-                                    <i>Pasa</i>
+                                    <i> Obwód <br />Pasa</i>
 
-                                    <input type="text" class="form-control form-control-user" asp-for="WaistCircumference" placeholder="Pasa">
+                                    <input type="text" class="form-control form-control-user" asp-for="WaistCircumference" placeholder="Uzupełnij">
                                     <span asp-validation-for="WaistCircumference"></span>
                                 </div>
                                 <div class="col-sm-4">
-                                    <i>Bioder</i>
+                                    <i> Obwód <br />Bioder</i>
 
-                                    <input type="text" class="form-control form-control-user" asp-for="HipCircumference" placeholder="Bioder">
+                                    <input type="text" class="form-control form-control-user" asp-for="HipCircumference" placeholder="Uzupełnij">
                                     <span asp-validation-for="HipCircumference"></span>
                                 </div>
 
@@ -126,23 +126,29 @@
 
                             </div>
                             <div class="form-group row">
-                                <div class="col-sm-4">
-                                    <i>Ramienia</i>
+                                <div class="col-sm-3">
+                                    <i> Obwód <br />Ramienia</i>
 
-                                    <input type="text" class="form-control form-control-user" asp-for="ArmCircumference" placeholder="Ramienia">
+                                    <input type="text" class="form-control form-control-user" asp-for="ArmCircumference" placeholder="Uzupełnij">
                                     <span asp-validation-for="ArmCircumference"></span>
                                 </div>
-                                <div class="col-sm-4">
-                                    <i>Uda</i>
+                                <div class="col-sm-3">
+                                    <i> Obwód <br />Uda</i>
 
-                                    <input type="text" class="form-control form-control-user" asp-for="ThighCircumference" placeholder="Uda">
+                                    <input type="text" class="form-control form-control-user" asp-for="ThighCircumference" placeholder="Uzupełnij">
                                     <span asp-validation-for="ThighCircumference"></span>
                                 </div>
-                                <div class="col-sm-4">
-                                    <i>Łydki</i>
+                                <div class="col-sm-3">
+                                    <i> Obwód <br />Łydki</i>
 
-                                    <input type="text" class="form-control form-control-user" asp-for="CalfCircumference" placeholder="Łydki">
+                                    <input type="text" class="form-control form-control-user" asp-for="CalfCircumference" placeholder="Uzupełnij">
                                     <span asp-validation-for="CalfCircumference"></span>
+                                </div>
+                                <div class="col-sm-3">
+                                    <i> Obwód <br />przedramienia</i>
+
+                                    <input type="text" class="form-control form-control-user" asp-for="ForearmCircumference" placeholder="Uzupełnij">
+                                    <span asp-validation-for="ForearmCircumference"></span>
                                 </div>
 
                             </div>

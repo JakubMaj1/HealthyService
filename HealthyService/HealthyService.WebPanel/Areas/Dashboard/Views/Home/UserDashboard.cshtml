@@ -15,7 +15,7 @@
 
                     <!-- Middle placement -->
 
-                    <div class="card">
+                            <div class="card">
                                 <div class="card-header header-elements-inline">
                                     <h6 class="card-title"><b>Początkowe Pomiary</b></h6>
                                     <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline-info  ml-2">
@@ -23,42 +23,51 @@
                                     </a>
                                 </div>
 
+                                <div id="collapseOne" class="card-body row ">
 
-                        <div id="collapseOne" class="card-body">
-                            <hr>
-                            <div style="font-size:12px;">
-                                @{
+                                    <div class="col-md-6" style="font-size:16px;">
+                                        <hr />
 
-                                    <div>Obwód łydki: @(Model.UserDetailsFirst.CalfCircumference != null ? Model.UserDetailsFirst.CalfCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+                                        <b> Waga </b> <br /> <div> @(Model.UserDetailsFirst.Weight != null ? Model.UserDetailsFirst.Weight.ToString() + " kg" : "Brak danych")</div>
 
-                                    <div>Obwód bioder: @(Model.UserDetailsFirst.HipCircumference != null ? Model.UserDetailsFirst.HipCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+                                    </div>
 
-                                    <div>Obwód klatki: @(Model.UserDetailsFirst.ChestCircumference != null ? Model.UserDetailsFirst.ChestCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+                                    <div class="col-md-6" style="font-size:12px;">
+                                        <hr />
 
-                                    <div>Obwód pasa: @(Model.UserDetailsFirst.WaistCircumference != null ? Model.UserDetailsFirst.WaistCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+                                        @{
+                                            <b>Obwód łydki:</b> <br /> <div> @(Model.UserDetailsFirst.CalfCircumference != null ? Model.UserDetailsFirst.CalfCircumference.ToString() + " cm" : "Brak danych")</div>
 
-                                    <div>Obwód Ramienia: @(Model.UserDetailsFirst.ArmCircumference != null ? Model.UserDetailsFirst.ArmCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+                                            <b>Obwód bioder:</b> <br /> <div> @(Model.UserDetailsFirst.HipCircumference != null ? Model.UserDetailsFirst.HipCircumference.ToString() + " cm" : "Brak danych")</div>
 
-                                    <div>Obwód Przedramienia: @(Model.UserDetailsFirst.ForearmCircumference != null ? Model.UserDetailsFirst.ForearmCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+                                            <b>Obwód klatki: </b> <br /> <div> @(Model.UserDetailsFirst.ChestCircumference != null ? Model.UserDetailsFirst.ChestCircumference.ToString() + " cm" : "Brak danych")</div>
 
-                                    <div>Obwód Uda: @(Model.UserDetailsFirst.ThighCircumference != null ? Model.UserDetailsFirst.ThighCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
+                                            <b>Obwód pasa: </b> <br /> <div> @(Model.UserDetailsFirst.WaistCircumference != null ? Model.UserDetailsFirst.WaistCircumference.ToString() + " cm" : "Brak danych")</div>
+
+                                            <b>Obwód Ramienia: </b> <br /> <div> @(Model.UserDetailsFirst.ArmCircumference != null ? Model.UserDetailsFirst.ArmCircumference.ToString() + " cm" : "Brak danych")</div>
+
+                                            <b>Obwód Przedramienia: </b> <br /> <div> @(Model.UserDetailsFirst.ForearmCircumference != null ? Model.UserDetailsFirst.ForearmCircumference.ToString() + " cm" : "Brak danych")</div>
+
+                                            <b>Obwód Uda:  </b> <br /> <div>  @(Model.UserDetailsFirst.ThighCircumference != null ? Model.UserDetailsFirst.ThighCircumference.ToString() + " cm" : "Brak danych")</div>
+                                        }
+                                    </div>
 
 
 
-                                }
+
+
+
+                                </div>
+                                
+                                <div class="card-footer d-flex justify-content-between bg-slate">
+                                    <span class="font-size-sm text-uppercase font-weight-semibold">
+
+                                        @Model.UserDetailsFirst.CreateDate
+
+                                    </span>
+                                </div>
+
                             </div>
-
-
-                        </div>
-                        <div class="card-footer d-flex justify-content-between">
-                            <span class="font-size-sm text-uppercase font-weight-semibold">
-
-                                @Model.UserDetailsFirst.CreateDate
-
-                            </span>
-                        </div>
-
-                    </div>
 
 
 
@@ -69,54 +78,70 @@
                     <!-- Middle placement -->
                     <div class="card">
 
-                        
+
                         <div class="card-header header-elements-inline">
                             <h6 class="card-title"> <b>Aktualne Pomiary</b></h6>
-                            <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline-info  ml-2">
+                            <a asp-area="Users" asp-controller="Home" asp-action="MeasurementEdit" class="btn btn-outline-info  ml-2">
                                 Dodaj
                             </a>
-                        </div>
-
-                        <div id="collapseOne" class="card-body ">
-                       
-                            <hr />
-                            @{
-                                if (@Model.UserDetailsLast != null)
-                                {
-                                                        <div style="font-size:12px;">
-
-                                                            @{
-                                                                <div>Obwód łydki: @(Model.UserDetailsLast.CalfCircumference != null ? Model.UserDetailsLast.CalfCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
-
-                                                                <div>Obwód bioder: @(Model.UserDetailsLast.HipCircumference != null ? Model.UserDetailsLast.HipCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
-
-                                                                <div>Obwód Klatki: @(Model.UserDetailsLast.ChestCircumference != null ? Model.UserDetailsLast.ChestCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
-
-                                                                <div> Obwód Pasa @(Model.UserDetailsLast.WaistCircumference != null ? Model.UserDetailsLast.WaistCircumference.ToString() + " cm" : "Brak danych do wyświetlania")</div>
-
-                                                                <div>Obwód Ramienia: @(Model.UserDetailsLast.ArmCircumference != null ? Model.UserDetailsLast.ArmCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
-
-                                                                <div>Obwód Przedramienia: @(Model.UserDetailsLast.ForearmCircumference != null ? Model.UserDetailsLast.ForearmCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
-
-                                                                <div>Obwód Uda: @(Model.UserDetailsLast.ThighCircumference != null ? Model.UserDetailsLast.ThighCircumference.ToString() + " cm" : "Brak danych do wyświetlenia")</div>
-                                                            }
-                                                        </div>
-                                }
-                                else
-                                {
-                                    <div>
-                                        <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-secondary w-100 ">
-                                            <div>Uzupełnij dane</div>
-                                        </a>
-                                    </div>
-
-                                }
-                            }
-
-
 
                         </div>
-                        <div class="card-footer d-flex justify-content-between">
+
+                        <div id="collapseOne" class="card-body row ">
+
+                            <div class="col-md-6" style="font-size:16px;">
+                                <hr />
+
+                                <b> Waga </b> <br /> <div> @(Model.UserDetailsLast.Weight != null ? Model.UserDetailsLast.Weight.ToString() + " kg" : "Brak danych")</div>
+
+                                @{ if (Model.UserDetailsFirst.Weight > Model.UserDetailsLast.Weight)
+                                    {
+                                        <b >Spadek wagi o:</b>
+                                        <br /> <div style="color:green"> @(Model.UserDetailsLast.Weight != null ?  (Model.UserDetailsLast.Weight - Model.UserDetailsFirst.Weight).ToString() + " kg" : "Brak danych")</div>
+
+                                    }
+                                    else if (Model.UserDetailsFirst.Weight < Model.UserDetailsLast.Weight)
+                                    {
+                                        <b >Wzrost wagi o:</b>
+                                        <br /> <div style="color:red"> @(Model.UserDetailsLast.Weight != null ? "+" + ( Model.UserDetailsLast.Weight - Model.UserDetailsFirst.Weight).ToString() + " kg" : "Brak danych")</div>
+
+                                    }
+                                    else
+                                    {
+                                        
+                                    }
+                                }
+
+
+                            </div>
+
+                            <div class="col-md-6" style="font-size:12px;">
+                                <hr />
+
+                                @{
+                                    <b>Obwód łydki:</b> <br /> <div> @(Model.UserDetailsLast.CalfCircumference != null ? Model.UserDetailsLast.CalfCircumference.ToString() + " cm" : "Brak danych")</div>
+
+                                    <b>Obwód bioder:</b> <br /> <div> @(Model.UserDetailsLast.HipCircumference != null ? Model.UserDetailsLast.HipCircumference.ToString() + " cm" : "Brak danych")</div>
+
+                                    <b>Obwód klatki: </b> <br /> <div> @(Model.UserDetailsLast.ChestCircumference != null ? Model.UserDetailsLast.ChestCircumference.ToString() + " cm" : "Brak danych")</div>
+
+                                    <b>Obwód pasa: </b> <br /> <div> @(Model.UserDetailsLast.WaistCircumference != null ? Model.UserDetailsLast.WaistCircumference.ToString() + " cm" : "Brak danych")</div>
+
+                                    <b>Obwód Ramienia: </b> <br /> <div> @(Model.UserDetailsLast.ArmCircumference != null ? Model.UserDetailsLast.ArmCircumference.ToString() + " cm" : "Brak danych")</div>
+
+                                    <b>Obwód Przedramienia: </b> <br /> <div> @(Model.UserDetailsLast.ForearmCircumference != null ? Model.UserDetailsLast.ForearmCircumference.ToString() + " cm" : "Brak danych")</div>
+
+                                    <b>Obwód Uda:  </b> <br /> <div>  @(Model.UserDetailsLast.ThighCircumference != null ? Model.UserDetailsLast.ThighCircumference.ToString() + " cm" : "Brak danych")</div>
+                                }
+                            </div>
+
+
+
+
+
+
+                        </div>
+                        <div class="card-footer d-flex justify-content-between bg-slate">
                             <span class="font-size-sm text-uppercase font-weight-semibold">
                                 @(Model.UserDetailsLast != null ? Model.UserDetailsLast.CreateDate : DateTime.Now)
                             </span>
@@ -154,17 +179,7 @@
                                     <div class="card-img-actions-overlay ">
 
                                         <a asp-area="Users" asp-controller="Home" asp-action="MeasurementAdd" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
-                                            @{ if (Model.UserDetailsFirst != null)
-                                                {
-                                                    <div>Aktualizuj</div>
-
-                                                }
-                                                else
-                                                {
                                                     <div>Dodaj</div>
-
-                                                }
-                                            }
                                         </a>
                                     </div>
                                 </div>
@@ -254,9 +269,9 @@
                 <div class="col-md-4">
 
                     <!-- Overlay buttons -->
-                    <div class="card">
+                    <div class="card border-1 border-secondary" >
                         <div class="card-img-actions">
-                            <img class="card-img-top img-fluid" src="../../img/Split.jpg" alt="">
+                            <img class="card-img-top img-fluid" src="../../img/Lift.jpg" alt="">
                             <div class="card-img-actions-overlay card-img-top">
 
                                 <a asp-area="Training" asp-controller="Home" asp-action="PrimaryTraining" class="btn btn-outline bg-white text-white border-white border-2 ml-2">
@@ -274,9 +289,9 @@
                             <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="ml-auto">Czytaj więcej <i class="icon-arrow-right14 ml-2"></i></a>
                         </div>*@
                     </div>
-                    <div class="card">
+                    <div class="card border-1 border-secondary">
                         <div class="card-img-actions">
-                            <img class="card-img-top img-fluid" src="../../img/Calculators.jpg" alt="">
+                            <img class="card-img-top img-fluid" src="../../img/Calculator.jpg" alt="">
                             <div class="card-img-actions-overlay card-img-top">
 
                                 <a asp-area="Calculators" asp-controller="Home" asp-action="PrimaryCalculators" class="btn btn-outline bg-white text-white border-white border-2 ml-2">

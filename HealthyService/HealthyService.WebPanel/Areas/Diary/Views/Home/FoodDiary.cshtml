@@ -28,7 +28,7 @@
 <div class="row m-2 mt-4">
 
     <div class="col-md-7 ">
-        <div class="card border-top-1 border-top-indigo-600 rounded-top-0 card_to_block">
+        <div class="card rounded-top-0 card_to_block " >
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-lg-8 p-3">
@@ -46,14 +46,23 @@
         <div class="card border-top-1 border-top-indigo-600 rounded-top-0 card_to_block">
 
             <div id="metric_crud">
-                <div class="card-header header-elements-md-inline p-4 bg-grey-400">
+                <div class="card-header header-elements-md-inline p-4 bg-indigo">
                     <h5>
                         <i class="icon-album mr-2"></i>
                         <span class="font-weight-semibold">
-                            Dodaj posiłek
+                            <i class="fa fa-wizards-of-the-coast"></i> Dodaj posiłek
+                        </span>
+
+
+                        <span class="ml-md-auto">
                         </span>
                     </h5>
-
+                    <div class="header-elements">
+                        <div>
+                            
+                            <i >Kcal 1200  B 50 W 100 T111</i>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="m-3">
@@ -64,7 +73,7 @@
                                 <div class="counter_input_box">
                                     <div class="form-group">
                                         <label>Nazwa <span class="text-danger">*</span></label>
-                                        <input class="form-control touchspin-empty" placeholder="" required>
+                                        <input class="form-control touchspin-empty"   placeholder="" required>
                                     </div>
                                 </div>
                             </div>
@@ -98,7 +107,7 @@
                                     Banan
                                 </td>
                                 <td class="w-25">
-                                    <input class="form-control icon-font-size2" placeholder="Ilość" required>
+                                    <input class="form-control icon-font-size2" style="background-color:#F8F8FF" placeholder="Ilość" required>
                                 </td>
                                 <td class="text-center">
                                     5
@@ -123,12 +132,12 @@
                             </table>
                         </div>
 
-                        <div class="row">
+                        <div class="row mt-2">
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Kliknij by zapisać</label><br />
-                                    <button type="button" onclick="submitAddMetricValueForm();" class="btn btn-success btn-ladda btn-ladda-spinner" data-style="expand-right" data-spinner-color="#333" data-spinner-size="20">
+                                    <button type="button" onclick="submitAddMetricValueForm();" class="btn btn-secondary bg-slate" data-style="expand-right" data-spinner-color="#333" data-spinner-size="20">
                                         <i class="icon-plus-circle2 mr-2"></i>
                                         <span class="ladda-label">Zatwierdź</span>
                                     </button>
@@ -140,12 +149,25 @@
             </div>
         </div>
 
+        <div class="card">
+            <div class="card-header bg-indigo-700">
+
+                Posiłek nr 1
+            </div>
+
+            <div class="card-body">
+
+
+                ssdd
+            </div>
+        </div>
+
     </div>
         <div class="col-md-5">
-            <div class="card border-top-1 border-top-indigo-600 rounded-top-0 card_to_block">
+            <div class="card border-top-1 border-top-indigo-600 rounded-top-0 card_to_block ">
 
                 <div id="metric_crud">
-                    <div class="card-header header-elements-md-inline pb-1">
+                    <div class="card-header header-elements-md-inline p-4 bg-slate-400" @*style="background-color:#002070"*@>
                         <h5>
                             <i class="icon-album mr-2"></i>
                             <span class="font-weight-semibold">
@@ -202,12 +224,12 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row mt-2">
 
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Kliknij by zapisać</label><br />
-                                        <button type="button" onclick="submitAddMetricValueForm();" class="btn btn-light btn-ladda btn-ladda-spinner" data-style="expand-right" data-spinner-color="#333" data-spinner-size="20">
+                                        <button type="button" onclick="submitAddMetricValueForm();" class="btn btn-secondary bg-slate" data-style="expand-right" data-spinner-color="#333" data-spinner-size="20">
                                             <i class="icon-plus-circle2 mr-2"></i>
                                             <span class="ladda-label">Zatwierdź</span>
                                         </button>

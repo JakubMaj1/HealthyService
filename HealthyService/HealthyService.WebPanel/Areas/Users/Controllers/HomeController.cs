@@ -108,10 +108,10 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                     .Where(q => q.IsActive && !q.IsDeleted)
                     .Select(q => q.Id).FirstOrDefaultAsync();
 
-                var LastUserDetails = await dbContext.UsersDetails
+                var FirstUserDetails = await dbContext.UsersDetails
                     .Where(q => q.IsActive && !q.IsDeleted)
                     .Where(q => q.UserId == UserId)
-                    .OrderByDescending(q => q.CreateDate)
+                    .OrderBy(q => q.CreateDate)
                     .FirstOrDefaultAsync();
 
                 Dictionary<string, string> Translator2 = new Dictionary<string, string>();
@@ -150,20 +150,20 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                 });
 
                 model.Genders = new SelectList(types1, "Value", "Text");
-                if(LastUserDetails !=null)
+                if(FirstUserDetails != null)
                 {
-                    model.Age = LastUserDetails.Age;
-                    model.Height = LastUserDetails.Height;
-                    model.Weight = LastUserDetails.Weight;
-                    model.ActivityLevel = LastUserDetails.ActivityLevel.ToString();
-                    model.ArmCircumference = LastUserDetails.ArmCircumference;
-                    model.CalfCircumference = LastUserDetails.CalfCircumference;
-                    model.ChestCircumference = LastUserDetails.ChestCircumference;
-                    model.ForearmCircumference = LastUserDetails.ForearmCircumference;
-                    model.HipCircumference = LastUserDetails.HipCircumference;
-                    model.ThighCircumference = LastUserDetails.ThighCircumference;
-                    model.WaistCircumference = LastUserDetails.WaistCircumference;
-                    model.Gender = LastUserDetails.Gender;
+                    model.Age = FirstUserDetails.Age;
+                    model.Height = FirstUserDetails.Height;
+                    model.Weight = FirstUserDetails.Weight;
+                    model.ActivityLevel = FirstUserDetails.ActivityLevel.ToString();
+                    model.ArmCircumference = FirstUserDetails.ArmCircumference;
+                    model.CalfCircumference = FirstUserDetails.CalfCircumference;
+                    model.ChestCircumference = FirstUserDetails.ChestCircumference;
+                    model.ForearmCircumference = FirstUserDetails.ForearmCircumference;
+                    model.HipCircumference = FirstUserDetails.HipCircumference;
+                    model.ThighCircumference = FirstUserDetails.ThighCircumference;
+                    model.WaistCircumference = FirstUserDetails.WaistCircumference;
+                    model.Gender = FirstUserDetails.Gender;
                 }
 
                 return View(model);
@@ -224,6 +224,8 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                             FirstMacro.CalfCircumference = model.CalfCircumference;
                             FirstMacro.ChestCircumference = model.ChestCircumference;
                             FirstMacro.HipCircumference = model.HipCircumference;
+                            FirstMacro.ThighCircumference = model.ThighCircumference;
+                            FirstMacro.ForearmCircumference = model.ForearmCircumference;
                             FirstMacro.Gender = model.Gender;
                             FirstMacro.CreateDate = DateTime.Now;
                             FirstMacro.UserId = UserId;
@@ -247,6 +249,8 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                             userDetails.CalfCircumference = model.CalfCircumference;
                             userDetails.ChestCircumference = model.ChestCircumference;
                             userDetails.HipCircumference = model.HipCircumference;
+                            userDetails.ThighCircumference = model.ThighCircumference;
+                            userDetails.ForearmCircumference = model.ForearmCircumference;
                             userDetails.CreateDate = DateTime.Now;
                             userDetails.UserId = UserId;
 
@@ -337,6 +341,7 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                     model.WaistCircumference = LastUserDetails.WaistCircumference;
                 }
 
+
                 return View(model);
             }
         }
@@ -384,6 +389,8 @@ namespace HealthyService.WebPanel.Areas.Users.Controllers
                         userDetails.CalfCircumference = model.CalfCircumference;
                         userDetails.ChestCircumference = model.ChestCircumference;
                         userDetails.HipCircumference = model.HipCircumference;
+                        userDetails.ThighCircumference = model.ThighCircumference;
+                        userDetails.ForearmCircumference = model.ForearmCircumference;
                         userDetails.CreateDate = DateTime.Now;
                         userDetails.UserId = UserId;
 
