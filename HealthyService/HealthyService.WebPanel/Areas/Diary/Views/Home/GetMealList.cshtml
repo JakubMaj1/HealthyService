@@ -1,0 +1,124 @@
+﻿@model List<HealthyService.Core.Database.Tables.Meal>
+
+@{
+    ViewData["Title"] = "GetMealList";
+}
+<script>
+    $(document).ready(function () {
+
+
+    });
+
+    function deleteMeal(mealId) {
+        var url = "/Diary/Home/DeleteMealFromDiary";
+             var data = {
+                 mealId: mealId,
+             }
+            $.ajax({
+                url: url,
+                type: 'delete',
+                data: data,
+                success: function (responseData) {
+                    console.log("complete: " + responseData);
+                    ReloadMealList();
+
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error");
+                },
+                complete: function (jqXHR, textStatus) {
+
+                    
+                }
+            });
+
+    }
+
+</script>
+
+@foreach (var meal in Model)
+{
+
+    var proteinSum = 0.0f;
+    var carboSum = 0.0f;
+    var fatSum = 0.0f;
+
+
+    foreach (var productInMeal in meal.Products)
+    {
+        var amount = productInMeal.Amount.Value;
+        var factor = productInMeal.Product.ProductMeasure == HealthyService.Core.Database.Types.ProductMeasureType.Gram ? amount / 100.0f : amount;
+
+
+        proteinSum += productInMeal.Product.Protein * factor;
+        carboSum += productInMeal.Product.Carbo * factor;
+        fatSum += productInMeal.Product.Fat * factor;
+    }
+
+    var totalKcal = ((proteinSum + carboSum) * 4 + fatSum * 9);
+
+    <div class="card">
+        <div class="card-header header-elements-inline bg-indigo-600">
+            <h5 class="card-title">@meal.Name</h5>
+            <div class="header-elements">
+                <span id="x" class="badge badge-pill position-static ml-auto ml-md-1 font-size-lg p-2 border-2 border-white ">Kcal  @String.Format("{0:0.0}", totalKcal)</span>
+                <span id="x" class="badge badge-pill position-static ml-auto ml-md-1 font-size-lg p-2 border-2 border-white ">B @String.Format("{0:0.0}", proteinSum)</span>
+                <span id="x" class="badge badge-pill position-static ml-auto ml-md-1 font-size-lg p-2 border-2 border-white ">W @String.Format("{0:0.0}", carboSum)</span>
+                <span id="x" class="badge badge-pill position-static ml-auto ml-md-1 font-size-lg p-2 border-2 border-white mr-3">T @String.Format("{0:0.0}", fatSum) </span>
+                <div class="list-icons">
+                    <a onclick="ReloadCreateMeal(@meal.Id)" class="icon-pen6 "></a>
+                    <a class="list-icons-item" data-toggle="collapse" data-target="#meal_@meal.Id">wdol</a>
+                    <a onclick="deleteMeal(@meal.Id)" class="list-icons-item">X</a>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="meal_@meal.Id" class="collapse">
+            <table class="table table-striped table-bordered table-hover">
+                <thead class="text-center">
+                    <tr>
+                        <th>Nazwa Produktu</th>
+                        <th>Ilość</th>
+                        <th>Białko</th>
+                        <th>Węglowodany</th>
+                        <th>Tłuszcze</th>
+                        <th>Kalorie</th>
+                    </tr>
+                </thead>
+                <tbody class="text-center">
+                    @foreach (var product in meal.Products)
+                    {
+                    <tr>
+                        <td>
+                            @product.Product.Name
+                        </td>
+                        <td class="w-25">
+                            @String.Format("{0:0.0}", product.Amount)
+                        </td>
+                        <td class="text-center">
+                            @String.Format("{0:0.0}", product.Product.ProductMeasure == HealthyService.Core.Database.Types.ProductMeasureType.Gram ? product.Product.Protein * (product.Amount / 100.0f) : product.Product.Protein * product.Amount)
+                        </td>
+                        <td>
+                            @String.Format("{0:0.0}", product.Product.ProductMeasure == HealthyService.Core.Database.Types.ProductMeasureType.Gram ? product.Product.Carbo * (product.Amount / 100.0f) : product.Product.Carbo * product.Amount)
+                        </td>
+                        <td>
+                            @String.Format("{0:0.0}", product.Product.ProductMeasure == HealthyService.Core.Database.Types.ProductMeasureType.Gram ? product.Product.Fat * (product.Amount / 100.0f) : product.Product.Fat * product.Amount)
+                        </td>
+                        <td>
+                            @String.Format("{0:0.0}", product.Product.ProductMeasure == HealthyService.Core.Database.Types.ProductMeasureType.Gram ?
+                            ((product.Product.Protein + product.Product.Carbo) * 4 + product.Product.Fat * 9) * (product.Amount / 100.0f)
+                            : ((product.Product.Protein + product.Product.Carbo) * 4 + product.Product.Fat * 9) * product.Amount)
+                        </td>
+                    </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+
+
+    </div>
+}

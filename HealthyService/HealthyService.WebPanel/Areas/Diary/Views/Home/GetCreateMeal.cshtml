@@ -1,0 +1,274 @@
+﻿@model HealthyService.Core.Database.Tables.Meal
+
+@{
+    ViewData["Title"] = "GetCreateMeal";
+}
+
+<script>
+     $(document).ready(function () {
+
+         $('#productItems').select2({
+            //minimumInputLength : 3,
+            ajax: {
+                delay: 500,
+                url: '@Url.Action("GetProducts", "Home", new { area = "Diary" })',
+                data: function (params) {
+                    var query = {
+                        search: params.term,
+                    };
+
+                    return query;
+                }
+            }
+         });
+
+         $('#productItems').on('select2:select', function (e) {
+            var data = e.params.data;
+            var selectetProductId = data.id;
+            var mealId = @Model.Id;
+
+            var url = "/Diary/Home/AddProductToMeal";
+             var data = {
+                 mealId: mealId,
+                 productId: selectetProductId
+             }
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: data,
+                success: function (responseData) {
+                    console.log("complete: " + responseData);
+                    ReloadCreateMeal(mealId);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error");
+                },
+                complete: function (jqXHR, textStatus) {
+
+                    
+                }
+            });
+         });
+
+         $("#createMealName").on('change clear', function () {
+             var inputValue = $("#createMealName")[0].value;
+             console.log(inputValue);
+             console.log($("#createMealName"));
+
+            var mealId = @Model.Id;
+
+            var url = "/Diary/Home/UpdateMealName";
+             var data = {
+                 mealId: mealId,
+                 name: inputValue
+             }
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: data,
+                success: function (responseData) {
+                    console.log("complete: " + responseData);
+                    ReloadCreateMeal(mealId);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error");
+                },
+                complete: function (jqXHR, textStatus) {
+
+                    
+                }
+            });
+         });
+       
+         
+
+     });
+
+    function deleteProduct(mealId, productId) {
+             var url = "/Diary/Home/DeleteProductFromMeal";
+             var data = {
+                 mealId: mealId,
+                 productId: productId
+             }
+            $.ajax({
+                url: url,
+                type: 'delete',
+                data: data,
+                success: function (responseData) {
+                    console.log("complete: " + responseData);
+                    ReloadCreateMeal(mealId);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error");
+                },
+                complete: function (jqXHR, textStatus) {
+
+                    
+                }
+            });
+    }
+
+    function changeAmount(newValue, mealId, productId) {
+        var url = "/Diary/Home/AddAmountToProdcut";
+        var data = {
+            mealId: mealId,
+            productId: productId,
+            newValue: newValue
+            }
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: data,
+            success: function (responseData) {
+                console.log("complete: " + responseData);
+                ReloadCreateMeal(mealId);
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log("error");
+            },
+            complete: function (jqXHR, textStatus) {
+
+                    
+            }
+        });
+    }
+
+    function submitMeal() {
+        CancelMeal();
+
+        ReloadMealList();
+    }
+
+</script>
+<form id="addMetricValueFormInternal" autocomplete="on" role="form" asp-area="Counters" asp-controller="ProductItems" asp-action="AddMetricValue" method="post" class="form-validate-jquery">
+
+    <div class="row">
+        <div class="col-md-7">
+            <div class="counter_input_box">
+                <div class="form-group">
+                    <label>Nazwa <span class="text-danger">*</span></label>
+                    <input id="createMealName" class="form-control touchspin-empty" placeholder="" value="@Model.Name">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-xs-6">
+            <label> Wyszukaj produkt <span class="text-danger">*</span></label>
+
+            <select id="productItems" data-placeholder="+" class="form-control select-search select-minimum">
+            </select>
+        </div>
+    </div>
+
+    <div class="row">
+
+        <table class="table datatable-basic">
+            <thead class="text-center">
+                <tr>
+                    <th>Nazwa Produktu</th>
+                    <th>Ilość</th>
+                    <th>Białko</th>
+                    <th>Węglowodany</th>
+                    <th>Tłuszcze</th>
+                    <th>Kalorie</th>
+                    <th class="text-center">Usuń</th>
+                </tr>
+            </thead>
+
+
+            <tbody class="text-center">
+
+                @foreach(var mealItem in Model.Products)
+                { 
+                    <tr>
+                        <td>
+                            @mealItem.Product.Name
+                        </td>
+                        <td class="w-25">
+                            <input onchange="changeAmount(this.value, @Model.Id, @mealItem.ProductId)" class="form-control icon-font-size2" style="background-color:#F8F8FF" value="@mealItem.Amount" required>
+                        </td>
+                        <td class="text-center">
+                            @String.Format("{0:0.0}",mealItem.Product.ProductMeasure == HealthyService.Core.Database.Types.ProductMeasureType.Gram  ? mealItem.Product.Protein * (mealItem.Amount/100.0f) : mealItem.Product.Protein * mealItem.Amount  )
+                        </td>
+                        <td>
+                            @String.Format("{0:0.0}",mealItem.Product.ProductMeasure == HealthyService.Core.Database.Types.ProductMeasureType.Gram ? mealItem.Product.Carbo * (mealItem.Amount / 100.0f) : mealItem.Product.Carbo * mealItem.Amount)
+                        </td>
+                        <td>
+                            @String.Format("{0:0.0}",mealItem.Product.ProductMeasure == HealthyService.Core.Database.Types.ProductMeasureType.Gram ? mealItem.Product.Fat * (mealItem.Amount / 100.0f) : mealItem.Product.Fat * mealItem.Amount)
+                        </td>
+                        <td>
+                            @String.Format("{0:0.0}", mealItem.Product.ProductMeasure == HealthyService.Core.Database.Types.ProductMeasureType.Gram ?
+                            ((mealItem.Product.Protein + mealItem.Product.Carbo) * 4 + mealItem.Product.Fat * 9) * (mealItem.Amount / 100.0f)
+                            : ((mealItem.Product.Protein + mealItem.Product.Carbo) * 4 + mealItem.Product.Fat * 9) * mealItem.Amount)
+                        </td>
+                        <td>
+                            <a onclick="deleteProduct(@Model.Id, @mealItem.Product.Id)"><span class="icon-x text-danger"></span></a>
+
+                        </td>
+                    </tr>
+
+                }
+
+            </tbody>
+            <tfoot class="text-center" style="background-color:#F8F8FF">
+                @{ 
+                    var proteinSum =0.0f;
+                    var carboSum =0.0f;
+                    var fatSum = 0.0f;
+                   
+
+                    foreach(var productInMeal in Model.Products)
+                    {
+                        var amount = productInMeal.Amount.Value;
+                        var factor = productInMeal.Product.ProductMeasure == HealthyService.Core.Database.Types.ProductMeasureType.Gram ? amount / 100.0f : amount;
+
+
+                        proteinSum += productInMeal.Product.Protein * factor;
+                        carboSum += productInMeal.Product.Carbo * factor;
+                        fatSum += productInMeal.Product.Fat * factor;
+                    }
+
+                     var totalKcal = ((proteinSum +carboSum) * 4 + fatSum * 9);
+                }
+                <tr>
+                    <td>
+                        <b> Podsumowanie</b>
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        @proteinSum
+                    </td>
+                    <td>
+                        @carboSum
+                    </td>
+                    <td>
+                        @fatSum
+                    </td>
+                    <td>
+                        @totalKcal
+                    </td>
+                    <td>
+                    </td>
+
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="row mt-2">
+
+        <div class="col-md-12">
+            <div class="form-group row">
+                <div class="col-md-8">
+                    <label>Kliknij by zapisać</label><br />
+                    <button type="button" onclick="submitMeal();" class="btn btn-secondary bg-slate" data-style="expand-right" data-spinner-color="#333" data-spinner-size="20">
+                        <i class="icon-plus-circle2 mr-2"></i>
+                        <span class="ladda-label">Zatwierdź</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

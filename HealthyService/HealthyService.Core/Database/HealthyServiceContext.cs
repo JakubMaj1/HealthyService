@@ -144,6 +144,9 @@ namespace HealthyService.Core.Database
                 .HasOne(pm => pm.Meal)
                 .WithMany(p => p.Products)
                 .HasForeignKey(pm => pm.MealId);
+
+            modelBuilder.Entity<ProductMeal>()
+                .Property(q => q.Amount);
         }
     }
 }

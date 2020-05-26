@@ -11,5 +11,7 @@ namespace HealthyService.Core.Database.Tables
 
         public long ProductId { get; set; }
         public Meal Meal { get; set; }
+
+        public float? Amount { get; set; }//ilosc
     }
 }
